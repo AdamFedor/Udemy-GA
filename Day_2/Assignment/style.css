@@ -4,6 +4,7 @@ body{
   margin-top: 20px;
   font-family: sans-serif;
   background: #eff8ff;
+  text-decoration: none;
 }
 a{
   color: black;
@@ -40,8 +41,9 @@ img{
   border: 1px solid black;
   margin-top: 20px;
 }
-footer nav{
-  margin-bottom: 50px;
+.navfooter{
+  margin-bottom: 20px;
+  text-align: center;
 }
 .job{
   font-size: 15px;
