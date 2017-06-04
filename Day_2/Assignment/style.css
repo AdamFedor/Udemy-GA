@@ -1,0 +1,58 @@
+body{
+  border-top: 5px black solid;
+  border-bottom: 5px black solid;
+  margin-top: 20px;
+  font-family: sans-serif;
+  background: #eff8ff;
+}
+a{
+  color: black;
+  font-weight: bold;
+}
+em{
+  font-weight: bold;
+}
+header{
+    text-align:center;
+}
+header nav{
+  margin-top:50px;
+}
+p{
+  font-family: serif;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+h1{
+  margin-top:10px;
+  margin-bottom:40px;
+}
+h2{
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+h3{
+  font-size: 14px;
+}
+img{
+  padding: 5px;
+  border: 1px solid black;
+  margin-top: 20px;
+}
+footer nav{
+  margin-bottom: 50px;
+}
+.job{
+  font-size: 15px;
+  font-weight: bold;
+  font-style: italic;
+}
+.RFont{
+  font-family: serif;
+  font-size: 15px;
+}
+.date-range{
+  font-family: serif;
+  font-size: 13px;
+}
