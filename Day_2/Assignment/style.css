@@ -9,6 +9,10 @@ body{
 a{
   color: black;
   font-weight: bold;
+  text-decoration: underline blue;
+}
+a:hover{
+  color: blue;
 }
 em{
   font-weight: bold;
@@ -39,7 +43,8 @@ h3{
 img{
   padding: 5px;
   border: 1px solid black;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .navfooter{
   margin-bottom: 20px;
