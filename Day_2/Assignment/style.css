@@ -46,7 +46,7 @@ img{
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.navfooter{
+td > nav{
   margin-bottom: 20px;
   text-align: center;
 }
@@ -55,7 +55,7 @@ img{
   font-weight: bold;
   font-style: italic;
 }
-.RFont{
+.rfont{
   font-family: serif;
   font-size: 15px;
 }
