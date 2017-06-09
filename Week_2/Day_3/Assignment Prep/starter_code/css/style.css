@@ -50,8 +50,6 @@ body {
      font-size: 12px;
      line-height: 1.4;
      font-family: 'Open Sans', sans-serif;
-     background: url(../images/header_bg.jpg) no-repeat center top rgb(134,141,157);
-      background-size: cover;
 }
 
 
@@ -61,13 +59,15 @@ body {
 
 /* Center the container */
 #container {
-  width: 100%;
+  max-width: 1200px;
   margin: auto;
+  text-align: center;
 }
 header {
   color: #fff;
   background-image: url(../images/header_bg.jpg);
-  background-size: 1200px cover center;
+  background-size: 1200px cover Top;
+  height: 700px;
 }
 header h1{
   font-weight: 900;
@@ -102,7 +102,11 @@ header button{
   color: #606161;
   padding: 5px 40px;
 }
-div div{
+section + div {
+  background-image: url(../images/header_bg.jpg);
+  background-size: 1200px cover bottom;
+}
+div + div{
   background: #f9e42e;
 }
 div > button {
