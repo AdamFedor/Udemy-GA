@@ -1,0 +1,18 @@
+#notification{
+  color: red;
+}
+.message{
+  font-style: italic;
+}
+.error{
+  color: red;
+}
+.huge{
+  font-size: 32px;
+}
+.success{
+  color: green;
+}
+.obnoxious{
+  text-transform: uppercase;
+}

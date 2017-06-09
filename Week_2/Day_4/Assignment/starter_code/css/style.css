@@ -60,13 +60,15 @@ body {
 /* Center the container */
 #container {
   max-width: 1200px;
+  min-width: 750px;
   margin: auto;
   text-align: center;
 }
 header {
   color: #fff;
   background-image: url(../images/header_bg.jpg);
-  background-size: 1200px cover Top;
+  background-size: 1200px;
+  background-position: top;
   height: 700px;
 }
 header h1{
@@ -80,6 +82,7 @@ header h2{
 footer {
   background: #606161;
   color: #fff;
+  height: 350px;
 }
 footer h2{
   color: #f9e42e;
@@ -91,23 +94,31 @@ section{
   color: #606161;
   font-weight: 100;
   font-size: 13px;
+  height: 600px;
 }
 section h2{
   color: #033048;
   font-weight:500;
   font-size: 20px;
 }
+section p, section li{
+  text-align: left;
+}
 header button{
   background: #f9e42e;
   color: #606161;
   padding: 5px 40px;
+  border-radius: 1px;
 }
 section + div {
   background-image: url(../images/header_bg.jpg);
-  background-size: 1200px cover bottom;
+  background-size: 1200px;
+  background-position: bottom;
+  height: 390px;
 }
 div + div{
   background: #f9e42e;
+  height: 120px;
 }
 div > button {
   background: #033048;
