@@ -65,7 +65,7 @@ body {
   margin: auto;
   text-align: center;
 }
-header {
+header{
   color: #fff;
   background-image: url(../images/header_bg.jpg);
   background-size: 1200px;
@@ -73,18 +73,22 @@ header {
   height: 700px;
 }
 header h1{
-  font-weight: 900;
-  font-size: 50px;
   text-align: left;
   margin: 0 0 0 0;
   padding: 20px 0 0 60px;
-  font-family: sans-serif;
 }
 header h2{
   font-weight: 500;
   font-size: 50px;
   margin: 0 0 0 0;
   padding: 100px 0 72px 0;
+}
+header button{
+  background: #f9e42e;
+  color: #033048;
+  font-weight: 500;
+  font-size: 30px;
+  padding: 11.5px 60px;
 }
 footer {
   background: #333333;
@@ -93,11 +97,8 @@ footer {
 }
 footer h2{
   color: #f9e42e;
-  font-weight: 900;
-  font-size: 50px;
   padding: 50px 0 0 0;
   margin: 0 0 50px 0;
-  font-family: sans-serif;
 }
 footer img{
   margin: 0 30px;
@@ -112,31 +113,29 @@ section{
   font-weight: 100;
   font-size: 25px;
   height: 600px;
+  overflow: auto;
+  text-align: left;
 }
 section h2{
   color: #033048;
   font-weight:500;
-  font-size: 20px;
 }
 section p, section li{
   text-align: left;
 }
-header button{
-  background: #f9e42e;
-  color: #033048;
-  font-weight: 500;
-  font-size: 30px;
-  padding: 11.5px 60px;
-}
 section + div {
   background-image: url(../images/header_bg.jpg);
-  background-size: 1200px;
+  background-size: 250%;
   background-position: bottom;
   height: 390px;
+  color: #fff;
+  font-size: 37px;
+  font-weight: 100;
+  padding: 80px 0 0 0;
 }
-div + div{
-  background: #f9e42e;
-  height: 120px;
+section > div{
+  width: 600px;
+  margin: 85px 0 0 110px;
 }
 div > button{
   background: #033048;
@@ -146,9 +145,39 @@ div > button{
   font-size: 25px;
   padding: 14.5px 60px;
 }
+ul{
+  margin: 50px 0 0 0;
+}
+li{
+  margin: 10px 0 0 0;
+}
 .button{
   border-style: none;
   border-radius: 6px;
+}
+.relaxr{
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 50px;
+}
+.thinFont{
+  font-weight: 100;
+  font-size: 24px;
+}
+.boldFont{
+  font-weight: 700;
+  font-size: 40px;
+}
+.yellow{
+  background: #f9e42e;
+  height: 120px;
+}
+.italic{
+  font-style: italic;
+}
+#smallBullets{
+  width: 450px;
+  margin: 0 0 0 50px;
 }
 /******************************************
 /* ADDITIONAL STYLES
