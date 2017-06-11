@@ -18,7 +18,7 @@ Developer @GA in NYC
 }
 
 /* Clear fix hack */
-.clearfix:after {
+/*.clearfix:after {
      content: ".";
      display: block;
      clear: both;
@@ -33,34 +33,35 @@ Developer @GA in NYC
 
 .alignright {
   float: right;
-  padding: 0 0 10px 10px; /* note the padding around a right floated image */
+  padding: 0 0 10px 10px;
 }
 
 .alignleft {
   float: left;
-  padding: 0 10px 10px 0; /* note the padding around a left floated image */
+  padding: 0 10px 10px 0;
 }
-
+*/
 /******************************************
 /* BASE STYLES
 /*******************************************/
 
 body {
      color: #000;
-     font-size: 12px;
      line-height: 1.4;
      font-family: 'Open Sans', sans-serif;
 }
-
 
 /******************************************
 /* LAYOUT
 /*******************************************/
 
+/*  Note:
+    spec details have been changed to replicate image of assignment */
+
 /* Center the container */
 #container {
   max-width: 1200px;
-  min-width: 750px;
+  min-width: 825px;
   margin: auto;
   text-align: center;
 }
@@ -73,27 +74,43 @@ header {
 }
 header h1{
   font-weight: 900;
-  font-size: 24px;
+  font-size: 50px;
+  text-align: left;
+  margin: 0 0 0 0;
+  padding: 20px 0 0 60px;
+  font-family: sans-serif;
 }
 header h2{
   font-weight: 500;
-  font-size: 24px;
+  font-size: 50px;
+  margin: 0 0 0 0;
+  padding: 100px 0 72px 0;
 }
 footer {
-  background: #606161;
+  background: #333333;
   color: #fff;
   height: 350px;
 }
 footer h2{
   color: #f9e42e;
   font-weight: 900;
-  font-size: 24px;
+  font-size: 50px;
+  padding: 50px 0 0 0;
+  margin: 0 0 50px 0;
+  font-family: sans-serif;
+}
+footer img{
+  margin: 0 30px;
+}
+footer p{
+  font-size: 16px;
+  margin: 85px 0 0 0;
 }
 section{
   background: #f0efef;
   color: #606161;
   font-weight: 100;
-  font-size: 13px;
+  font-size: 25px;
   height: 600px;
 }
 section h2{
@@ -106,9 +123,10 @@ section p, section li{
 }
 header button{
   background: #f9e42e;
-  color: #606161;
-  padding: 5px 40px;
-  border-radius: 1px;
+  color: #033048;
+  font-weight: 500;
+  font-size: 30px;
+  padding: 11.5px 60px;
 }
 section + div {
   background-image: url(../images/header_bg.jpg);
@@ -120,10 +138,17 @@ div + div{
   background: #f9e42e;
   height: 120px;
 }
-div > button {
+div > button{
   background: #033048;
   color: #fff;
-  padding: 5px 40px;
+  margin: 27.5px 0 0 0;
+  font-weight: 500;
+  font-size: 25px;
+  padding: 14.5px 60px;
+}
+.button{
+  border-style: none;
+  border-radius: 6px;
 }
 /******************************************
 /* ADDITIONAL STYLES
