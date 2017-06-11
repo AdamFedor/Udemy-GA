@@ -90,6 +90,9 @@ header button{
   font-size: 30px;
   padding: 11.5px 60px;
 }
+p{
+  margin: 10px 0 0 0;
+}
 footer {
   background: #333333;
   color: #fff;
@@ -131,11 +134,12 @@ section + div {
   color: #fff;
   font-size: 37px;
   font-weight: 100;
-  padding: 80px 0 0 0;
+  padding: 0 0 0 0;
+  overflow:auto;
 }
 section > div{
   width: 600px;
-  margin: 85px 0 0 110px;
+  margin: 75px 0 0 110px;
 }
 div > button{
   background: #033048;
@@ -172,10 +176,16 @@ li{
   background: #f9e42e;
   height: 120px;
 }
-.italic{
+.italicQuote{
   font-style: italic;
+  font-size: 38px;
+  font-weight: 100px;
+  margin: 50px 0 0 0;
 }
-#smallBullets{
+.quotes{
+  width: 720px;
+}
+.smallBullets{
   width: 450px;
   margin: 0 0 0 50px;
 }
