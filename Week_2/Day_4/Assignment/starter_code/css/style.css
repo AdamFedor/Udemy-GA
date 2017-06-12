@@ -67,9 +67,9 @@ body {
 header{
   color: #fff;
   background-image: url(../images/header_bg.jpg);
-  background-size: 1200px;
+  background-size: cover;
   background-position: top;
-  height: 700px;
+  padding-bottom: 30%;
 }
 header h1{
   text-align: left;
@@ -82,7 +82,7 @@ header h2{
   margin: 0 0 0 0;
   padding: 100px 0 72px 0;
 }
-header button{
+header .button{
   background: #f9e42e;
   color: #033048;
   font-weight: 500;
@@ -140,7 +140,7 @@ section > div{
   width: 600px;
   margin: 75px 0 0 110px;
 }
-div > button{
+div > .button{
   background: #033048;
   color: #fff;
   margin: 27.5px 0 0 0;
@@ -158,7 +158,7 @@ li{
   border-style: none;
   border-radius: 6px;
 }
-.relaxr{
+.logo{
     font-family: sans-serif;
     font-weight: 900;
     font-size: 50px;
