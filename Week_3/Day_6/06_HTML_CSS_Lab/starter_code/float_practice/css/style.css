@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.container > h1 {
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.exercise {
+    margin-bottom: 20px;
+}
+
+.exercise > div { /* this is the wrapper class but not called out to be used */
+    padding: 10px;
+    background: #efefef;
+    border: 1px solid black;
+}
+
+.outer {
+    background: #ccc;
+}
+
+/* Exercise One */
+
+.one .outer {
+  padding: 2%;
+}
+
+.one  .left {
+  float: left;
+  background: red;
+  width: 40%;
+  height: 132px;
+  margin-bottom: 2%;
+}
+
+.one .right {
+  float: right;
+  background: yellow;
+  height: 132px;
+  width: 70%;
+}
+
+/* Exercise Two */
+
+.two .outer {
+  padding: 2% 0;
+}
+
+.two .inner {
+  background: blue;
+  height: 132px;
+  width: 25%;
+  margin: 0 auto;
+}
+
+/* Exercise Three */
+
+.three .outer {
+  background-image: url("#");
+  background-size: cover;
+}
+
+.three .inner {
+  background: green;
+  height: 132px;
+  width: 40%;
+  float: right;
+  margin: 2% 2% 2% 0;
+}
+
+/* Exercise Four */
+.four .inner {
+  border-right: 1px solid black;
+  width: calc(100% / 3);
+  float: left;
+  padding: 2%;
+}
+
+.four .inner:last-child {
+  border-right: 0;
+}
