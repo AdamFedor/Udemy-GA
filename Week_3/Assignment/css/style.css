@@ -42,7 +42,7 @@ Developer @GA in SEA
 }
 
 /******************************************
-/* BASE STYLES
+/* BASE STYLES - changed from basic spec for appearance and experimentation.
 /*******************************************/
 #containerID {
   margin: auto;
@@ -65,6 +65,8 @@ header {
 h1 {
   color: #fff;
   float: left;
+  margin: 3% auto;
+  overflow: auto;
 }
 article {
   border-bottom: 1px solid black;
@@ -82,10 +84,6 @@ footer > h2 {
 footer > p {
   padding: 0 0 0 0;
   margin: 0 0 0 0;
-}
-h1 {
-  margin: 3% auto;
-  overflow: auto;
 }
 section {
   width: 73%;
@@ -108,6 +106,9 @@ ul {
   list-style: none;
   padding-left: 3%;
   margin: 0;
+}
+a:hover {
+  color: blue;
 }
 li a {
   text-decoration: none;
@@ -149,7 +150,7 @@ aside > p {
   margin: 0;
   font-weight: 100;
 }
-aside > img {
+aside > img { /*Use a background image for the headers*/
   margin-top: 40px;
 }
 .floatNav {
