@@ -44,7 +44,6 @@ Developer @GA in SEA
 /******************************************
 /* BASE STYLES
 /*******************************************/
-
 #containerID {
   margin: auto;
   text-align: center;
@@ -55,13 +54,13 @@ body {
      line-height: 1.4;
      font-family: Helvetica, Arial, sans-serif;
      margin: 0;
+     color: #033048;
 }
 body > div {
        background: #efefee;
 }
 header {
   background: #033048;
-  overflow: auto;
 }
 h1 {
   color: #fff;
@@ -96,6 +95,25 @@ section {
 aside {
   width: 26%;
   float: right;
+  text-align: left;
+}
+aside > h3:first-child {
+  padding-left: 1.5%;
+}
+h3 {
+  font-size: 20px;
+  margin-bottom: 5%;
+}
+ul {
+  list-style: none;
+  padding-left: 3%;
+  margin: 0;
+}
+li a {
+  text-decoration: none;
+  color: #033048;
+  font-weight: 100;
+  font-size: 14px;
 }
 article img, aside img {
   width: 100%;
@@ -109,16 +127,41 @@ div > .button {
   margin: 1.5% auto;
   display: block;
 }
+article > h2 {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  margin-bottom: 1.5%;
+}
+article > p::first-letter {
+  font-size: 32px;
+  float: left;
+}
+article > p {
+  font-weight: 100;
+  margin-bottom: 0;
+  color: #5b5b5b;
+}
+article:last-child {
+  margin-bottom: 10px;
+}
+aside > p {
+  margin: 0;
+  font-weight: 100;
+}
+aside > img {
+  margin-top: 40px;
+}
 .floatNav {
   color: #f9e42e;
   float: right;
-  margin: 6%;
+  margin: 0 2% 0 2%;
 }
 .navLinks {
   text-decoration: none;
   color: #ffee00;
   font-size: 14px;
-  padding-right: 20px;
+  padding-right: 10px;
 }
 .navLinks:last-child {
   padding-right: 0;
@@ -140,6 +183,29 @@ div > .button {
   border-style: none;
   border-radius: 6px;
   width: 300px;
+}
+.moreLink {
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration: none;
+  color: #033048;
+  font-family: 'Roboto', sans-serif;
+}
+.rightLink {
+  text-align: right;
+  margin: 25px 0 15px 0;
+}
+
+/******************************************
+/* Nav break - just playing around with it.
+/*******************************************/
+
+@media (min-width:539px){
+  .floatNav {
+    color: #f9e42e;
+    float: right;
+    margin: 45px 2% 0 2%;
+  }
 }
 
 /******************************************
@@ -167,9 +233,24 @@ div > .button {
     margin: 1% 0 0 0;
     padding: 0 0 1% 0;
   }
+  section {
+    width: 72%;
+    margin-right: 2%;
+  }
+  article > h2 {
+    font-size: 26px;
+    font-weight: 500;
+  }
+  article:last-child {
+    margin-bottom: 40px;
+  }
   .navLinks {
     font-size: 16px;
     padding-right: 25px;
+    padding-right: 20px;
+  }
+  .floatNav {
+    margin: 8%;
   }
 }
 
@@ -196,8 +277,18 @@ div > .button {
     margin: 7% 0 0 0;
     padding: 0 0 1% 0;
   }
+  article > h2 {
+    font-size: 32px;
+    font-weight: 500;
+  }
+  article:last-child {
+    margin-bottom: 80px;
+  }
   .navLinks {
     font-size: 18px;
     padding-right: 30px;
+  }
+  .floatNav {
+    margin: 6%;
   }
 }
