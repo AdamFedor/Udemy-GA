@@ -153,7 +153,7 @@ aside > p {
 aside > img { /*Use a background image for the headers*/
   margin-top: 40px;
 }
-.floatNav {
+header nav {
   color: #f9e42e;
   float: right;
   margin: 0 2% 0 2%;
@@ -179,6 +179,7 @@ aside > img { /*Use a background image for the headers*/
     font-family: sans-serif;
     font-weight: 900;
     font-size: 50px;
+    display: block;
 }
 .button {
   border-style: none;
@@ -201,8 +202,8 @@ aside > img { /*Use a background image for the headers*/
 /* Nav break - just playing around with it.
 /*******************************************/
 
-@media (min-width:539px){
-  .floatNav {
+@media (min-width:531px){
+  header nav {
     color: #f9e42e;
     float: right;
     margin: 45px 2% 0 2%;
@@ -250,7 +251,7 @@ aside > img { /*Use a background image for the headers*/
     padding-right: 25px;
     padding-right: 20px;
   }
-  .floatNav {
+  header nav {
     margin: 8%;
   }
 }
@@ -289,7 +290,7 @@ aside > img { /*Use a background image for the headers*/
     font-size: 18px;
     padding-right: 30px;
   }
-  .floatNav {
+  header nav {
     margin: 6%;
   }
 }
