@@ -14,4 +14,4 @@ $(document).ready(function(){
   $("#question1").click(showQuestion1);
   $("#question2").click(showQuestion2);
   $("#question3").click(showQuestion3);
-})
+})//
