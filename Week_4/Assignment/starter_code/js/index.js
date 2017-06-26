@@ -1,0 +1,16 @@
+$(document).ready(function(){
+	$(".readmore").click(function(){
+			$(".readmore").hide();
+			$(".readless").show();
+			$("#show-this-on-click").slideDown("slow");
+	});
+	$(".readless").click(function(){
+			$("#show-this-on-click").slideUp("slow");
+			$(".readless").hide();
+			$(".readmore").show();
+	});
+	$(".learnmore").click(function(){
+			$(".learnmore").hide();
+			$("#learnmoretext").slideDown("slow");
+	});
+})
