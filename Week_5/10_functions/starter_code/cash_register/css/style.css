@@ -29,7 +29,13 @@ body {
 #ticket th {
   text-align: left;
 }
-#ticket td, #ticket #total {
+#ticket td {
+  text-align: left;
+}
+#ticket td + td {
+  text-align: right;
+}
+#ticket #total {
   text-align: right;
 }
 #ticket tfoot th {
