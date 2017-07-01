@@ -16,7 +16,13 @@ function addRow(receiptTable){
   newEx = +newEx + +1;
   var receiptText = document.createTextNode("New Expense " + newEx);
   addCellL.appendChild(receiptText);
-  addCellR.appendChild(valueRow)
+  addCellR.appendChild(valueRow);
+  var isNegative =  Math.sign(inputValue);
+  isNegative = parseFloat(isNegative);
+  if (isNegative < 0){
+    console.log("negative");
+    $("#entries tr:last-child > td:last-child").toggleClass("negativeValue");
+  } // no way, that worked! Just messing around seeing if I could make negaives red.
 }
 
 $(document).ready(function(){
