@@ -15,7 +15,7 @@ function displayOutput(index, content){
 // change myBoolean to false, !false, true, and !true;
 
 var myBoolean = true;
-if(myBoolean){
+if(!myBoolean){
 	displayOutput(0, "dog");
 }else{
 	displayOutput(0, "pony");
@@ -47,12 +47,12 @@ if(numberA === numberB){
 // mind that each if statement here will override the previous ones.
 // Try commenting out some of the statements or fixing the assignment
 // to equality
-var num3 = 0;
-if(num3 = 5){
+var num3 = 12;
+if(num3 === 5){
 	displayOutput(2, "num3 = " + num3);
-}if(num3 = 10){
+}if(num3 === 10){
 	displayOutput(2, "num3 = " + num3);
-}if(num3 = 12){
+}if(num3 === 12){
 	displayOutput(2, "num3 = " + num3);
 }
 
@@ -60,11 +60,11 @@ if(num3 = 5){
 // This will be exactly the same as example 3, but we're using "else if"
 // instead of several if statements. How does this affect the output?
 var num4 = 0;
-if(num4 = 5){
+if(num4 === 5){
 	displayOutput(3, "num4 = " + num4);
-}else if(num4 = 10){
+}else if(num4 === 10){
 	displayOutput(3, "num4 = " + num4);
-}else if(num4 = 12){
+}else if(num4 === 12){
 	displayOutput(3, "num4 = " + num4);
 }
 
@@ -85,7 +85,7 @@ if(num4 = 5){
 var num5 = "5";
 if(num5 === 5){
 	displayOutput(4, "num5 strictly equal to the number 5");
-}else if(num5 == 5){
+}else if(num5 == 5){//true
 	displayOutput(4, "num5 loosely equal to number 5");
 }
 
@@ -101,7 +101,7 @@ var num6 = [10, 2];
 if(num6[0] === 10 && num6[0] === 12){
 	displayOutput(5, "num6[0] equals 10 and num6[0] equals 12");
 }else if(num6[0] === 10 && num6[1] === 2){
-	displayOutput(5, "num6[0] equals 10 and num6[0] equals 2");
+	displayOutput(5, "num6[0] equals 10 and num6[1] equals 2");
 }
 
 // example 7
@@ -116,8 +116,8 @@ if(num6[0] === 10 && num6[0] === 12){
 // if statement to pass
 
 var num7 = [21, 72];
-if(num7[0] < 17 || num7[1] < 100){
+if(num7[0] < 17 || num7[1] < 100){ // true, because of 2nd argument
 	displayOutput(6, "num7[0] less than 17 or num7[1] less than 100");
-}else if(num7[0] > 24 || num[1] < 101){
+}else if(num7[0] > 24 || num[1] < 101){ // true, because of second argument
 	displayOutput(6, "num7[0] greater than 24 or num[1] less than 72");
 }
