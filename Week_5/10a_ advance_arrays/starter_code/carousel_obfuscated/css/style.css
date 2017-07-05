@@ -1,4 +1,4 @@
-/* 
+/*
 Project Name: Blank Template
 Client: Your Client
 Author: Your Name
@@ -7,7 +7,7 @@ Developer @GA in NYC
 
 
 /******************************************
-/* SETUP                   
+/* SETUP
 /*******************************************/
 
 
@@ -27,17 +27,17 @@ Developer @GA in NYC
 }
 
 .alignright {
-	float: right; 
+	float: right;
 	padding: 0 0 10px 10px; /* note the padding around a right floated image */
 }
 
 .alignleft {
-	float: left; 
+	float: left;
 	padding: 0 10px 10px 0; /* note the padding around a left floated image */
 }
 
 /******************************************
-/* BASE STYLES                   
+/* BASE STYLES
 /*******************************************/
 
 body {
@@ -49,7 +49,7 @@ body {
 
 
 /******************************************
-/* LAYOUT                   
+/* LAYOUT
 /*******************************************/
 
 /* Center the container */
@@ -60,9 +60,9 @@ body {
 
 header {
      background: #000;
-     height: 80px; 
+     height: 80px;
      color:#ccc;
-     font-size:17px; 
+     font-size:17px;
 }
 
 footer {
@@ -70,9 +70,8 @@ footer {
 }
 
 /******************************************
-/* ADDITIONAL STYLES                   
+/* ADDITIONAL STYLES
 /*******************************************/
-
 nav ul li {
      float:left;
 }
@@ -89,7 +88,6 @@ nav ul li {
           background:url(../images/bg_nav_rollover.png) repeat-x;
           color:#FFF;
      }
-
 .btn{
      color: #ffffff;
      background-color: #428bca;
@@ -119,6 +117,8 @@ nav ul li {
 }
 #image-to-vote-on{
      margin-top: 50px;
+     height: 500px;
+     width: auto;
 }
 #buttons-wrapper{
      margin-top:20px;

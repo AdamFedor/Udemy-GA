@@ -24,25 +24,58 @@
 // starting position
 // form dropdown is selected and a value is picked, selecting blank does nothing
 var toStore;
-var calculatedArray = [ , , , , ];
-// store the changed value
-function didThisChange(event){
-  toStore = $("#your-vote").find(":selected").val();
-  console.log("" + toStore);
-}
+var calculatedArray = [ , , , , , , , ];
+var finalScore = 0;
+var i = 0;
+var j = 1;
+var k = 0;
+var l = 0;
+var imageCycle = ["images/food1.jpg","images/food2.jpg","images/food3.jpg","images/food4.jpg","images/food5.jpg","images/food6.jpg","images/food7.jpg","images/food8.jpg"];
 // identify if the drop down changed
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelector('select[name="choiceList"]').onchange=didThisChange;
 }, false);
-// when ready code
-$(document).ready(function(){
+// store the changed value of the dropdown select and go to next
+function didThisChange(event){
+  toStore = $("#your-vote").find(":selected").val();
+  toStore = parseFloat(toStore);
+  // value is submitted the value is added to the array
+  if (toStore === 1 || toStore === 2 || toStore === 3 || toStore === 4 || toStore === 5){
+    // store value to array
+    if (i < 7){
+      calculatedArray[i] = toStore;
+    } else {
+      calculatedArray[7] = toStore;
+    }
+    // update i to add 1
+    if(i < 7){
+      i = i +1;
+      j = j +1;
+    }
+    // go to next image
+    //document.getElementById("image-to-vote-on").innerHTML.replace('images/food1.jpg','images/food' + i + '.jpg');
+    $("img").replaceWith('<img id="image-to-vote-on" src="images/food' + j + '.jpg">')
+    console.log(calculatedArray);
+  }
+  // if statement if array for value 5 is submitted or skipped with variable
+  if (i >= imageCycle.length){console.log(imageCycle.length)};
+  // update score
+  console.log(finalScore + " is the final score")
+  // display text and score
+}
+// back is selected
+// i-- to adjust for array input
+// previous image is pulled up
+// variable for 5th array submitted is turned off
+
+
+
+// skip is selected
+// i++ to adjust for array input
+// next image is pulled up
 
 
 
 
 
-
-
-
-})
 // giving up for the night, no clue what a drop down form is called. Assuming select. No clue how the select fires a trigger. Assuming some how the page has to associate to an array, no clue how to do that. Completely missing everything related to this outside of an array will do it and hot to inject array values if I can somehow fire the dropdown to a value.
