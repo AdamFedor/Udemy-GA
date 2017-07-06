@@ -47,21 +47,29 @@ function didThisChange(event){
     } else {
       calculatedArray[7] = toStore;
     }
+    console.log(i);
+    // ADD FUNCTIONS IN HERE TO PULL DATA IN AND OUT - DUH!
     // update i to add 1
     if(i < 7){
-      i = i +1;
-      j = j +1;
+      i = addI(i);
+      j = addJ(j);
     }
     // go to next image
-    //document.getElementById("image-to-vote-on").innerHTML.replace('images/food1.jpg','images/food' + i + '.jpg');
     $("img").replaceWith('<img id="image-to-vote-on" src="images/food' + j + '.jpg">')
     console.log(calculatedArray);
   }
   // if statement if array for value 5 is submitted or skipped with variable
-  if (i >= imageCycle.length){console.log(imageCycle.length)};
   // update score
   console.log(finalScore + " is the final score")
   // display text and score
+}
+// function for storing i values
+function addI(addTheI) {
+  return addTheI +1;
+}
+// function for storing j values
+function addJ(addTheJ) {
+  return addTheJ +1;
 }
 // back is selected
 // i-- to adjust for array input
@@ -76,6 +84,4 @@ function didThisChange(event){
 
 
 
-
-
-// giving up for the night, no clue what a drop down form is called. Assuming select. No clue how the select fires a trigger. Assuming some how the page has to associate to an array, no clue how to do that. Completely missing everything related to this outside of an array will do it and hot to inject array values if I can somehow fire the dropdown to a value.
+// final score
