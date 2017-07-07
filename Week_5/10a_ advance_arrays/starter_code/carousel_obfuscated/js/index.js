@@ -25,11 +25,10 @@
 // form dropdown is selected and a value is picked, selecting blank does nothing
 var toStore;
 var calculatedArray = [ , , , , , , , ];
+var finalTotal = 0;
 var finalScore = 0;
 var i = 0;
 var j = 1;
-var k = 0;
-var l = 0;
 var imageCycle = ["images/food1.jpg","images/food2.jpg","images/food3.jpg","images/food4.jpg","images/food5.jpg","images/food6.jpg","images/food7.jpg","images/food8.jpg"];
 // identify if the drop down changed
 document.addEventListener('DOMContentLoaded',function(){
@@ -60,7 +59,16 @@ function didThisChange(event){
   }
   // if statement if array for value 5 is submitted or skipped with variable
   // update score
-  console.log(finalScore + " is the final score")
+  console.log(calculatedArray.length);
+  if (i === 7) {
+    for (k = 0; k <= calculatedArray.length; k++){
+      finalTotal = finalTotal + calculatedArray[k];
+      console.log("Total " + finalTotal);
+    }
+    console.log("Total " + finalTotal);
+    finalScore = finalTotal / calculatedArray.length;
+    console.log("Score " + finalScore);
+  }
   // display text and score
 }
 // function for storing i values
