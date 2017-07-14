@@ -1,0 +1,75 @@
+/*Remove inline*/
+select{
+     width:150px;
+}
+
+/*Combine multiples*/
+#buttons-wrapper,#buttons-wrapper>form{
+     padding:10px;
+     border:1px solid black;
+}
+#buttons-wrapper{
+     background:orange;
+}
+
+
+
+/*Rename classes/ids for readability*/
+#image-to-vote-on{
+     margin-top: 50px;
+}
+
+/*Organize CSS*/
+/*Global*/
+a{
+     color:red;
+}
+a:hover{
+     color:purple;
+}
+body{
+     background-image:url(../images/anImage.png);
+}
+/*Header*/
+header{
+     height:80px;
+}
+header>ol{
+     list-style: none;
+}
+.list-item{
+     width:200px;
+}
+#navigation-wrapper{
+     float:left;
+}
+/*Container*/
+#container>img{
+     border:1px solid red;
+}
+#container>.col{
+     width:50%;
+}
+/*Footer*/
+footer{
+     text-align: right;
+}
+footer>#company-name{
+     font-weight: bold;
+}
+
+
+/*Create classes for large css changes
+$("#container").addClass("container-style");
+*/
+.container-style{
+     background:red;
+     font-size:12px;
+     color:purple;
+     box-shadow:0 0 10px #ccc;
+}
+
+/*Remove unnecessary CSS */
+#myDiv{
+     margin:10px 0 0 20px;
+}
