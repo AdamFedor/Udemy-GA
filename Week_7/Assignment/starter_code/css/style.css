@@ -1,14 +1,14 @@
 /*
-Project Name: Blank Template
+Project Name: Relaxr
 Client: Your Client
-Author: Your Name
-Developer @GA in NYC
+Author: Adam Fedor
+Developer @GA in SEA
 */
 
 
-/******************************************
-/* SETUP
-/*******************************************/
+/******************************************/
+/*                 Setup                  */
+/******************************************/
 
 /* Box Model Hack */
 * {
@@ -41,9 +41,9 @@ Developer @GA in NYC
   padding: 0 10px 10px 0; /* note the padding around a left floated image */
 }
 
-/******************************************
-/* BASE STYLES
-/*******************************************/
+/******************************************/
+/*              Base Layout               */
+/******************************************/
 
 body {
   color: #f0efef;
@@ -53,24 +53,25 @@ body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
+
 a {
   text-decoration: none;
 }
 
-
-/******************************************
-/* LAYOUT
-/*******************************************/
+/******************************************/
+/*                 LAYOUT                 */
+/******************************************/
 
 /* Center the container */
 .container {
-  width: 960px;
+  max-width: 1060px;
   margin: 0 auto;
+  padding: 0 50px;
 }
-.logo {
-  font-size: 48px;
-  font-weight: 800;
-}
+
+/******************************************/
+/*                 Header                 */
+/******************************************/
 
 header {
   background: #033048;
@@ -85,15 +86,33 @@ header .logo {
 header nav {
   float: right;
   margin-top: 15px;
+  display: block;
 }
 header nav ul li {
   display: inline-block;
   margin: 0 0 0 40px;
-  font-size: 24px;
+  font-size: 1em;
 }
 header nav ul li a {
   color: #f9e42e;
 }
+
+.logo {
+  font-size: 1.8em;
+  font-weight: 800;
+}
+
+.juicyHamburgerNumNumNum {
+  height: 60px;
+  float: right;
+  font-size: 1.8em;
+  display: none;
+  margin-right: 10px;
+}
+
+/******************************************/
+/*                  hero                  */
+/******************************************/
 
 #hero {
   height: 700px;
@@ -105,18 +124,23 @@ header nav ul li a {
   color: #fff;
 }
 #hero h2 {
-  font-size: 48px;
+  font-size: 1.5em;
   text-align: center;
   color: #fff;
   margin: 120px 0 90px;
   font-weight: 600;
 }
+
+/******************************************/
+/*                generic                 */
+/******************************************/
+
 .button {
   border-radius: 5px;
   font-weight: 800;
   padding: 12px 0;
   width: 280px;
-  font-size: 28px;
+  font-size: 1.08em;
   text-align: center;
   display: block;
   margin: 0 auto;
@@ -128,14 +152,14 @@ header nav ul li a {
 .blue {
   background: #033048;
   color: #fff;
-  font-size: 24px;
+  font-size: .925em;
 }
 #benefits {
   padding: 100px 0 80px;
 }
 h3 {
   color: #033048;
-  font-size: 40px;
+  font-size: 1.535em;
   font-weight: 600;
   margin-bottom: 40px;
 }
@@ -152,7 +176,7 @@ h3 {
   color: #fff;
 }
 blockquote {
-  font-size: 36px;
+  font-size: 1.385em;
   font-weight: 300;
   font-style: italic;
   text-align: center;
@@ -178,12 +202,23 @@ blockquote span {
   display: inline-block;
   vertical-align: top;
 }
+
+#bottom-cta {
+  background: #f9e42e;
+  padding: 30px;
+  text-align: center;
+}
+
+/******************************************/
+/*              Post/Readmore             */
+/******************************************/
+
 .post {
   border-bottom: 1px solid #043049;
   padding-bottom: 40px;
   margin-bottom: 40px;
 }
-.post h2 {
+.post h2 { /**********************FIX THIS IN NEXT PAGE************************/
   font-weight: 600;
   font-size: 40px;
   line-height: 1.3;
@@ -239,6 +274,10 @@ blockquote span {
   font-size: 24px;
 }*/
 
+/******************************************/
+/*                Sidebar                 */
+/******************************************/
+
 #sidebar h3 {
   font-size: 32px;
   font-weight: 800;
@@ -262,11 +301,9 @@ blockquote span {
   font-weight: 600;
 }
 
-#bottom-cta {
-  background: #f9e42e;
-  padding: 30px;
-  text-align: center;
-}
+/******************************************/
+/*                 Footer                 */
+/******************************************/
 
 footer {
   background: #121212;
@@ -288,5 +325,176 @@ footer p {
   font-weight: 600;
 }
 
+/******************************************/
+/*               768 Break                */
+/******************************************/
 
+@media only screen and (max-width: 768px) {
+  /********* Generic **********/
+  .mobile-keepaway {
+    display: none;
+  }
 
+  .container {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /********** Header **********/
+  header {
+    padding: 0 40px;
+  }
+
+  .juicyHamburgerNumNumNum {
+    display: block;
+  }
+
+  /*********** Hero ***********/
+  #hero {
+    height: 280px;
+    background: url(../images/header_bg.jpg) no-repeat top center #131e27;
+    padding-top: 32px;
+  }
+
+  #hero h2 {
+    font-size: 1.2em;
+    margin: 40px 0 60px;
+  }
+
+  /********** Button **********/
+  .button {
+    padding: 8px 0;
+    width: 220px;
+    font-size: .8em;
+  }
+
+  /******** generic **********/
+  blockquote {
+    font-size: 1em;
+    width: 520px;
+  }
+
+  #testimonial {
+    padding: 45px 0;
+  }
+
+  /*********** nav ***********/
+  #lookingDownOnYou nav {
+    clear: both;
+    float: none;
+  }
+
+  #lookingDownOnYou nav li {
+    float: none;
+    text-align: center;
+    display: block;
+  }
+
+  /******** benefits *********/
+  #benefits {
+    padding: 35px 0 45px;
+  }
+
+  #benefits li, p {
+    font-size: .7em;
+    padding-left: 0;
+  }
+
+  #benefits p {
+    padding-left: 40px;
+    width: 550px;
+  }
+  #benefits ul {
+    width: 100%;
+  }
+
+  #benefits ul {
+    margin-left: 40px;
+  }
+
+  /*********** h3 ************/
+  h3 {
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    padding-left: 10px;
+  }
+
+  /********* footer **********/
+  footer {
+    padding: 30px 0 20px;
+  }
+
+  footer .logo {
+    margin-bottom: 30px;
+  }
+
+  footer ul li {
+    margin: 0 20px 35px;
+  }
+
+  .copyright {
+    font-size: .7em;
+  }
+}
+
+/******************************************/
+/*                575 Break               */
+/******************************************/
+
+@media only screen and (max-width: 575px) {
+  /********** Header **********/
+  header {
+    padding: 0 10px;
+  }
+
+  /******** benefits *********/
+  #benefits li, p {
+    font-size: .6em;
+  }
+
+  #benefits p {
+    padding-left: 10px;
+    width: 360px;
+  }
+
+  #benefits ul {
+    margin-left: 25px;
+    width: 350px;
+  }
+  /******** generic **********/
+  #hero h2 {
+    font-size: .85em;
+  }
+
+  blockquote {
+    font-size: .7em;
+    width: 300px;
+  }
+
+  #testimonial {
+    padding: 25px 0;
+  }
+
+  /*********** h3 ************/
+  h3 {
+    font-size: 1em;
+  }
+
+  /********* footer **********/
+  footer {
+    padding: 20px 0 10px;
+  }
+
+  footer .logo {
+    margin-bottom: 20px;
+  }
+
+  footer ul li {
+    margin: 0 10px 15px;
+  }
+
+  .copyright {
+    font-size: .5em;
+  }
+}
