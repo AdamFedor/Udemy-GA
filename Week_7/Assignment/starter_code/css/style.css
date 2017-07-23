@@ -238,7 +238,7 @@ blockquote span {
 }
 .post p:first-of-type:first-letter {
   float: left;
-  font-size: 80px;
+  font-size: 3.3em;
   line-height: 65px;
   padding-top: 4px;
   padding-right: 8px;
@@ -279,7 +279,7 @@ blockquote span {
 /******************************************/
 
 #sidebar h3 {
-  font-size: 32px;
+  font-size: 1.22em;
   font-weight: 800;
   margin-bottom: 15px;
   color: #043049;
@@ -289,10 +289,10 @@ blockquote span {
 }
 #sidebar ul li a {
   color: #043049;
-  font-size: 24px;
+  font-size: .9em;
 }
 #sidebar p {
-  font-size: 22px;
+  font-size: .85em;
   line-height: 1.1;
   margin-bottom: 40px;
 }
@@ -336,7 +336,6 @@ footer p {
   }
 
   .container {
-    max-width: 1060px;
     margin: 0 auto;
     padding: 0;
   }
@@ -377,6 +376,78 @@ footer p {
 
   #testimonial {
     padding: 45px 0;
+  }
+
+  #main {
+    margin-top: 20px;
+  }
+
+  #main h2{
+    font-size: .7em;
+    padding-left: 40px;
+  }
+
+  /******** sidebar **********/
+  #sidebar {
+    width: 100%;
+  }
+
+  #sidebar h3 {
+    font-size: .9em;
+    margin-bottom: 0;
+  }
+
+  #sidebar ul {
+    margin-bottom: 20px;
+  }
+
+  #sidebar ul li a {
+    font-size: .6em;
+    padding-left: 10px;
+  }
+
+  #sidebar p {
+    font-size: .55em;
+    padding-left: 10px;
+  }
+
+  #sidebar img {
+    display: none;
+  }
+
+  /********** posts **********/
+  #posts {
+    margin: 0;
+    width: 100%;
+  }
+
+  #posts img {
+    width: 100%;
+    padding: 0 2%;
+  }
+
+  #posts h2 {
+    margin-bottom: 20px;
+  }
+
+  #posts p {
+    font-size: .5em;
+    padding: 0 10px;
+  }
+
+  .post p:first-of-type:first-letter {
+    float: left;
+    font-size: 2.2em;
+    line-height: 45px;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-left: 3px;
+    font-weight: 600;
+  }
+
+  .post {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
   }
 
   /*********** nav ***********/
@@ -474,6 +545,21 @@ footer p {
 
   #testimonial {
     padding: 25px 0;
+  }
+
+  #main h2{
+    font-size: .5em;
+    padding-left: 5px;
+  }
+
+  /******** readmore *********/
+  .readmore {
+    margin-top: 15px;
+  }
+
+  .post {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   /*********** h3 ************/
