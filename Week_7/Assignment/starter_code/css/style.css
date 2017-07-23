@@ -400,7 +400,7 @@ footer p {
   }
 
   #sidebar li {
-    height: 20px; /* forcing function, I couldn't find a rule in debugging that was causing spacing above. */
+    line-height: 20px; /* haha, this is what I was trying to figure out!*/
   }
 
   /********** posts **********/
