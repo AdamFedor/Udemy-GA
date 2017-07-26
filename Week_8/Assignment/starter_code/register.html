@@ -28,31 +28,31 @@
 					<!-- where the forms go -->
 					<fieldset>
 						<legend>Register Now!</legend>
-						<div>
+						<div class="shortMan">
 							<label for="textBlock">Name:</label>
-							<input id="textBlock" name="textBlock" type="text" class="wide"></input>
+							<input id="textBlock" name="textBlock" type="text" class="wide" placeholder="Bob Boberton"></input>
 						</div>
-						<div>
-							<label type="emailBlock">Email:</label>
-							<input id="emailBlock" name="emailBlock" type="email" class="wide"></input>
+						<div class="shortMan">
+							<label for="emailBlock">Email:</label>
+							<input id="emailBlock" name="emailBlock" type="email" class="wide" placeholder="bobertonbob@bob-da-boberton.com"></input>
 						</div>
-						<div>
+						<div class="shortMan">
 							<label for="telBlock">Phone:</label>
-							<input id="telBlock" name="telBlock" type="tel" class="wide"></input>
+							<input id="telBlock" name="telBlock" type="tel" class="wide" placeholder="425-123-4567"></input>
 						</div>
-						<div>
+						<div class="shortMan">
 							<label for="stateInput">State</label>
-							<select name="stateInput" id="stateInput">
+							<select name="stateInput" id="stateInput"  class="wide">
 								<option value="value1" selected>Washington</option>
 								<option value="value2">Washington State</option>
 								<option value="value3">The state is actually Washington</option>
 							</select>
-						</div>
+						</div class="shortMan">
 						<div>
 							<label for="passwordBlock">Password:</label>
-							<input id="passwordBlock" name="passwordBlock" type="password"></input>
+							<input id="passwordBlock" name="passwordBlock" type="password" class="wide"></input>
 						</div>
-						<div>
+						<div class="shortMan">
 							<label>Which services are you interested in?</label>
 							<input id="radioInputA" name="radioInput" type="radio" value="A"/>
 							<label for="radioInputA" class="smallWidth">Relaxing</label>
@@ -61,11 +61,11 @@
 							<input id="radioInputC" name="radioInput" type="radio" value="C" />
 							<label for="radioInputC"class="smallWidth">Phone</label>
 						</div>
-						<div>
+						<div class="shortMan">
 							<input id="checkboxInput" name="checkboxInput" type="checkbox"></input>
-							<label for="checkboxInput">I agree to the terms</label>
+							<label for="checkboxInput" class="agreement">I agree to the terms</label>
 					</fieldset>
-					<input type="submit" value="Register Now!">
+					<button id="signedAwayLife">Register Now!</button>
 				</section>
 			</div>
 		</section>

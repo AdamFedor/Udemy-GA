@@ -270,6 +270,7 @@ blockquote span {
 }
 
 footer {
+  margin-top: 100px;
   background: #121212;
   padding: 65px 0 45px;
   text-align: center;
@@ -296,15 +297,50 @@ label{
   width: 170px;
   display: inline-block;
 }
+.agreement {
+  width: 135px;
+  margin-right: 0;
+}
 .smallWidth {
-  width: 40px; /* set smaller so that only the text was clickable, not the margin */
-  margin-right: 40px;
+  width: 80px;
+}
+.shortMan {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 legend{
   font-size: 35px;
 }
 .wide {
   width: 300px;
+}
+input[type=text], input[type=email], input[type=tel], select, input[type=password], input[type=radio] {
+  border: none;
+  border-bottom: black 1px solid;
+  padding: 7px;
+  font-size: 12px;
+}
+#signedAwayLife{
+     color: #ffffff;
+     border-color: #357ebd;
+     padding-left: 80px;
+     padding-right: 80px;
+     margin-bottom: 0;
+     font-size: 20px;
+     font-weight: normal;
+     line-height: 1.5;
+     text-align: center;
+     white-space: nowrap;
+     vertical-align: middle;
+     cursor: pointer;
+     border: 1px solid transparent;
+     border-radius: 4px;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     -o-user-select: none;
+     user-select: none;
+     background: #033048;
 }
 @media only screen and (max-width: 768px) {
   body {
