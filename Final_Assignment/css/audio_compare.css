@@ -121,7 +121,10 @@ a {
 /******************************************/
 
 header {
-  background: #7c745e;
+  background-color: #000000;
+  background-image: url('../img/header_img.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
   padding: 25px 0;
   overflow: hidden;
 }
@@ -129,6 +132,7 @@ header {
 header .logo {
   color: #fff;
   float: left;
+  text-shadow: 1px 1px 2px black;
 }
 
 header nav {
@@ -142,7 +146,15 @@ header nav ul li {
   margin: 0 0 0 40px;
   font-size: 1em;
 }
+
+header a {
+    border: 2px solid #f9e42e;
+    /*background-color: #2D2B2E;*/
+    background-color: rgba(45,43,46,.8);
+}
+
 header a, footer a {
+  padding: 5px;
   color: #f9e42e;
 }
 
@@ -189,9 +201,22 @@ article {
 .imgPlaceHolder {
   width: 90%;
   height: 350px;
-  border: 1px black solid;
+  border: none;
   margin-left: 5%;
-  background-color: gray;
+}
+
+.defaultspeaker {
+  background-image: url('../img/default_speaker.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.defaultamp {
+  background-image: url('../img/default_amp.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 h3 {
@@ -337,6 +362,7 @@ footer p {
 
   header nav {
     float: none;
+    display: inline-block;
   }
 
   .grayButton {
@@ -354,5 +380,24 @@ footer p {
     margin: 0;
     font-size: .6em;
     padding: 15px 0;
+  }
+}
+
+/******************************************/
+/*           Breakpoint: 480px            */
+/******************************************/
+
+@media only screen and (max-width: 480px) {
+  .logo {
+    font-size: 1.5em;
+  }
+  header nav ul li {
+    margin-left: 0;
+  }
+  header {
+    padding: 0;
+  }
+  header nav {
+    margin-top: 7px;
   }
 }
