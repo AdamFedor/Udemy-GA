@@ -116,6 +116,10 @@ a {
   margin-bottom: 10px;
 }
 
+.muteButton {
+  display: none;
+}
+
 /******************************************/
 /*                 Header                 */
 /******************************************/
@@ -127,6 +131,8 @@ header {
   background-position: center;
   padding: 25px 0;
   overflow: hidden;
+  position: sticky;
+  top: 0;
 }
 
 header .logo {
@@ -168,11 +174,6 @@ section {
 section p {
   margin: 5px 0 35px 0;
   font-size: .9em;
-}
-
-section h1 {
-  font-size: 1.5em;
-  margin: 5px 0;
 }
 
 /******************************************/
@@ -287,10 +288,6 @@ footer p {
 /******************************************/
 
 @media only screen and (max-width: 845px) {
-  /***************Base Layout**************/
-  .container {
-    padding: 0 30px;
-  }
 
   /****************Section*****************/
   section p {
@@ -327,8 +324,14 @@ footer p {
     margin-left: 25%;
   }
 
+  .grayButton {
+    padding: 15px 0;
+    width: 60%;
+  }
+
   .blueButton {
     width: 200px;
+    padding: 15px 0;
   }
 
   .indecisiveFloat {
@@ -365,11 +368,6 @@ footer p {
     display: inline-block;
   }
 
-  .grayButton {
-    padding: 15px 0;
-    width: 60%;
-  }
-
   .orangeButton {
     padding: 15px 0;
     width: 100%;
@@ -379,7 +377,6 @@ footer p {
     width: 170px;
     margin: 0;
     font-size: .6em;
-    padding: 15px 0;
   }
 }
 
@@ -398,6 +395,6 @@ footer p {
     padding: 0;
   }
   header nav {
-    margin-top: 7px;
+    margin-top: 6px;
   }
 }
