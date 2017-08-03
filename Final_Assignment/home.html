@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="description" content="Audio combinations made simple.">
   <title>Audio Configurations</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/audio_compare.css">
   <script type="x-template" id="selectionTop">
     <div id="selectionAmpSpeaker" class="clearfix">
-      <article class="amplifier">
+      <article class="amplifier selections">
         <h3 class="centered">
           Amplifier
         </h3>
@@ -21,7 +22,7 @@
           <option>Select an Amp</option>
         </select>
       </article>
-      <article class="speaker">
+      <article class="speaker selections">
         <h3 class="centered">
           Speaker
         </h3>
@@ -37,24 +38,75 @@
     </div>
   </script>
   <script type="x-template" id="selectionButtons">
-  <div class="separateAdd container centered">
-    <input type="button" class="btn grayButton" value="Add Additional Comparison Option">
-    </input>
-    <input id="selectionButtonsReoccuring" type="button" class="btn grayButton muteButton" value="Remove Additional Comparison Option">
-    </input>
-  </div>
+    <!--//<div class="separateAdd container centered">
+    //   <input type="button" class="btn grayButton" value="Add Additional Comparison Option">
+    //   </input>
+    //   <input id="selectionButtonsReoccuring" type="button" class="btn grayButton muteButton" value="Remove Additional Comparison Option">
+    //   </input>
+    // </div>-->
+    <!--//test for popover, doesn't work with experimental header. //<a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>-->
   </script>
   <script type="x-template" id="selectionBottom">
     <div id="selectionButtons" class="container clearfix">
       <div class="example">
-        <input type="button" class="btn leftFloat blueButton" value="Create Custom Amp">
-        </input>
-        <input type="button" class="btn indecisiveFloat blueButton" value="Create Custom Speaker">
-        </input>
+        <!--//<input type="button" class="btn floatLeft blueButton" value="Create Custom Amp">
+        //</input>
+        //<input type="button" class="btn indecisiveFloat blueButton" value="Create Custom Speaker">
+        //</input>-->
       </div>
       <input type="button" class="btn floatRight orangeButton" value="Evaluate Selection">
       </input>
     </div>
+  </script>
+  <script type="x-template" id="resultsTop">
+    <h3 id="resultsHeaderId"></h3>
+    <div class="clearfix">
+      <article class="resultsSizeRight floatRight">
+        <img class="resultsRight">
+        </img>
+        <img class="resultsRight">
+        </img>
+      </article>
+      <article class="resultsSizeLeft">
+        <h4>Amplifier Details</h4>
+        <p id="ampBrandModelId" class="zeroOut indentResultDetails"></p>
+        <p id="ampTypeId" class="zeroOut indentResultDetails"></p>
+        <p id="ampWattsOhmId" class="zeroOut indentResultDetails">
+          <button id="notificationWattsAmp" class="roundTooltip blueNotification muteButton" data-toggle="tooltip" data-placement="right" title="Recommendation: Amplifier watts far exceed speaker watts. Pre-amplifier may have limited range when turning up volume before damaging the speaker.">?</button>
+        </p>
+        <p id="ampNoiseId" class="zeroOut indentResultDetails">
+          <button id="notificationNoise" class="roundTooltip yellowCaution muteButton" data-toggle="tooltip" data-placement="right" title="Caution! Signal to noise is below the average.">!</button>
+        </p>
+        <p id="ampThdId" class="zeroOut indentResultDetails"></p>
+        <p id="ampPriceId" class="zeroOut indentResultDetails"></p>
+        <h4>Speaker Details</h4>
+        <p id="speakerBrandModelId" class="zeroOut indentResultDetails"></p>
+        <p id="speakerTypeId" class="zeroOut indentResultDetails"></p>
+        <p id="speakerFrequencyId" class="zeroOut indentResultDetails">
+          <button id="notificationFrequency" class="roundTooltip blueNotification muteButton" data-toggle="tooltip" data-placement="right" title="Recommendation: Minimum frequency misses key low frequencies, recommend a subwoofer.">?</button>
+        </p>
+        <p id="speakerOhmId" class="zeroOut indentResultDetails">
+          <button id="notificationOhm" class="roundTooltip redWarning muteButton" data-toggle="tooltip" data-placement="right" title="WARNING! Amplifier does not support ohm of speaker.">X</button>
+        </p>
+        <p id="speakerOhmMinId" class="zeroOut indentResultDetails">
+          <button id="notificationOhmMin" class="roundTooltip redWarning muteButton" data-toggle="tooltip" data-placement="right" title="WARNING! Amplifier does not support minimum ohm of speaker.">X</button>
+        </p>
+        <p id="speakerWattsMaxId" class="zeroOut indentResultDetails">
+          <button id="notificationWattsMax" class="roundTooltip blueNotification muteButton" data-toggle="tooltip" data-placement="right" title="Recommendation: Speaker watts far exceed amplifier watts.">?</button>
+        </p>
+        <p id="speakerWattsMinId" class="zeroOut indentResultDetails"></p>
+        <p id="speakerSensitivityId" class="zeroOut indentResultDetails"></p>
+        <p id="speakerWeightId" class="zeroOut indentResultDetails"></p>
+        <p id="speakerPriceId" class="zeroOut indentResultDetails"></p>
+        <!--//<p class="zeroOut">Example:Tooltip-->
+           <!--//<button class="roundTooltip blueNotification red-tooltip" data-toggle="tooltip" data-placement="right" title="Caution! Your amplifier watts may result in overpowering your speakers. Your speakers may be damage when played louder than it's max rating.">!</button>-->
+        <!--//</p>-->
+        <h4>Summary</h4>
+        <p id="resultsLoudnessId" class="zeroOut indentResultDetails"></p>
+      </article>
+    </div>
+    <p id="resultsReplaceParagraph">
+    </p>
   </script>
 </head>
 <body>
@@ -77,7 +129,7 @@
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </p>
   </section>
-  <h2 class="centered">Analyze: Stereo Configuration</h2>
+  <h2 id="replaceH2" class="centered">Analyze: Stereo Configuration</h2>
   <section class="container">
     <!-- Area for replacement on adding additional -->
     <div class="replaceThisTop">
@@ -98,6 +150,7 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous">
   </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="js/audio_compare.js"></script>
 </body>
 </html>

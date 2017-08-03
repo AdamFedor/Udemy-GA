@@ -314,7 +314,7 @@ legend{
 .wide {
   width: 300px;
 }
-input[type=text], input[type=email], input[type=tel], select, input[type=password], input[type=radio] {
+input[type="text"], input[type="email"], input[type="tel"], select, input[type="password"], input[type="radio"] {
   border: none;
   border-bottom: black 1px solid;
   padding: 7px;
