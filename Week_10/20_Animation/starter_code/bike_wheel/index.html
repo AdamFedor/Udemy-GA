@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Your description goes here">
+	<meta name="keywords" content="one, two, three">
+	
+	<title>Bike wheel spinner</title>
+
+	<!-- external CSS link -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+	<div id="container">
+		<header>
+			<h1>Bike wheel spinner</h1>
+		</header>
+		<img src="images/bike-wheel.png" class="thing-to-spin">
+		<form action="" id="controls">
+			<h3>Animation controls</h3>
+			<label>
+				<span>animation-iteration-count</span>
+				<input name="iteration-count" type="text" placeholder="&quot;infinite&quot; or number" value="infinite">
+			</label>
+			<label>
+				<span>animation-direction</span>
+				<select name="direction">
+					<option value="normal" selected>normal</option>
+					<option value="reverse">reverse</option>
+					<option value="alternate">alternate</option>
+					<option value="alternate-reverse">alternate-reverse</option>
+				</select>
+			</label>
+			<label>
+				<span>animation-duration</span>
+				<input name="duration" type="text" placeholder="duration in seconds(s) or milliseconds(ms)" value="1000ms">
+			</label>
+			<label>
+				<span>animation-timing-function</span>
+				<select name="timing-function">
+					<option value="ease">ease</option>
+					<option value="ease-in">ease-in</option>
+					<option value="ease-out">ease-out</option>
+					<option value="ease-in-out">ease-in-out</option>
+					<option value="linear" selected>linear</option>
+					<option value="step-start">step-start</option>
+					<option value="step-end">step-end</option>
+				</select>
+			</label>
+			<label>
+				<span>animation-play-state</span>
+				<select name="play-state">
+					<option value="running" selected>running</option>
+					<option value="paused">paused</option>
+				</select>
+			</label>
+			<label>
+					<span>animation-fill-mode</span>
+					<select name="fill-mode">
+						<option value="none">none</option>
+						<option value="forwards">forwards</option>
+						<option value="backwards">backwards</option>
+						<option value="both">both</option>
+					</select>
+			</label>
+		</form>
+		<footer>
+			&copy; General Assembly
+		</footer>
+	</div>
+	<script src="js/main.js"></script>
+</body>
+</html>
