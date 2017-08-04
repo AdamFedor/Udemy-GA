@@ -8,7 +8,7 @@ var resultsVarNoise;
 var resultsVarThd;
 var resultsVarSensitivity;
 var resultsVarSubwoofer;
-var mathDb;
+var relativeLoudness;
 
 // ********************************************************* //
 // ************************* READY ************************* //
@@ -155,13 +155,9 @@ function resultsSpeaker(speakerBrand,speakerModel,speakerType,speakerFrequencyMi
 
 // function to return the relative loudness of the speaker and amp combo
 function resultsLoudness(speakerSensitivity){
-  var speakerSensitivity = 92;
+  var speakerSensitivity = 88;
   var isNumber = parseInt(speakerSensitivity);
-  var startingPoint = isNumber-89;
-  startingPoint = startingPoint/3;
-  startingPoint = startingPoint*2*100;
-  console.log(startingPoint);
-  relativeLoudness = startingPoint;
+  decibelMathFunc(isNumber);
   $("#resultsLoudnessId").append("Relative Loudness: "+relativeLoudness+" watts");
 }
 
@@ -195,14 +191,26 @@ function resultsParagraph(match,noise,SpeakerThd,Sensitivity,Subwoofer){
 // ********************************************************* //
 
 // function for below 98db
-function decibelMathBelow() {
-  
-}
+function decibelMathFunc(decibelMath) {
+  var validate = decibelMath;
+  var validateNum = parseInt(validate);
+  var aThird = 1/3;
+  var aSixth = 1/6;
+  var aTwelth = 1/12;
+  var aTwentyFourth = 1/24;
+  // calculate if less than 89
+  if (validateNum <= parseInt(80)) {
+      relativeLoudness = 100 - (6.25 * aTwentyFourth);
+  } // calculate if more than 89
+  else if (validateNum > parseInt(89)) {
 
-// function for equal to or above 98db
-function decibelMathAbove() {
-
-}
+  } // calculate if equal to 89
+  else if (validateNum = parseInt(89)) {
+    console.log(validateNum);
+    relativeLoudness = 100;
+  };
+  console.log(relativeLoudness);
+};
 
 // ********************************************************* //
 // ************************ ARRAYS ************************* //
