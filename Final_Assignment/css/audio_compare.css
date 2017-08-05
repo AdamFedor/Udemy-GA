@@ -74,6 +74,11 @@ a {
   width: 100%;
 }
 
+.linkFormat, .linkFormat:visited, .linkFormat:focus, .linkFormat:hover {
+  color: #f9e42e;
+  text-decoration: none;
+}
+
 /******************************************/
 /*                Buttons                 */
 /******************************************/
@@ -157,7 +162,7 @@ a {
 .yellowCaution {
   color: #000000;
   background-color: #ffcc00;
-  padding: 0 8px;
+  padding: 0 6.5px;
 }
 
 .redWarning {
@@ -175,6 +180,10 @@ a {
 
 .tooltip-inner {
   background-color:#202020;
+}
+
+.muteTooltip {
+  display: none;
 }
 
 /******************************************/
@@ -262,8 +271,11 @@ section p {
 }
 
 .indentResultDetails {
+  padding-left: 23px;
+}
+
+.font8em {
   font-size: .8em;
-  padding-left: 20px;
 }
 
 .amplifier {
