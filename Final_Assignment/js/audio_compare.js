@@ -4,26 +4,32 @@
 
 // used for array values when outputting results
 var relativeLoudness;
-var varAmpBrand = "McIntosh";
-var varAmpModel = "MC301"
-var varAmpType = "Amplifier"
-var varAmpWatts = 300;
-var varAmpOhm = 8;
-var varAmpNoise = 120;
-var varAmpThd = 0.005;
-var varAmpPrice = 5000.00;
-var varSpeakerBrand = "Bowers & Wilkins";
-var varSpeakerModel = "CM10 S2";
-var varSpeakerType = "Tower Speaker";
-var varSpeakerFrequencyMin = 45;
-var varSpeakerFrequencyMax = 28000;
-var varSpeakerOhm = 8;
-var varSpeakerOhmMin = 3.1;
-var varSpeakerWattsMin = 30;
-var varSpeakerWattsMax = 300;
-var varSpeakerSensitivity = 90;
-var varSpeakerWeight = 73.7;
-var varSpeakerPrice = 4000.00;
+var varAmpBrand;
+var varAmpModel;
+var varAmpType;
+var varAmpWatts8;
+var varAmpWatts6;
+var varAmpWatts4;
+var varAmpWatts;
+var varAmpOhm;
+var varAmpNoise;
+var varAmpThd;
+var varAmpPrice;
+var varSpeakerBrand;
+var varSpeakerModel;
+var varSpeakerType;
+var varSpeakerFrequencyMin;
+var varSpeakerFrequencyMax;
+var varSpeakerOhm;
+var varSpeakerOhmMin;
+var varSpeakerWattsMin;
+var varSpeakerWattsMax;
+var varSpeakerSensitivity;
+var varSpeakerWeight;
+var varSpeakerPrice;
+var objectAmpNumber;
+var objectSpeakerNumber;
+
 
 // ********************************************************* //
 // ************************* READY ************************* //
@@ -33,9 +39,12 @@ var varSpeakerPrice = 4000.00;
 $(document).ready(function(){
   // This is the default state of the page. Allows 1 grouped selection.
   selectionRun();
-  // resultsRun();
   ampDropDown();
   speakerDropDown();
+  document.getElementById("amp-select").onchange = ampImgSelect;
+  document.getElementById("speaker-select").onchange = speakerImgSelect;
+  document.getElementById("evaluateSelection").onclick = clearToResults;
+  document.getElementById("resetPage").onClick = clearToSelection;
 });
 
 // on change to drop down, image changes to brand+" "+model
@@ -74,29 +83,89 @@ function addComma(valueConvert) {
     return valueConvert.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// update amp image with updated selection
+function ampImgSelect(){
+  // change objectSpeakerNumber to selection
+  ampSelection = document.getElementById("amp-select").selectedIndex;
+  var oneLess = ampSelection - 1;
+  objectAmpNumber = ampSelection;
+  varAmpBrand = amp[oneLess].brand;
+  varAmpModel = amp[oneLess].model;
+  varAmpType = amp[oneLess].type;
+  varAmpWatts8 = amp[oneLess].ohm8;
+  varAmpWatts6 = amp[oneLess].ohm6;
+  varAmpWatts4 = amp[oneLess].ohm4;
+  varAmpOhm = amp[oneLess].minImpedence;
+  varAmpNoise = amp[oneLess].signalToNoise;
+  varAmpThd = amp[oneLess].thdAmp;
+  varAmpPrice = amp[oneLess].cost;
+  // remove spaces for image - custom stored images will later be done this way
+  var ampUsed = ampImg[objectAmpNumber].replace(/\s+/g, '');
+  // replace image with selected - custom images will later be done this way
+  $(".defaultamp").css("background-image", "url('"+ampUsed+".jpg'");
+}
+
+// update speaker image with updated selection
+function speakerImgSelect(){
+  // change objectSpeakerNumber to selection
+  speakerSelection = document.getElementById("speaker-select").selectedIndex;
+  var oneLess = speakerSelection - 1;
+  objectSpeakerNumber = speakerSelection;
+  // now that the number of the drop down is selected, the object can be applied to the variables
+  varSpeakerBrand = speaker[oneLess].brand;
+  varSpeakerModel = speaker[oneLess].model;
+  varSpeakerType = speaker[oneLess].type;
+  varSpeakerFrequencyMin = speaker[oneLess].frequencyMin;
+  varSpeakerFrequencyMax = speaker[oneLess].frequencyMax;
+  varSpeakerOhm = speaker[oneLess].ohmNominal;
+  varSpeakerOhmMin = speaker[oneLess].ohmMinimal;
+  varSpeakerWattsMin = speaker[oneLess].recommendedMinPower;
+  varSpeakerWattsMax = speaker[oneLess].recommendedMaxPower;
+  varSpeakerSensitivity = speaker[oneLess].sensitivityDb;
+  varSpeakerWeight = speaker[oneLess].weightLbs;
+  varSpeakerPrice = speaker[oneLess].costPerPair;
+  // remove spaces for image
+  var speakerUsed = speakerImg[speakerSelection].replace(/\s+/g, '');
+  // replace image with selected - custom stored images will later be done this way
+  $(".defaultspeaker").css("background-image", "url('"+speakerUsed+".jpg'");
+}
+
+// prep for switching and switch to results page
+function clearToResults() {
+  $("#selectionAmpSpeaker").remove();
+  $("#selectionButtons").remove();
+  resultsRun();
+}
+
+// prep for switching and switch to results page
+function clearToSelection() {
+  $("#resultsSwitch").remove();
+  selectionRun();
+}
+
 // ********************************************************* //
 // ****************** FUNCTIONS: SELECTION ***************** //
 // ********************************************************* //
 
 // function to run selection functions
-function selectionRun(){
+function selectionRun() {
   selectionHigh();
-  selectionMed();
+  // selectionMed();
   selectionLow();
 }
 
 // functions for selection template loaded
-function selectionHigh(){
+function selectionHigh() {
   var selectionTemplateVar = $("#selectionTop").text();
   var $selectionTopText = $(selectionTemplateVar);
   $(".replaceThisTop").append($selectionTopText);
 }
-function selectionMed(){
-  var selectionTemplateVar = $("#selectionButtons").text();
+function selectionMed() {
+  var selectionTemplateVar = $("#selectionMiddle").text();
   var $selectionTopText = $(selectionTemplateVar);
   $(".replaceThisMiddle").append($selectionTopText);
 }
-function selectionLow(){
+function selectionLow() {
   var selectionTemplateVar = $("#selectionBottom").text();
   var $selectionTopText = $(selectionTemplateVar);
   $(".replaceThisBottom").append($selectionTopText);
@@ -107,22 +176,32 @@ function selectionLow(){
 // ********************************************************* //
 
 // function to run results functions
-function resultsRun(){
+function resultsRun() {
   resultsHigh();
-  resultsPrice(varAmpPrice,varSpeakerPrice);
-  resultsAmp(varAmpBrand,varAmpModel,varAmpType,varAmpWatts,varAmpOhm,varAmpNoise,varAmpThd,varAmpPrice);
-  resultsSpeaker(varSpeakerBrand,varSpeakerModel,varSpeakerType,varSpeakerFrequencyMin,varSpeakerFrequencyMax,varSpeakerOhm,varSpeakerOhmMin,varSpeakerWattsMin,varSpeakerWattsMax,varSpeakerSensitivity,varSpeakerWeight,varSpeakerPrice);
-  resultsLoudness(varSpeakerSensitivity);
+  // resultsPrice(varAmpPrice,varSpeakerPrice);
+  // resultsAmp(varAmpBrand,varAmpModel,varAmpType,varAmpWatts,varAmpOhm,varAmpNoise,varAmpThd,varAmpPrice);
+  // resultsSpeaker(varSpeakerBrand,varSpeakerModel,varSpeakerType,varSpeakerFrequencyMin,varSpeakerFrequencyMax,varSpeakerOhm,varSpeakerOhmMin,varSpeakerWattsMin,varSpeakerWattsMax,varSpeakerSensitivity,varSpeakerWeight,varSpeakerPrice);
+  // resultsLoudness(varSpeakerSensitivity);
   resultsParagraph();
 }
 
+function resultsWattsToOhm() {
+  if (speakerOhm === 8) {
+    varSpeakerOhm = varAmpWatts8;
+  } else if (speakerOhm === 6) {
+    varSpeakerOhm = varAmpWatts6;
+  } else if (speakerOhm === 4) {
+    varSpeakerOhm = varAmpWatts4;
+  }
+}
+
 // functions for results template loaded
-function resultsHigh(){
+function resultsHigh() {
   var selectionTemplateVar = $("#resultsTop").text();
   var $selectionTopText = $(selectionTemplateVar);
   $(".replaceThisTop").append($selectionTopText);
 }
-function resultsLow(){
+function resultsLow() {
   var selectionTemplateVar = $("#resultsBottom").text();
   var $selectionTopText = $(selectionTemplateVar);
   $(".replaceThisTop").append($selectionTopText);
@@ -159,15 +238,14 @@ function resultsSpeaker(speakerBrand,speakerModel,speakerType,speakerFrequencyMi
 }
 
 // function to return the relative loudness of the speaker and amp combo
-function resultsLoudness(speakerSensitivity){
-  var speakerSensitivity = 86;
+function resultsLoudness(speakerSensitivity) {
   var isNumber = parseInt(speakerSensitivity);
   decibelMathFunc(isNumber);
   $("#resultsLoudnessId").append("Relative Loudness: "+relativeLoudness+" watts");
 }
 
 // function to return the total price of the speaker and amp combo
-function resultsPrice(ampPrice,speakerPrice){
+function resultsPrice(ampPrice,speakerPrice) {
     var ampPriceNum = parseInt(ampPrice);
     var speakerPriceNum = parseInt(speakerPrice);
     var priceCombinedNormal = ampPriceNum+speakerPriceNum;
@@ -177,7 +255,7 @@ function resultsPrice(ampPrice,speakerPrice){
 }
 
 // function to return the results paragraph with variables of results
-function resultsParagraph(match,noise,SpeakerThd,Sensitivity,Subwoofer){
+function resultsParagraph(match,noise,SpeakerThd,Sensitivity,Subwoofer) {
   var match = 1;
   var noise = 1;
   var speakerThd = 1;
@@ -248,11 +326,31 @@ function decibelMathFunc(decibelMath) {
 };
 
 // ********************************************************* //
+// *********************** DROPDOWN ************************ //
+// ********************************************************* //
+
+// function to do dropdown list of amp and setting images
+function ampDropDown() {
+  for (var i=0; i < amp.length; i++){
+    $("#amp-select").append("<option>"+amp[i].brand+": "+amp[i].model+"</option>")
+    ampImg.push(src="amps/"+amp[i].brand+" "+amp[i].model);
+  }
+}
+
+// function to do dropdown list of speaker and setting images
+function speakerDropDown() {
+  for (var i=0; i < speaker.length; i++){
+    $("#speaker-select").append("<option>"+speaker[i].brand+": "+speaker[i].model+"</option>")
+    speakerImg.push(src="speakers/"+speaker[i].brand+" "+speaker[i].model);
+  }
+}
+
+// ********************************************************* //
 // ************************ SCROLL ************************* //
 // ********************************************************* //
 
 // navigation bar collapsing details
-$(window).scroll(function(){ /*working draft, looking for alternative for .scroll()*/
+$(window).scroll(function() { /*working draft, looking for alternative for .scroll()*/
   if($(document).scrollTop() > 0) /*working draft, looking for alternative for .scrollTop()*/
 {
   if($('#lookingDownOnYou').data('size') == 'big')
@@ -278,32 +376,14 @@ else
 });
 
 // ********************************************************* //
-// *********************** DROPDOWN ************************ //
-// ********************************************************* //
-
-function ampDropDown(){
-  for (var i=0; i < amp.length; i++){
-    console.log(amp[i].brand+": "+amp[i].model);
-    $("#amp-select").append("<option>"+amp[i].brand+": "+amp[i].model+"</option>")
-  }
-}
-
-function speakerDropDown(){
-  for (var i=0; i < speaker.length; i++){
-    console.log(speaker[i].brand+": "+speaker[i].model);
-    $("#speaker-select").append("<option>"+speaker[i].brand+": "+speaker[i].model+"</option>")
-  }
-}
-
-// ********************************************************* //
 // ************************ ARRAYS ************************* //
 // ********************************************************* //
 
 // array for ampDropDown
-var ampDropArr = [];
+var ampImg = ["img/default_speaker"];
 
 // array for speakerDropDown
-var speakerDropArr = [];
+var speakerImg = ["img/default_amp"];
 
 // array of strings for results. First sentence.
 var resultsMatch = ["are a good match.","technically work, but advise changes.","are not a match."];
@@ -476,12 +556,26 @@ var amp = [
     ohm4: 150,
     signalToNoise: 103,
     minImpedence: 4,
-    thdAmp: "0.007%"
+    thdAmp: 0.007
   }
 ];
 
-// array of objects for amp
+// array of objects for amp ///////////////////////////////////////////////////
 var speaker = [
+  {
+    brand: "Bowers & Wilkins",
+    model: "CM10 S2",
+    type: "Tower",
+    costPerPair: 4000.00,
+    ohmNominal: 8,
+    ohmMinimal: 3.1,
+    recommendedMinPower: 30,
+    recommendedMaxPower: 300,
+    frequencyMin: 45,
+    frequencyMax: 28000,
+    sensitivityDb: 90,
+    weightLbs: 73.7
+  },
   {
     brand: "Bowers & Wilkins",
     model: "CM8 S2",
@@ -567,20 +661,6 @@ var speaker = [
     weightLbs: 28
   },
   {
-    brand: "Bowers & Wilkins",
-    model: "CM10 S2",
-    type: "Tower",
-    costPerPair: 4000.00,
-    ohmNominal: 8,
-    ohmMinimal: 3.1,
-    recommendedMinPower: 30,
-    recommendedMaxPower: 300,
-    frequencyMin: 45,
-    frequencyMax: 28000,
-    sensitivityDb: 90,
-    weightLbs: 73.7
-  },
-  {
     brand: "Focal",
     model: "Chorus 726",
     type: "Tower",
@@ -610,7 +690,7 @@ var speaker = [
   },
   {
     brand: "Focal",
-    model: "706",
+    model: "Chorus 706",
     type: "Bookshelf",
     costPerPair: 749.00,
     ohmNominal: 8,
@@ -624,7 +704,7 @@ var speaker = [
   },
   {
     brand: "Focal",
-    model: "705",
+    model: "Chorus 705",
     type: "Bookshelf",
     costPerPair: 549.99,
     ohmNominal: 8,
@@ -680,7 +760,7 @@ var speaker = [
   },
   {
     brand: "Klipsch",
-    model: "R-24F",
+    model: "RP-24F",
     type: "Tower",
     costPerPair: 999.96,
     ohmNominal: 8,
@@ -848,20 +928,6 @@ var speaker = [
   },
   {
     brand: "Sonus Faber",
-    model: "Chameleon",
-    type: "Tower",
-    costPerPair: 1999.98,
-    ohmNominal: 4,
-    ohmMinimal: NaN,
-    recommendedMinPower: 40,
-    recommendedMaxPower: 300,
-    frequencyMin: 38,
-    frequencyMax: 25000,
-    sensitivityDb: 90,
-    weightLbs: 54.013
-  },
-  {
-    brand: "Sonus Faber",
     model: "Venere 2.0",
     type: "Bookshelf",
     costPerPair: 3999.98,
@@ -891,6 +957,20 @@ var speaker = [
   {
     brand: "Sonus Faber",
     model: "Chameleon",
+    type: "Tower",
+    costPerPair: 1999.98,
+    ohmNominal: 4,
+    ohmMinimal: NaN,
+    recommendedMinPower: 40,
+    recommendedMaxPower: 300,
+    frequencyMin: 38,
+    frequencyMax: 25000,
+    sensitivityDb: 90,
+    weightLbs: 54.013
+  },
+  {
+    brand: "Sonus Faber",
+    model: "Chameleon B",
     type: "Bookshelf",
     costPerPair: 1799.98,
     ohmNominal: 4,

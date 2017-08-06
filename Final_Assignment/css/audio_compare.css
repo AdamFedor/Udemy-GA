@@ -74,11 +74,6 @@ a {
   width: 100%;
 }
 
-.linkFormat, .linkFormat:visited, .linkFormat:focus, .linkFormat:hover {
-  color: #f9e42e;
-  text-decoration: none;
-}
-
 /******************************************/
 /*                Buttons                 */
 /******************************************/
@@ -128,6 +123,11 @@ a {
 
 .muteButton {
   display: none;
+}
+
+.yellowButton {
+  border-color: #f9e42e;
+  background-color: black;
 }
 
 /******************************************/
@@ -209,7 +209,7 @@ header .logo {
 
 header nav {
   float: right;
-  margin-top: 15px;
+  margin-top: 7px;
   display: block;
 }
 
@@ -249,7 +249,7 @@ section p {
 .selections {
   width: 400px;
   float: left;
-  height: 500px;
+  height: 460px;
   background: white;
   border: 1px black solid;
   margin-bottom: 50px;
@@ -467,6 +467,9 @@ footer p {
     height: 0;
     width: 100%;
   }
+  ul {
+    padding-left: 0;
+  }
 }
 
 /******************************************/
@@ -483,11 +486,6 @@ footer p {
     display: block;
   }
 
-  header nav {
-    float: none;
-    display: inline-block;
-  }
-
   .orangeButton {
     padding: 15px 0;
     width: 100%;
@@ -497,6 +495,13 @@ footer p {
     width: 170px;
     margin: 0;
     font-size: .6em;
+  }
+  .btn {
+       padding-left: 20;
+       padding-right: 20;
+  }
+  ul {
+    padding-right: 10;
   }
 }
 
@@ -514,7 +519,12 @@ footer p {
   header {
     padding: 0;
   }
+
+  .btn {
+       padding-left: 10;
+       padding-right: 10;
+  }
   header nav {
-    margin-top: 6px;
+    margin-top: 0;
   }
 }

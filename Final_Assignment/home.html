@@ -15,9 +15,6 @@
         </h3>
         <div id="ampImage" class="imgPlaceHolder defaultamp">
         </div>
-        <h4 class="centered">
-          Amp Name Variable
-        </h4>
         <select id="amp-select">
           <option>Select an Amp</option>
         </select>
@@ -28,16 +25,13 @@
         </h3>
         <div id="speakerImage" class="imgPlaceHolder defaultspeaker">
         </div>
-        <h4 class="centered">
-          Speaker Name Variable
-        </h4>
         <select id="speaker-select">
           <option>Select a Speaker</option>
         </select>
       </article>
     </div>
   </script>
-  <script type="x-template" id="selectionButtons">
+  <script type="x-template" id="selectionMiddle">
     <!--//<div class="separateAdd container centered">
     //   <input type="button" class="btn grayButton" value="Add Additional Comparison Option">
     //   </input>
@@ -54,56 +48,58 @@
         //<input type="button" class="btn indecisiveFloat blueButton" value="Create Custom Speaker">
         //</input>-->
       </div>
-      <input type="button" class="btn floatRight orangeButton" value="Evaluate Selection">
+      <input id="evaluateSelection" type="button" class="btn floatRight orangeButton" value="Evaluate Selection">
       </input>
     </div>
   </script>
   <script type="x-template" id="resultsTop">
-    <h3 id="resultsHeaderId"></h3>
-    <div class="clearfix">
-      <article class="resultsSizeRight floatRight">
-        <img class="resultsRight">
-        </img>
-        <img class="resultsRight">
-        </img>
-      </article>
-      <article class="resultsSizeLeft">
-        <h4>Amplifier Details</h4>
-        <p id="ampBrandModelId" class="zeroOut indentResultDetails font8em"></p>
-        <p id="ampTypeId" class="zeroOut indentResultDetails font8em"></p>
-        <p id="ampWattsOhmId" class="zeroOut indentResultDetails font8em">
-          <span id="notificationWattsAmp" class="roundTooltip blueNotification muteTooltip" data-toggle="tooltip" data-placement="right" title="Recommendation: Amplifier watts far exceed speaker watts. Pre-amplifier may have limited range when turning up volume before damaging the speaker.">&#63</span>
-        </p>
-        <p id="ampNoiseId" class="zeroOut indentResultDetails font8em">
-          <span id="notificationNoise" class="roundTooltip yellowCaution muteTooltip" data-toggle="tooltip" data-placement="right" title="Caution! Signal to noise is below the average.">&#33</span>
-        </p>
-        <p id="ampThdId" class="zeroOut indentResultDetails font8em"></p>
-        <p id="ampPriceId" class="zeroOut indentResultDetails font8em"></p>
-        <h4>Speaker Details</h4>
-        <p id="speakerBrandModelId" class="zeroOut indentResultDetails font8em"></p>
-        <p id="speakerTypeId" class="zeroOut indentResultDetails font8em"></p>
-        <p id="speakerFrequencyId" class="zeroOut indentResultDetails font8em">
-          <span id="notificationFrequency" class="roundTooltip blueNotification muteTooltip" data-toggle="tooltip" data-placement="right" title="Recommendation: Minimum frequency misses key low frequencies, recommend a subwoofer.">&#63</span>
-        </p>
-        <p id="speakerOhmId" class="zeroOut indentResultDetails font8em">
-          <span id="notificationOhm" class="roundTooltip redWarning muteTooltip" data-toggle="tooltip" data-placement="right" title="WARNING! Amplifier does not support ohm of speaker.">&#x58</span>
-        </p>
-        <p id="speakerOhmMinId" class="zeroOut indentResultDetails font8em">
-          <span id="notificationOhmMin" class="roundTooltip redWarning muteTooltip" data-toggle="tooltip" data-placement="right" title="WARNING! Amplifier does not support minimum ohm of speaker.">&#x58</span>
-        </p>
-        <p id="speakerWattsMaxId" class="zeroOut indentResultDetails font8em">
-          <span id="notificationWattsMax" class="roundTooltip blueNotification muteTooltip" data-toggle="tooltip" data-placement="right" title="Recommendation: Speaker watts far exceed amplifier watts.">&#63</span>
-        </p>
-        <p id="speakerWattsMinId" class="zeroOut indentResultDetails font8em"></p>
-        <p id="speakerSensitivityId" class="zeroOut indentResultDetails font8em"></p>
-        <p id="speakerWeightId" class="zeroOut indentResultDetails font8em"></p>
-        <p id="speakerPriceId" class="zeroOut indentResultDetails font8em"></p>
-        <h4>Summary</h4>
-        <p id="resultsLoudnessId" class="zeroOut indentResultDetails font8em"></p>
-      </article>
+    <div id="resultsSwitch">
+      <h3 id="resultsHeaderId"></h3>
+      <div class="clearfix">
+        <article class="resultsSizeRight floatRight">
+          <img class="resultsRight">
+          </img>
+          <img class="resultsRight">
+          </img>
+        </article>
+        <article class="resultsSizeLeft">
+          <h4>Amplifier Details</h4>
+          <p id="ampBrandModelId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="ampTypeId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="ampWattsOhmId" class="zeroOut indentResultDetails font8em">
+            <span id="notificationWattsAmp" class="roundTooltip blueNotification muteTooltip" data-toggle="tooltip" data-placement="right" title="Recommendation: Amplifier watts far exceed speaker watts. Pre-amplifier may have limited range when turning up volume before damaging the speaker.">&#63</span>
+          </p>
+          <p id="ampNoiseId" class="zeroOut indentResultDetails font8em">
+            <span id="notificationNoise" class="roundTooltip yellowCaution muteTooltip" data-toggle="tooltip" data-placement="right" title="Caution! Signal to noise is below the average.">&#33</span>
+          </p>
+          <p id="ampThdId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="ampPriceId" class="zeroOut indentResultDetails font8em"></p>
+          <h4>Speaker Details</h4>
+          <p id="speakerBrandModelId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="speakerTypeId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="speakerFrequencyId" class="zeroOut indentResultDetails font8em">
+            <span id="notificationFrequency" class="roundTooltip blueNotification muteTooltip" data-toggle="tooltip" data-placement="right" title="Recommendation: Minimum frequency misses key low frequencies, recommend a subwoofer.">&#63</span>
+          </p>
+          <p id="speakerOhmId" class="zeroOut indentResultDetails font8em">
+            <span id="notificationOhm" class="roundTooltip redWarning muteTooltip" data-toggle="tooltip" data-placement="right" title="WARNING! Amplifier does not support ohm of speaker.">&#x58</span>
+          </p>
+          <p id="speakerOhmMinId" class="zeroOut indentResultDetails font8em">
+            <span id="notificationOhmMin" class="roundTooltip redWarning muteTooltip" data-toggle="tooltip" data-placement="right" title="WARNING! Amplifier does not support minimum ohm of speaker.">&#x58</span>
+          </p>
+          <p id="speakerWattsMaxId" class="zeroOut indentResultDetails font8em">
+            <span id="notificationWattsMax" class="roundTooltip blueNotification muteTooltip" data-toggle="tooltip" data-placement="right" title="Recommendation: Speaker watts far exceed amplifier watts.">&#63</span>
+          </p>
+          <p id="speakerWattsMinId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="speakerSensitivityId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="speakerWeightId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="speakerPriceId" class="zeroOut indentResultDetails font8em"></p>
+          <h4>Summary</h4>
+          <p id="resultsLoudnessId" class="zeroOut indentResultDetails font8em"></p>
+        </article>
+      </div>
+      <p id="resultsReplaceParagraph">
+      </p>
     </div>
-    <p id="resultsReplaceParagraph">
-    </p>
   </script>
 </head>
 <body>
@@ -112,7 +108,7 @@
       <h1 class="logo">Audio Customizer</h1>
 			<nav>
         <ul>
-          <li><a href="#" id="resetPage" class="linkFormat">Reset</a></li>
+          <li><button id="resetPage" class="btn yellowButton">Reset</button></li>
         </ul>
       </nav>
     </div>
