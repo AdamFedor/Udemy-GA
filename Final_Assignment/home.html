@@ -66,13 +66,14 @@
           <h4>Amplifier Details</h4>
           <p id="ampBrandModelId" class="zeroOut indentResultDetails font8em"></p>
           <p id="ampTypeId" class="zeroOut indentResultDetails font8em"></p>
-          <p id="ampWattsOhmId" class="zeroOut indentResultDetails font8em">
+          <p id="ampWattsOhmId" class="zeroOut indentResultDetails font8em textWrap">
             <span id="notificationWattsAmp" class="roundTooltip blueNotification muteTooltip" data-toggle="tooltip" data-placement="right" title="Recommendation: Amplifier watts far exceed speaker watts. Pre-amplifier may have limited range when turning up volume before damaging the speaker.">&#63</span>
           </p>
           <p id="ampNoiseId" class="zeroOut indentResultDetails font8em">
             <span id="notificationNoise" class="roundTooltip yellowCaution muteTooltip" data-toggle="tooltip" data-placement="right" title="Caution! Signal to noise is below the average.">&#33</span>
           </p>
           <p id="ampThdId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="ampWeight" class="zeroOut indentResultDetails font8em"></p>
           <p id="ampPriceId" class="zeroOut indentResultDetails font8em"></p>
           <h4>Speaker Details</h4>
           <p id="speakerBrandModelId" class="zeroOut indentResultDetails font8em"></p>
@@ -89,7 +90,9 @@
           <p id="speakerWattsMaxId" class="zeroOut indentResultDetails font8em">
             <span id="notificationWattsMax" class="roundTooltip blueNotification muteTooltip" data-toggle="tooltip" data-placement="right" title="Recommendation: Speaker watts far exceed amplifier watts.">&#63</span>
           </p>
-          <p id="speakerWattsMinId" class="zeroOut indentResultDetails font8em"></p>
+          <p id="speakerWattsMinId" class="zeroOut indentResultDetails font8em">
+            <span id="notificationWattsMin" class="roundTooltip redWarning muteTooltip" data-toggle="tooltip" data-placement="right" title="WARNING: Amplifier watts do not meet the minimum requirements for the speaker.">&#33</span>
+          </p>
           <p id="speakerSensitivityId" class="zeroOut indentResultDetails font8em"></p>
           <p id="speakerWeightId" class="zeroOut indentResultDetails font8em"></p>
           <p id="speakerPriceId" class="zeroOut indentResultDetails font8em"></p>

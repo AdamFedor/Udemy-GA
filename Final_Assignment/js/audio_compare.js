@@ -11,9 +11,10 @@ var varAmpWatts8;
 var varAmpWatts6;
 var varAmpWatts4;
 var varAmpWatts;
-var varAmpOhm;
+var varAmpOhmMin;
 var varAmpNoise;
 var varAmpThd;
+var varAmpWeight;
 var varAmpPrice;
 var varSpeakerBrand;
 var varSpeakerModel;
@@ -94,9 +95,10 @@ function ampImgSelect(){
   varAmpWatts8 = amp[oneLessAmp].ohm8;
   varAmpWatts6 = amp[oneLessAmp].ohm6;
   varAmpWatts4 = amp[oneLessAmp].ohm4;
-  varAmpOhm = amp[oneLessAmp].minImpedence;
+  varAmpOhmMin = amp[oneLessAmp].minImpedence;
   varAmpNoise = amp[oneLessAmp].signalToNoise;
   varAmpThd = amp[oneLessAmp].thdAmp;
+  varAmpWeight = amp[oneLessAmp].weightAmp;
   varAmpPrice = amp[oneLessAmp].cost;
   // remove spaces for image - custom stored images will later be done this way
   ampUsed = ampImg[objectAmpNumber].replace(/\s+/g, '');
@@ -185,22 +187,39 @@ function resultsRun() {
   resultsAmp();
   resultsSpeaker();
   resultsLoudness();
-  resultsParagraph();
   resultsImg()
+  resultsWattsToOhm();
+  resultsTooltip();
+  resultsParagraphProcessed();
 }
 
 // display ohm of speaker and lower ohm (if allowed), else error
 function resultsWattsToOhm() {
-  if (speakerOhm === 8) {
-    varSpeakerOhm = varAmpWatts8;
-  } else if (speakerOhm === 6) {
-    varSpeakerOhm = varAmpWatts6;
-    // run error check of ohm ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  } else if (speakerOhm === 4) {
-    varSpeakerOhm = varAmpWatts4;
-    // run error check of ohm ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+  if (varSpeakerOhm === 8) {
+    if (varAmpOhmMin === 8) {
+      $("#ampWattsOhmId").append("Watts: "+varAmpWatts8+" watts at 8 Ohm and "+varAmpWatts6+" watts at 6 ohm and "+varAmpWatts4+" watts at 4 ohm.");
+      varAmpWatts = varAmpWatts8;
+    }
+    if (varAmpOhmMin === 6) {
+      $("#ampWattsOhmId").append("Watts: "+varAmpWatts6+" watts at 6 Ohm and "+varAmpWatts4+" watts at 4 ohm.");
+      varAmpWatts = varAmpWatts6;
+    }
+    if (varAmpOhmMin === 4) {
+      $("#ampWattsOhmId").append("Watts: "+varAmpWatts4+" watts at 4 Ohm");
+      varAmpWatts = varAmpWatts4;
+    }
+  } else if (varSpeakerOhm === 6) {
+    if (varAmpOhmMin >= 6) {
+      $("#ampWattsOhmId").append("Watts: "+varAmpWatts6+" watts at 6 Ohm and "+varAmpWatts4+" watts at 4 ohm");
+      varAmpWatts = varAmpWatts6;
+    }
+    else if (varAmpOhmMin === 4) {
+      $("#ampWattsOhmId").append("Watts: "+varAmpWatts6+" watts at 6 Ohm");
+      varAmpWatts = varAmpWatts4;
+    }
+  } else if (varSpeakerOhm >= 4) {
+    $("#ampWattsOhmId").append("Watts: "+varAmpWatts4+" watts at 4 Ohm");
+    varAmpWatts = varAmpWatts4;
   }
 }
 
@@ -223,9 +242,9 @@ function resultsAmp(){
   var ampPriceFormatted = addComma(ampPriceFixed);
   $("#ampBrandModelId").append(varAmpBrand+": "+varAmpModel);
   $("#ampTypeId").append(varAmpType);
-  $("#ampWattsOhmId").append("Watts: "+varAmpWatts+" watts at "+varAmpOhm+" Ohm");
   $("#ampNoiseId").append("Signal to Noise Ratio: "+varAmpNoise);
   $("#ampThdId").append("THD: "+varAmpThd+"%");
+  $("#ampWeight").append("Weight: "+varAmpWeight+" lbs.")
   $("#ampPriceId").append("Price: $"+ampPriceFormatted);
 }
 
@@ -243,7 +262,7 @@ function resultsSpeaker(){
   $("#speakerWattsMaxId").append("Max Watts: "+speakerWattsMaxFormatted+" watts");
   $("#speakerWattsMinId").append("Min Watts: "+varSpeakerWattsMin+" watts");
   $("#speakerSensitivityId").append("Sensitivity: "+varSpeakerSensitivity+"db");
-  $("#speakerWeightId").append("Weight: "+varSpeakerWeight+" lbs.");
+  $("#speakerWeightId").append("Weight: "+varSpeakerWeight+" lbs. each");
   $("#speakerPriceId").append("Price: $"+speakerPriceFormatted);
 }
 
@@ -270,8 +289,71 @@ function resultsImg() {
   $(".speakerImg").css("background-image", "url('"+speakerUsed+".jpg'");
 }
 
+// calculate the details for the results tooltip warnings, errors, recommendations
+function resultsTooltip() {
+  if (varSpeakerWattsMax > (2 * varAmpWatts)){
+    // speaker watts far exceed amplifier watts
+    // blue on speaker max watts
+    $("#speakerWattsMaxId").toggleClass("indentResultDetails");
+    $("#notificationWattsMax").toggleClass("muteTooltip");
+  }
+  if (varAmpWatts > (1.25 * varSpeakerWattsMax)) {
+    // speaker watts far exceed amplifer watts
+    // yellow on amplifier watts
+    $("#ampWattsOhmId").toggleClass("indentResultDetails");
+    $("#notificationWattsAmp").toggleClass("muteTooltip");
+  }
+  if (varAmpWatts < varSpeakerWattsMin) {
+    // amplifier watts do not meet the minimum watts requirement for the speaker
+    // red on speaker min watts
+    $("#speakerWattsMinId").toggleClass("indentResultDetails");
+    $("#notificationWattsMin").toggleClass("muteTooltip");
+  }
+  if (varSpeakerOhmMin < varAmpOhmMin) {
+    // amplifier does not support minimum ohm of speaker
+    // red on speaker min ohm
+    $("#speakerOhmMinId").toggleClass("indentResultDetails");
+    $("#notificationOhmMin").toggleClass("muteTooltip");
+  }
+  if (varSpeakerFrequencyMin > 45) {
+    // minimum frequency is too high, recommend a subwoofer
+    // blue on speaker frequency
+    $("#speakerFrequencyId").toggleClass("indentResultDetails");
+    $("#notificationFrequency").toggleClass("muteTooltip");
+  }
+  if (varAmpNoise < 95) {
+    // signal to noise is below the average
+    // yellow on noise
+    $("#ampNoiseId").toggleClass("indentResultDetails");
+    $("#notificationNoise").toggleClass("muteTooltip");
+  }
+  if (varSpeakerOhm < varAmpOhmMin) {
+    // amplifier does not support ohm of speaker
+    // red on speaker ohm
+    $("#speakerOhmId").toggleClass("indentResultDetails");
+    $("#notificationOhm").toggleClass("muteTooltip");
+  }
+}
+
+// calculate the details for the results paragraph and details
+function resultsParagraphProcessed(){
+  // run calculations for Subwoofer (>=45hz, <45hz) - Subwoofer
+
+  // run calculations for Sensitivity (<89, =89, >89) - Sensitivity
+
+  // run calculations for thd (>0.035, 0.021-0.035, 0.011-0.020, <0.011) - SpeakerThd
+
+  // run calculations for if signal to noise is ok (>95, 95-101, 102-110, >110) - noise
+
+  // run calculations for match and other details (good, ok, bad) - match
+
+  // run function for results paragraph
+  // resultsParagraph(match,noise,speakerThd,sensitivity,subwoofer);
+  resultsParagraph();
+}
+
 // function to return the results paragraph with variables of results
-function resultsParagraph(match,noise,SpeakerThd,Sensitivity,Subwoofer) {
+function resultsParagraph(match,noise,speakerThd,sensitivity,subwoofer) {
   var match = 1;
   var noise = 1;
   var speakerThd = 1;
@@ -371,7 +453,7 @@ $(window).scroll(function() { /*working draft, looking for alternative for .scro
 {
   if($('#lookingDownOnYou').data('size') == 'big') {
     $('#lookingDownOnYou').data('size','small');
-    $('#lookingDownOnYou').stop().animate({ /*experimental, looking for alternative for .animate()*/
+    $('#lookingDownOnYou').stop().animate({
       'padding-top' : 0,
       height:'90px'
     },300);
@@ -382,8 +464,8 @@ else
     if($('#lookingDownOnYou').data('size') == 'small')
       {
       $('#lookingDownOnYou').data('size','big');
-      $('#lookingDownOnYou').stop().animate({ /*experimental, looking for alternative for .animate()*/
-        'padding-top' : '25px',
+      $('#lookingDownOnYou').stop().animate({
+        'padding-top': '25px',
         height:'141.219px'
       },100);
     }
