@@ -29,7 +29,8 @@ var varSpeakerWeight;
 var varSpeakerPrice;
 var objectAmpNumber;
 var objectSpeakerNumber;
-
+var ampUsed;
+var speakerUsed;
 
 // ********************************************************* //
 // ************************* READY ************************* //
@@ -37,23 +38,21 @@ var objectSpeakerNumber;
 
 // run function for selection template
 $(document).ready(function(){
-  // This is the default state of the page. Allows 1 grouped selection.
+  // These are the default state of the page. Allows 1 grouped selection.
   selectionRun();
   ampDropDown();
   speakerDropDown();
+  // change image of amp when amp is selected or reselected
   document.getElementById("amp-select").onchange = ampImgSelect;
+  // change image of speaker when speaker is selected or reselected
   document.getElementById("speaker-select").onchange = speakerImgSelect;
+  // switch from selection to results
   document.getElementById("evaluateSelection").onclick = clearToResults;
-  document.getElementById("resetPage").onClick = clearToSelection;
 });
 
-// on change to drop down, image changes to brand+" "+model
+// function for error
 
-// on change the object is selected and var above are set to selected variable
-
-// maybe instead flip the cards to show details of each? With results below? Or results seperate and this is for previewing.
-
-// reset takes the user back to the original selectionRun() setup.
+// update paragraph at bottom
 
 // ********************************************************* //
 // *********************** FUNCTIONS *********************** //
@@ -87,20 +86,20 @@ function addComma(valueConvert) {
 function ampImgSelect(){
   // change objectSpeakerNumber to selection
   ampSelection = document.getElementById("amp-select").selectedIndex;
-  var oneLess = ampSelection - 1;
+  var oneLessAmp = ampSelection - 1;
   objectAmpNumber = ampSelection;
-  varAmpBrand = amp[oneLess].brand;
-  varAmpModel = amp[oneLess].model;
-  varAmpType = amp[oneLess].type;
-  varAmpWatts8 = amp[oneLess].ohm8;
-  varAmpWatts6 = amp[oneLess].ohm6;
-  varAmpWatts4 = amp[oneLess].ohm4;
-  varAmpOhm = amp[oneLess].minImpedence;
-  varAmpNoise = amp[oneLess].signalToNoise;
-  varAmpThd = amp[oneLess].thdAmp;
-  varAmpPrice = amp[oneLess].cost;
+  varAmpBrand = amp[oneLessAmp].brand;
+  varAmpModel = amp[oneLessAmp].model;
+  varAmpType = amp[oneLessAmp].type;
+  varAmpWatts8 = amp[oneLessAmp].ohm8;
+  varAmpWatts6 = amp[oneLessAmp].ohm6;
+  varAmpWatts4 = amp[oneLessAmp].ohm4;
+  varAmpOhm = amp[oneLessAmp].minImpedence;
+  varAmpNoise = amp[oneLessAmp].signalToNoise;
+  varAmpThd = amp[oneLessAmp].thdAmp;
+  varAmpPrice = amp[oneLessAmp].cost;
   // remove spaces for image - custom stored images will later be done this way
-  var ampUsed = ampImg[objectAmpNumber].replace(/\s+/g, '');
+  ampUsed = ampImg[objectAmpNumber].replace(/\s+/g, '');
   // replace image with selected - custom images will later be done this way
   $(".defaultamp").css("background-image", "url('"+ampUsed+".jpg'");
 }
@@ -109,38 +108,42 @@ function ampImgSelect(){
 function speakerImgSelect(){
   // change objectSpeakerNumber to selection
   speakerSelection = document.getElementById("speaker-select").selectedIndex;
-  var oneLess = speakerSelection - 1;
+  var oneLessSpeaker = speakerSelection - 1;
   objectSpeakerNumber = speakerSelection;
   // now that the number of the drop down is selected, the object can be applied to the variables
-  varSpeakerBrand = speaker[oneLess].brand;
-  varSpeakerModel = speaker[oneLess].model;
-  varSpeakerType = speaker[oneLess].type;
-  varSpeakerFrequencyMin = speaker[oneLess].frequencyMin;
-  varSpeakerFrequencyMax = speaker[oneLess].frequencyMax;
-  varSpeakerOhm = speaker[oneLess].ohmNominal;
-  varSpeakerOhmMin = speaker[oneLess].ohmMinimal;
-  varSpeakerWattsMin = speaker[oneLess].recommendedMinPower;
-  varSpeakerWattsMax = speaker[oneLess].recommendedMaxPower;
-  varSpeakerSensitivity = speaker[oneLess].sensitivityDb;
-  varSpeakerWeight = speaker[oneLess].weightLbs;
-  varSpeakerPrice = speaker[oneLess].costPerPair;
+  varSpeakerBrand = speaker[oneLessSpeaker].brand;
+  varSpeakerModel = speaker[oneLessSpeaker].model;
+  varSpeakerType = speaker[oneLessSpeaker].type;
+  varSpeakerFrequencyMin = speaker[oneLessSpeaker].frequencyMin;
+  varSpeakerFrequencyMax = speaker[oneLessSpeaker].frequencyMax;
+  varSpeakerOhm = speaker[oneLessSpeaker].ohmNominal;
+  varSpeakerOhmMin = speaker[oneLessSpeaker].ohmMinimal;
+  varSpeakerWattsMin = speaker[oneLessSpeaker].recommendedMinPower;
+  varSpeakerWattsMax = speaker[oneLessSpeaker].recommendedMaxPower;
+  varSpeakerSensitivity = speaker[oneLessSpeaker].sensitivityDb;
+  varSpeakerWeight = speaker[oneLessSpeaker].weightLbs;
+  varSpeakerPrice = speaker[oneLessSpeaker].costPerPair;
   // remove spaces for image
-  var speakerUsed = speakerImg[speakerSelection].replace(/\s+/g, '');
+  speakerUsed = speakerImg[speakerSelection].replace(/\s+/g, '');
   // replace image with selected - custom stored images will later be done this way
   $(".defaultspeaker").css("background-image", "url('"+speakerUsed+".jpg'");
 }
 
 // prep for switching and switch to results page
 function clearToResults() {
-  $("#selectionAmpSpeaker").remove();
-  $("#selectionButtons").remove();
-  resultsRun();
+  if (objectAmpNumber != 0) {
+    $("#selectionAmpSpeaker").remove();
+    $("#selectionButtons").remove();
+    resultsRun();
+  }
 }
 
 // prep for switching and switch to results page
+// still working on this functionality
 function clearToSelection() {
+  console.log("cleartoselection");
   $("#resultsSwitch").remove();
-  selectionRun();
+  // selectionRun();
 }
 
 // ********************************************************* //
@@ -178,20 +181,26 @@ function selectionLow() {
 // function to run results functions
 function resultsRun() {
   resultsHigh();
-  // resultsPrice(varAmpPrice,varSpeakerPrice);
-  // resultsAmp(varAmpBrand,varAmpModel,varAmpType,varAmpWatts,varAmpOhm,varAmpNoise,varAmpThd,varAmpPrice);
-  // resultsSpeaker(varSpeakerBrand,varSpeakerModel,varSpeakerType,varSpeakerFrequencyMin,varSpeakerFrequencyMax,varSpeakerOhm,varSpeakerOhmMin,varSpeakerWattsMin,varSpeakerWattsMax,varSpeakerSensitivity,varSpeakerWeight,varSpeakerPrice);
-  // resultsLoudness(varSpeakerSensitivity);
+  resultsPrice();
+  resultsAmp();
+  resultsSpeaker();
+  resultsLoudness();
   resultsParagraph();
+  resultsImg()
 }
 
+// display ohm of speaker and lower ohm (if allowed), else error
 function resultsWattsToOhm() {
   if (speakerOhm === 8) {
     varSpeakerOhm = varAmpWatts8;
   } else if (speakerOhm === 6) {
     varSpeakerOhm = varAmpWatts6;
+    // run error check of ohm ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   } else if (speakerOhm === 4) {
     varSpeakerOhm = varAmpWatts4;
+    // run error check of ohm ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   }
 }
 
@@ -199,6 +208,7 @@ function resultsWattsToOhm() {
 function resultsHigh() {
   var selectionTemplateVar = $("#resultsTop").text();
   var $selectionTopText = $(selectionTemplateVar);
+  $("#hiddenWithResults").toggleClass("muteButton");
   $(".replaceThisTop").append($selectionTopText);
 }
 function resultsLow() {
@@ -208,50 +218,56 @@ function resultsLow() {
 }
 
 // function to return the results of the amplifier
-function resultsAmp(ampBrand,ampModel,ampType,ampWatts,ampOhm,ampNoise,ampThd,ampPrice){
-  var ampPriceFixed = ampPrice.toFixed(2);
+function resultsAmp(){
+  var ampPriceFixed = varAmpPrice.toFixed(2);
   var ampPriceFormatted = addComma(ampPriceFixed);
-  $("#ampBrandModelId").append(ampBrand+": "+ampModel);
-  $("#ampTypeId").append(ampType);
-  $("#ampWattsOhmId").append("Watts: "+ampWatts+" watts at "+ampOhm+" Ohm");
-  $("#ampNoiseId").append("Signal to Noise Ratio: "+ampNoise);
-  $("#ampThdId").append("THD: "+ampThd+"%");
+  $("#ampBrandModelId").append(varAmpBrand+": "+varAmpModel);
+  $("#ampTypeId").append(varAmpType);
+  $("#ampWattsOhmId").append("Watts: "+varAmpWatts+" watts at "+varAmpOhm+" Ohm");
+  $("#ampNoiseId").append("Signal to Noise Ratio: "+varAmpNoise);
+  $("#ampThdId").append("THD: "+varAmpThd+"%");
   $("#ampPriceId").append("Price: $"+ampPriceFormatted);
 }
 
 // function to return the results of the speaker
-function resultsSpeaker(speakerBrand,speakerModel,speakerType,speakerFrequencyMin,speakerFrequencyMax,speakerOhm,speakerOhmMin,speakerWattsMin,speakerWattsMax,speakerSensitivity,speakerWeight,speakerPrice){
-  var speakerWattsMaxFormatted = addComma(speakerWattsMax);
-  var speakerFrequencyMaxFormatted = addComma(speakerFrequencyMax);
-  var speakerPriceFixed = speakerPrice.toFixed(2);
+function resultsSpeaker(){
+  var speakerWattsMaxFormatted = addComma(varSpeakerWattsMax);
+  var speakerFrequencyMaxFormatted = addComma(varSpeakerFrequencyMax);
+  var speakerPriceFixed = varSpeakerPrice.toFixed(2);
   var speakerPriceFormatted = addComma(speakerPriceFixed);
-  $("#speakerBrandModelId").append(speakerBrand+": "+speakerModel);
-  $("#speakerTypeId").append(speakerType);
-  $("#speakerFrequencyId").append("Frequency: "+speakerFrequencyMin+"-"+speakerFrequencyMaxFormatted+" Hz");
-  $("#speakerOhmId").append("Ohm: "+speakerOhm);
-  $("#speakerOhmMinId").append("Min Ohm: "+speakerOhmMin+" Ohm");
+  $("#speakerBrandModelId").append(varSpeakerBrand+": "+varSpeakerModel);
+  $("#speakerTypeId").append(varSpeakerType);
+  $("#speakerFrequencyId").append("Frequency: "+varSpeakerFrequencyMin+"-"+speakerFrequencyMaxFormatted+" Hz");
+  $("#speakerOhmId").append("Ohm: "+varSpeakerOhm);
+  $("#speakerOhmMinId").append("Min Ohm: "+varSpeakerOhmMin+" Ohm");
   $("#speakerWattsMaxId").append("Max Watts: "+speakerWattsMaxFormatted+" watts");
-  $("#speakerWattsMinId").append("Min Watts: "+speakerWattsMin+" watts");
-  $("#speakerSensitivityId").append("Sensitivity: "+speakerSensitivity+"db");
-  $("#speakerWeightId").append("Weight: "+speakerWeight+" lbs.");
+  $("#speakerWattsMinId").append("Min Watts: "+varSpeakerWattsMin+" watts");
+  $("#speakerSensitivityId").append("Sensitivity: "+varSpeakerSensitivity+"db");
+  $("#speakerWeightId").append("Weight: "+varSpeakerWeight+" lbs.");
   $("#speakerPriceId").append("Price: $"+speakerPriceFormatted);
 }
 
 // function to return the relative loudness of the speaker and amp combo
-function resultsLoudness(speakerSensitivity) {
-  var isNumber = parseInt(speakerSensitivity);
+function resultsLoudness() {
+  var isNumber = parseInt(varSpeakerSensitivity);
   decibelMathFunc(isNumber);
   $("#resultsLoudnessId").append("Relative Loudness: "+relativeLoudness+" watts");
 }
 
 // function to return the total price of the speaker and amp combo
-function resultsPrice(ampPrice,speakerPrice) {
-    var ampPriceNum = parseInt(ampPrice);
-    var speakerPriceNum = parseInt(speakerPrice);
+function resultsPrice() {
+    var ampPriceNum = parseInt(varAmpPrice);
+    var speakerPriceNum = parseInt(varSpeakerPrice);
     var priceCombinedNormal = ampPriceNum+speakerPriceNum;
     var priceCombined = priceCombinedNormal.toFixed(2);
     var priceCombinedFormatted = addComma(priceCombined);
     $("#resultsHeaderId").append("Amplifier & Speaker Results: $"+priceCombinedFormatted);
+}
+
+// function to update images for results page
+function resultsImg() {
+  $(".amplifierImg").css("background-image", "url('"+ampUsed+".jpg'");
+  $(".speakerImg").css("background-image", "url('"+speakerUsed+".jpg'");
 }
 
 // function to return the results paragraph with variables of results
@@ -353,8 +369,7 @@ function speakerDropDown() {
 $(window).scroll(function() { /*working draft, looking for alternative for .scroll()*/
   if($(document).scrollTop() > 0) /*working draft, looking for alternative for .scrollTop()*/
 {
-  if($('#lookingDownOnYou').data('size') == 'big')
-    {
+  if($('#lookingDownOnYou').data('size') == 'big') {
     $('#lookingDownOnYou').data('size','small');
     $('#lookingDownOnYou').stop().animate({ /*experimental, looking for alternative for .animate()*/
       'padding-top' : 0,
@@ -403,6 +418,32 @@ var resultsSubwoofer = ["lower than 45hz. For full frequencies, try adding a sub
 // array of objects for amp
 var amp = [
   {
+    brand: "Emotiva",
+    model: "A-300",
+    type: "Amplifier",
+    cost: 399,
+    ohm8: 150,
+    ohm6: 225,
+    ohm4: 300,
+    signalToNoise: 120,
+    minImpedence: 4,
+    thdAmp: 0.020,
+    weightAmp: 25.2
+  },
+  {
+    brand: "Emotiva",
+    model: "XPA Gen3",
+    type: "Amplifier",
+    cost: 999,
+    ohm8: 300,
+    ohm6: 395,
+    ohm4: 490,
+    signalToNoise: 115,
+    minImpedence: 4,
+    thdAmp: 0.005,
+    weightAmp: 35.5
+  },
+  {
     brand: "McIntosh",
     model: "MA5200",
     type: "Integrated Amplifier",
@@ -412,7 +453,34 @@ var amp = [
     ohm4: NaN,
     signalToNoise: 110,
     minImpedence: 8,
-    thdAmp: 0.005
+    thdAmp: 0.005,
+    weightAmp: 38
+  },
+  {
+    brand: "McIntosh",
+    model: "MC152",
+    type: "Amplifier",
+    cost: 4500,
+    ohm8: 150,
+    ohm6: 150,
+    ohm4: 150,
+    signalToNoise: 110,
+    minImpedence: 8,
+    thdAmp: 0.005,
+    weightAmp: 75
+  },
+  {
+    brand: "McIntosh",
+    model: "MC301",
+    type: "Amplifier",
+    cost: 5000,
+    ohm8: 300,
+    ohm6: 300,
+    ohm4: 300,
+    signalToNoise: 110,
+    minImpedence: 8,
+    thdAmp: 0.005,
+    weightAmp: 67
   },
   {
     brand: "NAD",
@@ -424,7 +492,8 @@ var amp = [
     ohm4: 50,
     signalToNoise: 98,
     minImpedence: 4,
-    thdAmp: 0.030
+    thdAmp: 0.030,
+    weightAmp: 10.7
   },
   {
     brand: "NAD",
@@ -436,7 +505,8 @@ var amp = [
     ohm4: 150,
     signalToNoise: 95,
     minImpedence: 4,
-    thdAmp: "0.009%"
+    thdAmp: 0.009,
+    weightAmp: 24.7
   },
   {
     brand: "NAD",
@@ -448,7 +518,8 @@ var amp = [
     ohm4: 180,
     signalToNoise: 91,
     minImpedence: 4,
-    thdAmp: 0.030
+    thdAmp: 0.030,
+    weightAmp: 21.6
   },
   {
     brand: "NAD",
@@ -460,7 +531,47 @@ var amp = [
     ohm4: 250,
     signalToNoise: 119,
     minImpedence: 4,
-    thdAmp: 0.004
+    thdAmp: 0.004,
+    weightAmp: 44.5
+  },
+  {
+    brand: "NAD",
+    model: "M22",
+    type: "Amplifier",
+    cost: 2999.99,
+    ohm8: 250,
+    ohm6: 250,
+    ohm4: 250,
+    signalToNoise: 100,
+    minImpedence: 4,
+    thdAmp: 0.003,
+    weightAmp: 19.6
+  },
+  {
+    brand: "Outlaw",
+    model: "Model 2200",
+    type: "Amplifier",
+    cost: 759.98,
+    ohm8: 200,
+    ohm6: 250,
+    ohm4: 300,
+    signalToNoise: 100,
+    minImpedence: 4,
+    thdAmp: 0.050,
+    weightAmp: 36
+  },
+  {
+    brand: "Outlaw",
+    model: "Model 5000",
+    type: "Amplifier",
+    cost: 599.99,
+    ohm8: 120,
+    ohm6: 150,
+    ohm4: 180,
+    signalToNoise: 100,
+    minImpedence: 4,
+    thdAmp: 0.050,
+    weightAmp: 50
   },
   {
     brand: "Rotel",
@@ -472,7 +583,8 @@ var amp = [
     ohm4: 120,
     signalToNoise: 100,
     minImpedence: 4,
-    thdAmp: 0.030
+    thdAmp: 0.030,
+    weightAmp: 28.66
   },
   {
     brand: "Rotel",
@@ -484,7 +596,34 @@ var amp = [
     ohm4: 200,
     signalToNoise: 102,
     minImpedence: 4,
-    thdAmp: 0.030
+    thdAmp: 0.030,
+    weightAmp: 37.04
+  },
+  {
+    brand: "Rotel",
+    model: "RB-1572",
+    type: "Amplifier",
+    cost: 1295,
+    ohm8: 250,
+    ohm6: 375,
+    ohm4: 500,
+    signalToNoise: 109,
+    minImpedence: 4,
+    thdAmp: 0.030,
+    weightAmp: 17.2
+  },
+  {
+    brand: "Rotel",
+    model: "RB-1582 MKII",
+    type: "Amplifier",
+    cost: 1595,
+    ohm8: 200,
+    ohm6: 200,
+    ohm4: 200,
+    signalToNoise: 116,
+    minImpedence: 4,
+    thdAmp: 0.030,
+    weightAmp: 38.8
   },
   {
     brand: "Rotel",
@@ -494,9 +633,10 @@ var amp = [
     ohm8: 350,
     ohm6: 350,
     ohm4: 350,
-    signalToNoise: NaN,
+    signalToNoise: 120,
     minImpedence: 4,
-    thdAmp: 0.030
+    thdAmp: 0.030,
+    weightAmp: 84
   },
   {
     brand: "Yamaha",
@@ -508,7 +648,8 @@ var amp = [
     ohm4: 70,
     signalToNoise: 99,
     minImpedence: 4,
-    thdAmp: 0.019
+    thdAmp: 0.019,
+    weightAmp: 19.8
   },
   {
     brand: "Yamaha",
@@ -520,7 +661,8 @@ var amp = [
     ohm4: NaN,
     signalToNoise: 99,
     minImpedence: 4,
-    thdAmp: 0.019
+    thdAmp: 0.019,
+    weightAmp: 22.7
   },
   {
     brand: "Yamaha",
@@ -532,7 +674,8 @@ var amp = [
     ohm4: NaN,
     signalToNoise: 99,
     minImpedence: 4,
-    thdAmp: 0.019
+    thdAmp: 0.019,
+    weightAmp: 22.7
   },
   {
     brand: "Yamaha",
@@ -544,7 +687,8 @@ var amp = [
     ohm4: 150,
     signalToNoise: 98,
     minImpedence: 4,
-    thdAmp: 0.020
+    thdAmp: 0.020,
+    weightAmp: 50
   },
   {
     brand: "Yamaha",
@@ -556,7 +700,8 @@ var amp = [
     ohm4: 150,
     signalToNoise: 103,
     minImpedence: 4,
-    thdAmp: 0.007
+    thdAmp: 0.007,
+    weightAmp: 54.2
   }
 ];
 

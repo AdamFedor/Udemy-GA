@@ -33,34 +33,34 @@
   </script>
   <script type="x-template" id="selectionMiddle">
     <!--//<div class="separateAdd container centered">
-    //   <input type="button" class="btn grayButton" value="Add Additional Comparison Option">
-    //   </input>
-    //   <input id="selectionButtonsReoccuring" type="button" class="btn grayButton muteButton" value="Remove Additional Comparison Option">
-    //   </input>
+    //   <button class="btn grayButton" value="Add Additional Comparison Option">
+    //   </button>
+    //   <button id="selectionButtonsReoccuring" class="btn grayButton muteButton" value="Remove Additional Comparison Option">
+    //   </button>
     // </div>-->
     <!--//test for popover, doesn't work with experimental header. //<a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>-->
   </script>
   <script type="x-template" id="selectionBottom">
     <div id="selectionButtons" class="container clearfix">
       <div class="example">
-        <!--//<input type="button" class="btn floatLeft blueButton" value="Create Custom Amp">
-        //</input>
-        //<input type="button" class="btn indecisiveFloat blueButton" value="Create Custom Speaker">
-        //</input>-->
+        <!--//<button class="btn floatLeft blueButton" value="Create Custom Amp">
+        //</button>
+        //<button class="btn indecisiveFloat blueButton" value="Create Custom Speaker">
+        //</button>-->
       </div>
-      <input id="evaluateSelection" type="button" class="btn floatRight orangeButton" value="Evaluate Selection">
-      </input>
+      <button id="evaluateSelection" class="btn floatRight orangeButton" value="Evaluate Selection">Evaluate Selection
+      </inpbuttonut>
     </div>
   </script>
   <script type="x-template" id="resultsTop">
     <div id="resultsSwitch">
       <h3 id="resultsHeaderId"></h3>
       <div class="clearfix">
-        <article class="resultsSizeRight floatRight">
-          <img class="resultsRight">
-          </img>
-          <img class="resultsRight">
-          </img>
+        <article class="floatRight resultsSizeRight">
+          <div class="resultsRight amplifierImg">
+          </div>
+          <div class="resultsRight speakerImg">
+          </div>
         </article>
         <article class="resultsSizeLeft">
           <h4>Amplifier Details</h4>
@@ -106,20 +106,23 @@
   <header id="lookingDownOnYou">
     <div class="container">
       <h1 class="logo">Audio Customizer</h1>
-			<nav>
-        <ul>
-          <li><button id="resetPage" class="btn yellowButton">Reset</button></li>
-        </ul>
+			<nav><a id="resetPage" class="btn yellowButton" href="home.html">Reset</a>
       </nav>
     </div>
   </header>
-  <section class="container">
+  <section id="hiddenWithResults" class="container">
     <h2>
       Make your selection
     </h2>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Your amplifier and speaker combination are always unique.
+      Sound will be perceived louder and clearer with some combinations.
+      While others will sound quiet and less clean.
+      Select one amplifier and one speaker to see how these will match.
+      You will find that not all combinations work.
+      A speaker may require an amplifier to handle the ohm of the speaker.
+      Or the speaker may take more energy to play at minimal volumes than your amplifier can handle.
+      While most combinations 'work.' You will find some are clearly better than others.
     </p>
   </section>
   <h2 id="replaceH2" class="centered">Analyze: Stereo Configuration</h2>

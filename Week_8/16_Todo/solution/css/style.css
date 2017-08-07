@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+}
+
+.clearfix:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+body {
+    font-family: 'Bellefair', serif;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Plaster', cursive;
+}
+
+h1 {
+    font-size: 2em;
+    border-bottom: .2rem solid black;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#tasks {
+    min-height: 3rem;
+}
+
+.task {
+    margin: 1rem 0;
+    padding: 1rem 0;
+    border-bottom: 0.1rem solid black;
+}
+
+.task button {
+    margin-left: 0.5rem;
+}
+
+.task-text {
+    font-size: 1.4em;
+    display: block;
+    float: left;
+    max-width: 80%;
+}
+
+.task-done .task-text {
+    text-decoration: line-through;
+}
+
+.task:last-child{
+    border-bottom: none;
+}
+
+.controls {
+    float: right;
+}
+
+.left {
+    float: left;
+    margin-right: 1rem;
+}
+
+.edit-task {
+    width: 2rem;
+    height: 2rem;
+    background: url("../img/black_pencil.svg") no-repeat;
+    background-size: contain;
+}
+
+.complete {
+    font-family: sans-serif;
+    height: 100%;
+    font-size: 2em;
+    float: right;
+}
+
+#new-task {
+    width: 100%;
+    margin-right: 5%;
+}
+
+input,
+form button {
+    float: left;
+    font-family: 'Bellefair', serif;
+    line-height: 1;
+    font-size: 1.6em;
+}
+
+.add-task button {
+    margin-top: 0.5em;
+    margin-right: 1em;
+}

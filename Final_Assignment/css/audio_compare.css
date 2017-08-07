@@ -74,6 +74,10 @@ a {
   width: 100%;
 }
 
+.linkFormat:hover {
+  color: #00a1ff;
+}
+
 /******************************************/
 /*                Buttons                 */
 /******************************************/
@@ -98,6 +102,10 @@ a {
      -ms-user-select: none;
      -o-user-select: none;
      user-select: none;
+}
+
+.yellowButton:hover, .yellowButton:focus {
+  color: yellow;
 }
 
 .blueButton {
@@ -128,6 +136,7 @@ a {
 .yellowButton {
   border-color: #f9e42e;
   background-color: black;
+  margin-top: 20px;
 }
 
 /******************************************/
@@ -267,7 +276,19 @@ section p {
 .resultsRight {
   height: 380px;
   width: 49.4%;
-  background-color: black;
+  display: inline-block;
+}
+
+.amplifierImg {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.speakerImg {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .indentResultDetails {
@@ -352,6 +373,11 @@ footer p {
     padding-left: 3%;
     padding-right: 3%;
     width: 100%;
+  }
+
+  .resultsRight {
+    height: 300px;
+    margin-top: 0;
   }
 }
 
@@ -526,5 +552,16 @@ footer p {
   }
   header nav {
     margin-top: 0;
+  }
+  .resultsSizeRight {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+  .resultsSizeLeft {
+    width: 100%;
+  }
+  .resultsRight {
+    width: 100%;
   }
 }
