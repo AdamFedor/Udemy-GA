@@ -30,6 +30,8 @@ var varSpeakerWeight;
 var varSpeakerPrice;
 var objectAmpNumber;
 var objectSpeakerNumber;
+var foundError;
+var foundWarning;
 var ampUsed;
 var speakerUsed;
 
@@ -51,10 +53,6 @@ $(document).ready(function(){
   document.getElementById("evaluateSelection").onclick = clearToResults;
 });
 
-// function for error
-
-// update paragraph at bottom
-
 // ********************************************************* //
 // *********************** FUNCTIONS *********************** //
 // ********************************************************* //
@@ -63,20 +61,6 @@ $(document).ready(function(){
 $(function(){
   $('#lookingDownOnYou').data('size','big');
 });
-
-// enable tooltips
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-// enable popovers
-$(function () {
-  $('[data-toggle="popover"]').popover()
-})
-
-// popover function to dismiss on click
-$('.popover-dismiss').popover({
-  trigger: 'focus'
-})
 
 // convert dollars to #,###.##
 function addComma(valueConvert) {
@@ -165,11 +149,13 @@ function selectionHigh() {
   var $selectionTopText = $(selectionTemplateVar);
   $(".replaceThisTop").append($selectionTopText);
 }
+
 function selectionMed() {
   var selectionTemplateVar = $("#selectionMiddle").text();
   var $selectionTopText = $(selectionTemplateVar);
   $(".replaceThisMiddle").append($selectionTopText);
 }
+
 function selectionLow() {
   var selectionTemplateVar = $("#selectionBottom").text();
   var $selectionTopText = $(selectionTemplateVar);
@@ -191,31 +177,35 @@ function resultsRun() {
   resultsWattsToOhm();
   resultsTooltip();
   resultsParagraphProcessed();
+  // tooltip has to be run here - if run earlier the tooltip will fail
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 }
 
 // display ohm of speaker and lower ohm (if allowed), else error
 function resultsWattsToOhm() {
   if (varSpeakerOhm === 8) {
     if (varAmpOhmMin === 8) {
+      $("#ampWattsOhmId").append("Watts: "+varAmpWatts8+" watts at 8 Ohm");
+      varAmpWatts = varAmpWatts4;
+    }
+    if (varAmpOhmMin === 6) {
+      $("#ampWattsOhmId").append("Watts: "+varAmpWatts8+" watts at 8 Ohm and "+varAmpWatts6+" watts at 6 ohm.");
+      varAmpWatts = varAmpWatts6;
+    }
+    if (varAmpOhmMin <= 4) {
       $("#ampWattsOhmId").append("Watts: "+varAmpWatts8+" watts at 8 Ohm and "+varAmpWatts6+" watts at 6 ohm and "+varAmpWatts4+" watts at 4 ohm.");
       varAmpWatts = varAmpWatts8;
     }
-    if (varAmpOhmMin === 6) {
-      $("#ampWattsOhmId").append("Watts: "+varAmpWatts6+" watts at 6 Ohm and "+varAmpWatts4+" watts at 4 ohm.");
-      varAmpWatts = varAmpWatts6;
-    }
-    if (varAmpOhmMin === 4) {
-      $("#ampWattsOhmId").append("Watts: "+varAmpWatts4+" watts at 4 Ohm");
-      varAmpWatts = varAmpWatts4;
-    }
   } else if (varSpeakerOhm === 6) {
-    if (varAmpOhmMin >= 6) {
-      $("#ampWattsOhmId").append("Watts: "+varAmpWatts6+" watts at 6 Ohm and "+varAmpWatts4+" watts at 4 ohm");
-      varAmpWatts = varAmpWatts6;
-    }
-    else if (varAmpOhmMin === 4) {
+    if (varAmpOhmMin === 6) {
       $("#ampWattsOhmId").append("Watts: "+varAmpWatts6+" watts at 6 Ohm");
       varAmpWatts = varAmpWatts4;
+    }
+    else if (varAmpOhmMin <= 4) {
+      $("#ampWattsOhmId").append("Watts: "+varAmpWatts6+" watts at 6 Ohm and "+varAmpWatts4+" watts at 4 ohm");
+      varAmpWatts = varAmpWatts6;
     }
   } else if (varSpeakerOhm >= 4) {
     $("#ampWattsOhmId").append("Watts: "+varAmpWatts4+" watts at 4 Ohm");
@@ -230,6 +220,7 @@ function resultsHigh() {
   $("#hiddenWithResults").toggleClass("muteButton");
   $(".replaceThisTop").append($selectionTopText);
 }
+
 function resultsLow() {
   var selectionTemplateVar = $("#resultsBottom").text();
   var $selectionTopText = $(selectionTemplateVar);
@@ -302,18 +293,21 @@ function resultsTooltip() {
     // yellow on amplifier watts
     $("#ampWattsOhmId").toggleClass("indentResultDetails");
     $("#notificationWattsAmp").toggleClass("muteTooltip");
+    foundWarning = 1;
   }
   if (varAmpWatts < varSpeakerWattsMin) {
     // amplifier watts do not meet the minimum watts requirement for the speaker
     // red on speaker min watts
     $("#speakerWattsMinId").toggleClass("indentResultDetails");
     $("#notificationWattsMin").toggleClass("muteTooltip");
+    foundWarning = 1;
   }
   if (varSpeakerOhmMin < varAmpOhmMin) {
     // amplifier does not support minimum ohm of speaker
     // red on speaker min ohm
     $("#speakerOhmMinId").toggleClass("indentResultDetails");
     $("#notificationOhmMin").toggleClass("muteTooltip");
+    foundWarning = 1;
   }
   if (varSpeakerFrequencyMin > 45) {
     // minimum frequency is too high, recommend a subwoofer
@@ -326,44 +320,74 @@ function resultsTooltip() {
     // yellow on noise
     $("#ampNoiseId").toggleClass("indentResultDetails");
     $("#notificationNoise").toggleClass("muteTooltip");
+    foundWarning = 1;
   }
   if (varSpeakerOhm < varAmpOhmMin) {
     // amplifier does not support ohm of speaker
     // red on speaker ohm
     $("#speakerOhmId").toggleClass("indentResultDetails");
     $("#notificationOhm").toggleClass("muteTooltip");
+    foundWarning = 1;
   }
 }
 
 // calculate the details for the results paragraph and details
 function resultsParagraphProcessed(){
-  // run calculations for Subwoofer (>=45hz, <45hz) - Subwoofer
-
-  // run calculations for Sensitivity (<89, =89, >89) - Sensitivity
-
+  var matchParagraph, noiseParagraph, thdParagraph, sensitivityParagraph, subwooferParagraph;
+  // run calculations for if signal to noise is ok (<95, 95-101, 102-110, >110) - noise
+  if (varAmpNoise <= 94) {
+    noiseParagraph = 3;
+    foundWarning = 1;
+  } else if (varAmpNoise <= 101) {
+    noiseParagraph = 2;
+  } else if (varAmpNoise <= 109) {
+    noiseParagraph = 1;
+  } else if (varAmpNoise >= 110) {
+    noiseParagraph = 0;
+  }
   // run calculations for thd (>0.035, 0.021-0.035, 0.011-0.020, <0.011) - SpeakerThd
-
-  // run calculations for if signal to noise is ok (>95, 95-101, 102-110, >110) - noise
-
+  if (varAmpThd <= 0.010) {
+    thdParagraph = 3;
+  } else if (varAmpThd <= 0.020) {
+    thdParagraph = 2;
+  } else if (varAmpThd <= 0.035) {
+    thdParagraph = 1;
+  } else if (varAmpThd >= 0.036) {
+    thdParagraph = 0;
+    foundWarning = 1;
+  }
+  // run calculations for Sensitivity (<89, =89, >89) - Sensitivity
+  if (varSpeakerSensitivity <= 88) {
+    sensitivityParagraph = 2;
+  } else if (varSpeakerSensitivity === 89) {
+    sensitivityParagraph = 1;
+  } else if (varSpeakerSensitivity >= 90) {
+    sensitivityParagraph = 0;
+  }
+  // run calculations for Subwoofer (>=45hz, <45hz) - Subwoofer
+  if (varSpeakerWattsMin >=45) {
+    subwooferParagraph = 1;
+  } else if (varSpeakerWattsMin <= 44) {
+    subwooferParagraph = 0;
+  }
   // run calculations for match and other details (good, ok, bad) - match
+  matchParagraph = 0;
+  if (foundError === 1) {
+    matchParagraph = 2;
+  } else if (foundWarning === 1) {
+    matchParagraph = 1;
+  }
 
   // run function for results paragraph
-  // resultsParagraph(match,noise,speakerThd,sensitivity,subwoofer);
-  resultsParagraph();
+  resultsParagraph(matchParagraph,noiseParagraph,thdParagraph,sensitivityParagraph,subwooferParagraph);
 }
 
 // function to return the results paragraph with variables of results
-function resultsParagraph(match,noise,speakerThd,sensitivity,subwoofer) {
-  var match = 1;
-  var noise = 1;
-  var speakerThd = 1;
-  var sensitivity = 2;
-  var subwoofer = 1;
-
+function resultsParagraph(match,noise,ampThd,sensitivity,subwoofer) {
   $("#resultsReplaceParagraph").append("The amplifier and speaker picked "+resultsMatch[match]+
     " Your amplifier's signal to noise ratio is "+resultsNoise[noise]+
-    " Additionally, your amplifier's THD (the internally generated noise, this is the accuracy of the left and right channels) is "+resultsThd[SpeakerThd]+
-    " For your speakers, relative loudness refers to how loud a speaker sounds at 100 watts on a speaker rated at 89db sensativity. Every 3db greater, it takes half the amount of power for the same volume. Every 3db less it takes twice the poewr for the same volume. Your setup sounds "+resultsSensitivity[sensitivity]+
+    " Additionally, your amplifier's THD (the internally generated noise, this is the accuracy of the left and right channels) is "+resultsThd[ampThd]+
+    " For your speakers, relative loudness refers to how loud a speaker sounds at 100 watts on a speaker rated at 89db sensativity. Every 3db greater, it takes half the amount of power for the same volume. Every 3db less it takes twice the power for the same volume. Your setup sounds "+resultsSensitivity[sensitivity]+
     " another speaker and amp combo playing at 100 watts and 89db. And your speakers minimum frequency is "+resultsSubwoofer[subwoofer]);
 }
 
@@ -382,7 +406,7 @@ function decibelMathFunc(decibelMath) {
   var aThird = 1/3;
   var aSixth = 1/6;
   // calculate if less than 89
-  if (validateNum < parseInt(89)) {
+  if (validateNum < 89) {
     // loop to do a less than formula. each reduced instance needs to apply to self
     for(var i=88, wattz=100; validateNum <= i; i--){
       if (wattz > 51) {
@@ -399,7 +423,7 @@ function decibelMathFunc(decibelMath) {
       relativeLoudness = wattz;
     }
   } // calculate if more than 89
-  else if (validateNum > parseInt(89)) {
+  else if (validateNum > 89) {
     // loop to do a more than formula. each increased instance needs to apply to self
     for(var i=90, wattz=100; validateNum >= i; i++){
       if (wattz < 199) {
@@ -414,7 +438,7 @@ function decibelMathFunc(decibelMath) {
       relativeLoudness = wattz;
     }
   } // calculate if equal to 89
-  else if (validateNum === parseInt(89)) {
+  else if (validateNum === 89) {
     relativeLoudness = 100;
   };
   // push out decimal points
@@ -489,13 +513,13 @@ var resultsMatch = ["are a good match.","technically work, but advise changes.",
 var resultsNoise = ["below the average. This will inject noise to the signal from your source to your speaker.","average. This mean's it will inject average noise to the signal from your source to your speaker.","above average. This mean's it will inject below average noise to the signal from your source to your speaker.","well above the average. This means it will inject the least noise to the signal from your source to your speaker."];
 
 // array of strings for results. Third sentence.
-var resultsThd = ["below average. You will incur noise.","average. You will incur acceptable noise.","above average. You will incur less than average noise.","well below the average. You will incur minimal noise."];
+var resultsThd = ["above average. You will incur noise.","average. You will incur acceptable noise.","above average. You will incur less than average noise.","well below the average. You will incur minimal noise."];
 
 // array of strings for results. Fourth sentence.
 var resultsSensitivity = ["louder than","exactly as loud as","quieter than"];
 
 // array of strings for results. Fifth sentence.
-var resultsSubwoofer = ["lower than 45hz. For full frequencies, try adding a subwoofer to your stereo setup. This will help round out the lowest frequencies.","low enough that you may not need additional bass by adding a subwoofer."];
+var resultsSubwoofer = ["higher than 45hz. And is expected to be quieter on low bass frequencies. For full frequencies, try adding a subwoofer to your stereo setup. This will help round out the lowest frequencies.","low enough that you may not need additional bass by adding a subwoofer."];
 
 // array of objects for amp
 var amp = [
@@ -508,7 +532,7 @@ var amp = [
     ohm6: 225,
     ohm4: 300,
     signalToNoise: 120,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.020,
     weightAmp: 25.2
   },
@@ -521,7 +545,7 @@ var amp = [
     ohm6: 395,
     ohm4: 490,
     signalToNoise: 115,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.005,
     weightAmp: 35.5
   },
@@ -531,10 +555,10 @@ var amp = [
     type: "Integrated Amplifier",
     cost: 4500,
     ohm8: 100,
-    ohm6: NaN,
-    ohm4: NaN,
+    ohm6: false,
+    ohm4: false,
     signalToNoise: 110,
-    minImpedence: 8,
+    minImpedence: 6.1,
     thdAmp: 0.005,
     weightAmp: 38
   },
@@ -547,7 +571,7 @@ var amp = [
     ohm6: 150,
     ohm4: 150,
     signalToNoise: 110,
-    minImpedence: 8,
+    minImpedence: 2,
     thdAmp: 0.005,
     weightAmp: 75
   },
@@ -560,7 +584,7 @@ var amp = [
     ohm6: 300,
     ohm4: 300,
     signalToNoise: 110,
-    minImpedence: 8,
+    minImpedence: 1,
     thdAmp: 0.005,
     weightAmp: 67
   },
@@ -573,7 +597,7 @@ var amp = [
     ohm6: 50,
     ohm4: 50,
     signalToNoise: 98,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.030,
     weightAmp: 10.7
   },
@@ -586,7 +610,7 @@ var amp = [
     ohm6: 150,
     ohm4: 150,
     signalToNoise: 95,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.009,
     weightAmp: 24.7
   },
@@ -599,7 +623,7 @@ var amp = [
     ohm6: 180,
     ohm4: 180,
     signalToNoise: 91,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.030,
     weightAmp: 21.6
   },
@@ -612,7 +636,7 @@ var amp = [
     ohm6: 250,
     ohm4: 250,
     signalToNoise: 119,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.004,
     weightAmp: 44.5
   },
@@ -625,7 +649,7 @@ var amp = [
     ohm6: 250,
     ohm4: 250,
     signalToNoise: 100,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.003,
     weightAmp: 19.6
   },
@@ -638,7 +662,7 @@ var amp = [
     ohm6: 250,
     ohm4: 300,
     signalToNoise: 100,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.050,
     weightAmp: 36
   },
@@ -651,7 +675,7 @@ var amp = [
     ohm6: 150,
     ohm4: 180,
     signalToNoise: 100,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.050,
     weightAmp: 50
   },
@@ -664,7 +688,7 @@ var amp = [
     ohm6: 120,
     ohm4: 120,
     signalToNoise: 100,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.030,
     weightAmp: 28.66
   },
@@ -677,7 +701,7 @@ var amp = [
     ohm6: 200,
     ohm4: 200,
     signalToNoise: 102,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.030,
     weightAmp: 37.04
   },
@@ -690,7 +714,7 @@ var amp = [
     ohm6: 375,
     ohm4: 500,
     signalToNoise: 109,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.030,
     weightAmp: 17.2
   },
@@ -703,7 +727,7 @@ var amp = [
     ohm6: 200,
     ohm4: 200,
     signalToNoise: 116,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.030,
     weightAmp: 38.8
   },
@@ -716,7 +740,7 @@ var amp = [
     ohm6: 350,
     ohm4: 350,
     signalToNoise: 120,
-    minImpedence: 4,
+    minImpedence: 2,
     thdAmp: 0.030,
     weightAmp: 84
   },
@@ -729,7 +753,7 @@ var amp = [
     ohm6: 65,
     ohm4: 70,
     signalToNoise: 99,
-    minImpedence: 4,
+    minImpedence: 1,
     thdAmp: 0.019,
     weightAmp: 19.8
   },
@@ -740,9 +764,9 @@ var amp = [
     cost: 549.99,
     ohm8: 85,
     ohm6: 100,
-    ohm4: NaN,
+    ohm4: 120,
     signalToNoise: 99,
-    minImpedence: 4,
+    minImpedence: 1,
     thdAmp: 0.019,
     weightAmp: 22.7
   },
@@ -753,9 +777,9 @@ var amp = [
     cost: 799.99,
     ohm8: 100,
     ohm6: 120,
-    ohm4: NaN,
+    ohm4: 160,
     signalToNoise: 99,
-    minImpedence: 4,
+    minImpedence: 1,
     thdAmp: 0.019,
     weightAmp: 22.7
   },
@@ -768,9 +792,22 @@ var amp = [
     ohm6: 120,
     ohm4: 150,
     signalToNoise: 98,
-    minImpedence: 4,
+    minImpedence: 1,
     thdAmp: 0.020,
     weightAmp: 50
+  },
+  {
+    brand: "Yamaha",
+    model: "A-S2100",
+    type: "Integrated Amplifier",
+    cost: 3999.99,
+    ohm8: 105,
+    ohm6: 135,
+    ohm4: 190,
+    signalToNoise: 103,
+    minImpedence: 1,
+    thdAmp: 0.025,
+    weightAmp: 51.6
   },
   {
     brand: "Yamaha",
@@ -778,10 +815,10 @@ var amp = [
     type: "Integrated Amplifier",
     cost: 6999.99,
     ohm8: 100,
-    ohm6: 125,
-    ohm4: 150,
+    ohm6: 150,
+    ohm4: 200,
     signalToNoise: 103,
-    minImpedence: 4,
+    minImpedence: 1,
     thdAmp: 0.007,
     weightAmp: 54.2
   }
@@ -812,7 +849,7 @@ var speaker = [
     ohmMinimal: 3,
     recommendedMinPower: 30,
     recommendedMaxPower: 150,
-    frequencyMin: "48",
+    frequencyMin: 48,
     frequencyMax: 28000,
     sensitivityDb: 88,
     weightLbs: 43
@@ -879,7 +916,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 6000.00,
     ohmNominal: 8,
-    ohmMinimal: "4.6",
+    ohmMinimal: 4.6,
     recommendedMinPower: 50,
     recommendedMaxPower: 120,
     frequencyMin: 34,
@@ -893,7 +930,7 @@ var speaker = [
     type: "Tower",
     costPerPair: 1899.98,
     ohmNominal: 8,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 40,
     recommendedMaxPower: 250,
     frequencyMin: 49,
@@ -907,7 +944,7 @@ var speaker = [
     type: "Tower",
     costPerPair: 1298.00,
     ohmNominal: 8,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 30,
     recommendedMaxPower: 150,
     frequencyMin: 52,
@@ -921,7 +958,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 749.00,
     ohmNominal: 8,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 25,
     recommendedMaxPower: 120,
     frequencyMin: 55,
@@ -935,7 +972,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 549.99,
     ohmNominal: 8,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 25,
     recommendedMaxPower: 100,
     frequencyMin: 65,
@@ -949,7 +986,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 799.98,
     ohmNominal: 8,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 25,
     recommendedMaxPower: 100,
     frequencyMin: 80,
@@ -963,8 +1000,8 @@ var speaker = [
     type: "Tower",
     costPerPair: 3599.98,
     ohmNominal: 8,
-    ohmMinimal: NaN,
-    recommendedMinPower: NaN,
+    ohmMinimal: false,
+    recommendedMinPower: false,
     recommendedMaxPower: 100,
     frequencyMin: 38,
     frequencyMax: 20000,
@@ -977,8 +1014,8 @@ var speaker = [
     type: "Tower",
     costPerPair: 1199.98,
     ohmNominal: 8,
-    ohmMinimal: NaN,
-    recommendedMinPower: NaN,
+    ohmMinimal: false,
+    recommendedMinPower: false,
     recommendedMaxPower: 150,
     frequencyMin: 32,
     frequencyMax: 25000,
@@ -991,8 +1028,8 @@ var speaker = [
     type: "Tower",
     costPerPair: 999.96,
     ohmNominal: 8,
-    ohmMinimal: NaN,
-    recommendedMinPower: NaN,
+    ohmMinimal: false,
+    recommendedMinPower: false,
     recommendedMaxPower: 75,
     frequencyMin: 45,
     frequencyMax: 24000,
@@ -1005,8 +1042,8 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 549.99,
     ohmNominal: 8,
-    ohmMinimal: NaN,
-    recommendedMinPower: NaN,
+    ohmMinimal: false,
+    recommendedMinPower: false,
     recommendedMaxPower: 100,
     frequencyMin: 45,
     frequencyMax: 25000,
@@ -1019,8 +1056,8 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 199.99,
     ohmNominal: 8,
-    ohmMinimal: NaN,
-    recommendedMinPower: NaN,
+    ohmMinimal: false,
+    recommendedMinPower: false,
     recommendedMaxPower: 50,
     frequencyMin: 64,
     frequencyMax: 24000,
@@ -1033,7 +1070,7 @@ var speaker = [
     type: "Tower",
     costPerPair: 4499.98,
     ohmNominal: 4,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 20,
     recommendedMaxPower: 200,
     frequencyMin: 46,
@@ -1047,7 +1084,7 @@ var speaker = [
     type: "Tower",
     costPerPair: 2999.98,
     ohmNominal: 6,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 20,
     recommendedMaxPower: 300,
     frequencyMin: 42,
@@ -1061,7 +1098,7 @@ var speaker = [
     type: "Tower",
     costPerPair: 1599.98,
     ohmNominal: 6,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 20,
     recommendedMaxPower: 300,
     frequencyMin: 42,
@@ -1075,7 +1112,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 1249.98,
     ohmNominal: 4,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 20,
     recommendedMaxPower: 250,
     frequencyMin: 50,
@@ -1103,7 +1140,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 5000.00,
     ohmNominal: 8,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 75,
     recommendedMaxPower: 300,
     frequencyMin: 80,
@@ -1117,7 +1154,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 4000.00,
     ohmNominal: 8,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 75,
     recommendedMaxPower: 300,
     frequencyMin: 40,
@@ -1131,7 +1168,7 @@ var speaker = [
     type: "Tower",
     costPerPair: 4999.98,
     ohmNominal: 4,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 40,
     recommendedMaxPower: 300,
     frequencyMin: 40,
@@ -1145,7 +1182,7 @@ var speaker = [
     type: "Tower",
     costPerPair: 3498.00,
     ohmNominal: 6,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 40,
     recommendedMaxPower: 300,
     frequencyMin: 38,
@@ -1159,7 +1196,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 3999.98,
     ohmNominal: 6,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 50,
     recommendedMaxPower: 200,
     frequencyMin: 45,
@@ -1173,7 +1210,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 2399.98,
     ohmNominal: 6,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 30,
     recommendedMaxPower: 150,
     frequencyMin: 50,
@@ -1187,7 +1224,7 @@ var speaker = [
     type: "Tower",
     costPerPair: 1999.98,
     ohmNominal: 4,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 40,
     recommendedMaxPower: 300,
     frequencyMin: 38,
@@ -1201,7 +1238,7 @@ var speaker = [
     type: "Bookshelf",
     costPerPair: 1799.98,
     ohmNominal: 4,
-    ohmMinimal: NaN,
+    ohmMinimal: false,
     recommendedMinPower: 30,
     recommendedMaxPower: 150,
     frequencyMin: 50,

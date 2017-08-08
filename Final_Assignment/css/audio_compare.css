@@ -283,6 +283,11 @@ section p {
   text-indent: -25px;
 }
 
+.textWrapNotTooltip {
+  margin-left: 0;
+  text-indent: 0;
+}
+
 .amplifierImg {
   background-size: contain;
   background-position: center;
