@@ -249,9 +249,13 @@ function resultsSpeaker(){
   $("#speakerTypeId").append(varSpeakerType);
   $("#speakerFrequencyId").append("Frequency: "+varSpeakerFrequencyMin+"-"+speakerFrequencyMaxFormatted+" Hz");
   $("#speakerOhmId").append("Ohm: "+varSpeakerOhm);
-  $("#speakerOhmMinId").append("Min Ohm: "+varSpeakerOhmMin+" Ohm");
+  if (varSpeakerOhmMin != false) {
+    $("#speakerOhmMinId").append("Min Ohm: "+varSpeakerOhmMin+" Ohm");
+  }
   $("#speakerWattsMaxId").append("Max Watts: "+speakerWattsMaxFormatted+" watts");
-  $("#speakerWattsMinId").append("Min Watts: "+varSpeakerWattsMin+" watts");
+  if (varSpeakerWattsMin != false) {
+    $("#speakerWattsMinId").append("Min Watts: "+varSpeakerWattsMin+" watts");
+  }
   $("#speakerSensitivityId").append("Sensitivity: "+varSpeakerSensitivity+"db");
   $("#speakerWeightId").append("Weight: "+varSpeakerWeight+" lbs. each");
   $("#speakerPriceId").append("Price: $"+speakerPriceFormatted);
@@ -295,19 +299,23 @@ function resultsTooltip() {
     $("#notificationWattsAmp").toggleClass("muteTooltip");
     foundWarning = 1;
   }
-  if (varAmpWatts < varSpeakerWattsMin) {
-    // amplifier watts do not meet the minimum watts requirement for the speaker
-    // red on speaker min watts
-    $("#speakerWattsMinId").toggleClass("indentResultDetails");
-    $("#notificationWattsMin").toggleClass("muteTooltip");
-    foundWarning = 1;
+  if (varSpeakerWattsMin != false) {
+    if (varAmpWatts < varSpeakerWattsMin) {
+      // amplifier watts do not meet the minimum watts requirement for the speaker
+      // red on speaker min watts
+      $("#speakerWattsMinId").toggleClass("indentResultDetails");
+      $("#notificationWattsMin").toggleClass("muteTooltip");
+      foundWarning = 1;
+    }
   }
-  if (varSpeakerOhmMin < varAmpOhmMin) {
-    // amplifier does not support minimum ohm of speaker
-    // red on speaker min ohm
-    $("#speakerOhmMinId").toggleClass("indentResultDetails");
-    $("#notificationOhmMin").toggleClass("muteTooltip");
-    foundWarning = 1;
+  if (varSpeakerOhmMin != false) {
+    if (varSpeakerOhmMin < varAmpOhmMin) {
+      // amplifier does not support minimum ohm of speaker
+      // red on speaker min ohm
+      $("#speakerOhmMinId").toggleClass("indentResultDetails");
+      $("#notificationOhmMin").toggleClass("muteTooltip");
+      foundWarning = 1;
+    }
   }
   if (varSpeakerFrequencyMin > 45) {
     // minimum frequency is too high, recommend a subwoofer
