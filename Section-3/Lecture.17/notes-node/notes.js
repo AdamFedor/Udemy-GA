@@ -21,25 +21,32 @@ var addNote = (title, body) => {
     title,
     body
   };
-  var duplicateNotes = notes.filter((note) => { //filter is why it looks through the multiple possible notes.
-    return note.title === title;
-  });
-
+  var duplicateNotes = notes.filter((note) =>  note.title === title);
   if (duplicateNotes.length ===0){
     notes.push(note);
     saveNotes(notes);
     return note; // returned to app.js
   };
 };
+
 var getAll = () => {
   console.log('Getting all notes');
 };
+
 var getNote = (title) => {
   console.log('Reading Note', title);
 };
+
 var removeNote = (title) => {
-  console.log('Removing Note', title);
+  var notes = fetchNotes ();
+  // notes is our array of notes in the line above
+  // filter is an array method that takes a callback, the callback is going to take an argument. So if I have an array of notes, it will take a single note.
+  // this function returns true or false.
+  // where is note coming from? add execution context?!
+  var filteredNotes = notes.filter((note) => note.title !== title);
+  saveNotes(filteredNotes);
 };
+
 module.exports = {
   addNote,
   getAll,
