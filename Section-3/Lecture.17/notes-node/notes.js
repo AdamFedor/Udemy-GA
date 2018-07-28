@@ -34,22 +34,33 @@ var getAll = () => {
 };
 
 var getNote = (title) => {
-  console.log('Reading Note', title);
+  var notes = fetchNotes();
+  var filteredNotes = notes.filter((note) => note.title === title); // returns the right of the =>
+  return filteredNotes[0];
 };
 
 var removeNote = (title) => {
-  var notes = fetchNotes ();
+  var notes = fetchNotes();
   // notes is our array of notes in the line above
   // filter is an array method that takes a callback, the callback is going to take an argument. So if I have an array of notes, it will take a single note.
   // this function returns true or false.
-  // where is note coming from? add execution context?!
+  // this filter knows note is a singular of notes, replace note and notes with anything that making the ones plural as plural and it works the same.
   var filteredNotes = notes.filter((note) => note.title !== title);
   saveNotes(filteredNotes);
+  return notes.length !== filteredNotes.length; // returns a boolean
 };
+
+// This allows this not to be repeated each time something is displayed.
+var logNote = (note) => {
+  console.log('--');
+  console.log(`Title: ${note.title}`);
+  console.log(`Body: ${note.body}`);
+}; // have to export it by adding it below to module.exports
 
 module.exports = {
   addNote,
   getAll,
   getNote,
-  removeNote
+  removeNote,
+  logNote
 };
