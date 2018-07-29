@@ -52,6 +52,9 @@ var removeNote = (title) => {
 
 // This allows this not to be repeated each time something is displayed.
 var logNote = (note) => {
+  // Debug challenge: Break on this line and use repl to output note
+  debugger; // then type repl and type 'note'
+
   console.log('--');
   console.log(`Title: ${note.title}`);
   console.log(`Body: ${note.body}`);
