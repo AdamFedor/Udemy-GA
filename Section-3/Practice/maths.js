@@ -7,13 +7,9 @@ var math_types = {
   '/': (x, y) => x / y,
   '*': (x, y) => x * y,
 }
-
-// calculate
 // var mathOutput = math_types['/'](3, 7); // want to understand [] better here
 var mathOutput = (a, b, c) => math_types[b](a, c);
-// using mathOutput
-var xyz = mathOutput(3, '-', 7);
-console.log(xyz);
+// var xyz = mathOutput(3, '-', 7); // using mathOutput
 
 var pullFromFile = () => {
   try {
@@ -32,26 +28,29 @@ var writeToFile = (outputData) => {
 // compute
 var computeMaths = (theValue, toRound) => {
   var sourceFile = pullFromFile();
+  var formulaGiven = theValue.split('').filter((item) => item != ' '); // /|S/ // this is a universal whitespace regex
+  var formulaJoined = formulaGiven.join('');
   var returnFile = {
-    theValue,
+    formulaJoined,
     toRound
   };
-  var duplicateMaths = maths.filter((returnFile) => returnFile.theValue === theValue);
-  if (duplicateMaths.length === 0) {
-    maths.push(returnFile);
-    writeToFile(maths);
+  var joinedValue = sourceFile.filter((returnFile) => returnFile.formulaJoined === formulaJoined);
+  var theRound = sourceFile.filter((returnFile) => returnFile.toRound === toRound);
+  var duplicateValue = Math.min(joinedValue.length, theRound.length);
+  if (duplicateValue === 0) {
+    sourceFile.push(returnFile);
+    writeToFile(sourceFile);
     return returnFile;
   }
 };
-
-// change
-var changeMaths
 
 // get all
 var getMaths
 
 // single read
-var getOneMaths
+var getOneMaths = (theValue, toRound) => {
+  console.log("get one maths");
+};
 
 // delete
 var removeMaths
@@ -60,7 +59,6 @@ var removeMaths
 // export
 module.exports = {
   computeMaths,
-  changeMaths,
   getMaths,
   getOneMaths,
   removeMaths
