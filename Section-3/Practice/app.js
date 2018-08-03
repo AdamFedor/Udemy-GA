@@ -4,9 +4,9 @@ const yargs = require('yargs');
 
 const maths = require('./maths.js')
 const argumentz = {
-  describe: 'Mathamatical argument: value operator value',
+  describe: 'Compute argument: value operator value',
   demand: true,
-  alias: 'a'
+  alias: 'c'
 }
 const roundingz = {
   describe: 'Should the result round whole number? yes/no',
@@ -33,25 +33,21 @@ const argv = yargs
   .argv;
 var command = argv._[0];
 
-// For argument1: value1 operator1 value2 is the format
+// take arguments
 if (command === 'compute'){
-  // if(theValue.char() === 3) {
-    var returnFile = maths.computeMaths(argv.theValue, argv.toRound);
-    if (returnFile) {
-      console.log('done');
-      // add return for note statement similar to read note
-    } else {
-      console.log('Math value and rounding already added. Duplicate and not added.')
-    };
-  // }
-} else if (command === 'update'){
-// update a stored value (include update timestamp with and history)
+  var returnFile = maths.computeMaths(argv.theValue, argv.toRound);
+  if (returnFile) {
+    console.log('Computed and Logged');
+    maths.logIt(returnFile);
+  };
 } else if (command === 'list'){
-// show all values
 } else if (command === 'read'){
   var returnFile = maths.getOneMaths(argv.theValue, argv.toRound);
+  console.log('reading');
   if (returnFile) {
-    console.log('read');
+    console.log('Currently Logged Computation');
+    maths.logIt(returnFile);
+    // maths.logIt(returnFile);
   } else {
     console.log('No valid entries. Nothing to read.');
   };
