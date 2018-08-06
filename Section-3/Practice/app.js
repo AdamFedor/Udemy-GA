@@ -55,7 +55,7 @@ if (command === 'compute'){
   };
 } else if (command === 'delete'){
   // delete a stored value
-  maths.removeMaths(argv.theValue, argv.toRound);
+  var returnFile = maths.removeMaths(argv.theValue, argv.toRound);
 } else {
   console.log('Not a valid input command');
-}
+};

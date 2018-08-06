@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-const joinedValue = require('./maths-data.json');
-
 var math_types = {
   '+': (x, y) => x + y,
   '-': (x, y) => x - y,
@@ -15,6 +13,9 @@ var checkArray = (mathValue) => {
   var examp = mathValue.split('*' || '/' || '-' || '+').length;
   return examp;
 };
+///////////////
+// NOT ACCEPTING anything other than X or * for symbols
+///////////////
 
 var pullFromFile = () => {
   try {
@@ -25,19 +26,37 @@ var pullFromFile = () => {
   }
 };
 
+var checkDup = (theValue, toRound, sourceData, return1, return2) => {
+  var myFilter = {
+    formulaJoined: theValue,
+    toRound: toRound
+  };
+  var checkTheDup = sourceData.filter(function(item) {
+    for (var key in myFilter) {
+      if (item[key] === undefined || item[key] !== myFilter[key])
+        return return1;
+      };
+    return return2;
+  });
+  return(checkTheDup);
+};
+
 var writeToFile = (outputData) => {
-  fs. writeFileSync('maths-data.json', JSON.stringify(outputData));
+  fs.writeFileSync('maths-data.json', JSON.stringify(outputData));
 };
 
 // compute
 var computeMaths = (theValue, toRound) => {
   var sourceFile = pullFromFile();
-  var formulaGiven = theValue.split('').filter((item) => item != ' '); // /|S/ // this is a universal whitespace regex
+  var formulaGiven = theValue.split('').filter((item) => item !== ' '); // /|S/ // this is a universal whitespace regex
   // replace the x with * for accidental use of x
   var checkIt = formulaGiven.indexOf('x');
   if (checkIt !== -1) {
       formulaGiven[checkIt] = '*';
   };
+  ///////////////
+  // NOT ACCEPTING anything other than X or * for symbols
+  ///////////////
   var formulaJoined = formulaGiven.join('');
   var dateNow = new Date();
   var theDate = dateNow.toGMTString();
@@ -47,18 +66,7 @@ var computeMaths = (theValue, toRound) => {
     theDate
   };
   if (checkArray(formulaJoined) === 2) {
-    // identify duplicates
-    var myFilter = {
-      formulaJoined: formulaJoined,
-      toRound: toRound
-    };
-    var aMatch = joinedValue.filter(function(item) {
-      for (var key in myFilter) {
-        if (item[key] === undefined || item[key] != myFilter[key])
-          return false;
-        };
-      return true;
-    });
+    var aMatch = checkDup(theValue, toRound, sourceFile, false, true);
     // check for duplicates
     if (aMatch.length === 0) {
       sourceFile.push(returnFile);
@@ -85,25 +93,26 @@ var getMaths = () => {
 // single read
 var getOneMaths = (theValue, toRound) => {
   var sourceFile = pullFromFile();
-  var myFilter = {
-    formulaJoined: theValue,
-    toRound: toRound
-  };
-  var aMatch = joinedValue.filter(function(item) {
-    for (var key in myFilter) {
-      if (item[key] === undefined || item[key] != myFilter[key])
-        return false;
-      };
-    return true;
-  }); // object in the array
+  var aMatch = checkDup(theValue, toRound, sourceFile, false, true);
   var breakOut = aMatch[0];
   return breakOut;
 };
 
 // delete
-var removeMaths = () => {
-  // var sourceFile = pullFromFile();
-  // var
+var removeMaths = (theValue, toRound) => {
+  var sourceFile = pullFromFile();
+  var aMatch = checkDup(theValue, toRound, sourceFile, true, false);
+  if (aMatch.length !== sourceFile.length) {
+    writeToFile(aMatch);
+    console.log('-----');
+    console.log('Deleted Entry!');
+    console.log('Calculation: '+ theValue);
+    console.log('Rounding: ' + toRound);
+    console.log('-----');
+    return aMatch;
+  } else {
+    console.log('WARNING: No file found. File not deleted.')
+  };
 };
 
 // display
@@ -112,10 +121,12 @@ var logIt = (returnFile) => {
   console.log(`Round It: ${returnFile.toRound}`);
   var theFormula = returnFile.formulaJoined.split('');
   var calculatedOutput = mathOutput (theFormula[0], theFormula[1], theFormula[2]);
+  if (returnFile.toRound = 'yes') {
+    calculatedOutput = Math.round(calculatedOutput);
+  };
   console.log('Output: ' + calculatedOutput);
   console.log(`Timestamp: ${returnFile.theDate}`);
   console.log('-----');
-  // console.log(theFormula);
 };
 
 // export
