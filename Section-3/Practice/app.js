@@ -38,22 +38,24 @@ if (command === 'compute'){
   var returnFile = maths.computeMaths(argv.theValue, argv.toRound);
   if (returnFile) {
     console.log('Computed and Logged');
+    console.log('-----');
     maths.logIt(returnFile);
   };
 } else if (command === 'list'){
+  console.log('-----');
+  maths.getMaths();
 } else if (command === 'read'){
   var returnFile = maths.getOneMaths(argv.theValue, argv.toRound);
-  console.log('reading');
   if (returnFile) {
     console.log('Currently Logged Computation');
+    console.log('-----');
     maths.logIt(returnFile);
-    // maths.logIt(returnFile);
   } else {
     console.log('No valid entries. Nothing to read.');
   };
-// pull a log of the one value and the details (timestamp and edits)
 } else if (command === 'delete'){
   // delete a stored value
+  maths.removeMaths(argv.theValue, argv.toRound);
 } else {
   console.log('Not a valid input command');
 }

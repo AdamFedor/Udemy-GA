@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+const joinedValue = require('./maths-data.json');
+
 var math_types = {
   '+': (x, y) => x + y,
   '-': (x, y) => x - y,
@@ -31,6 +33,11 @@ var writeToFile = (outputData) => {
 var computeMaths = (theValue, toRound) => {
   var sourceFile = pullFromFile();
   var formulaGiven = theValue.split('').filter((item) => item != ' '); // /|S/ // this is a universal whitespace regex
+  // replace the x with * for accidental use of x
+  var checkIt = formulaGiven.indexOf('x');
+  if (checkIt !== -1) {
+      formulaGiven[checkIt] = '*';
+  };
   var formulaJoined = formulaGiven.join('');
   var dateNow = new Date();
   var theDate = dateNow.toGMTString();
@@ -40,98 +47,67 @@ var computeMaths = (theValue, toRound) => {
     theDate
   };
   if (checkArray(formulaJoined) === 2) {
+    // identify duplicates
+    var myFilter = {
+      formulaJoined: formulaJoined,
+      toRound: toRound
+    };
+    var aMatch = joinedValue.filter(function(item) {
+      for (var key in myFilter) {
+        if (item[key] === undefined || item[key] != myFilter[key])
+          return false;
+        };
+      return true;
+    });
     // check for duplicates
-    var joinedValue = sourceFile.filter((returnFile) => returnFile.formulaJoined === formulaJoined);
-    var theRound = sourceFile.filter((returnFile) => returnFile.toRound === toRound);
-    var duplicateValue = Math.min(joinedValue.length, theRound.length);
-    if (duplicateValue === 0) {
+    if (aMatch.length === 0) {
       sourceFile.push(returnFile);
       writeToFile(sourceFile);
       return returnFile;
     } else {
       console.log('Math value and rounding already added. Duplicate and not added.');
     };
+  } else if (checkArray(formulaJoined) === 1) {
+    console.log('Invalid input: Only use + - * /');
   };
 };
 
 // get all
-var getMaths
+var getMaths = () => {
+  var sourceFile = pullFromFile();
+  for (var zzz = 0; zzz < sourceFile.length; zzz++) {
+    console.log('Computation Log: ' + zzz);
+    logIt(sourceFile[zzz]);
+  };
+  return sourceFile;
+};
 
 // single read
 var getOneMaths = (theValue, toRound) => {
   var sourceFile = pullFromFile();
-  var filter = {
-    theValue,
-    toRound
+  var myFilter = {
+    formulaJoined: theValue,
+    toRound: toRound
   };
-
-
-///////////////////////////////////////////////////////////////////
-// what works how I want my code to work
-  var filter = {
-    address: 'England',
-    name: 'Mark'
-  };
-  var users = [{
-      name: 'John',
-      email: 'johnson@mail.com',
-      age: 25,
-      address: 'USA'
-    },
-    {
-      name: 'Tom',
-      email: 'tom@mail.com',
-      age: 35,
-      address: 'England'
-    },
-    {
-      name: 'Mark',
-      email: 'mark@mail.com',
-      age: 28,
-      address: 'England'
-    }
-  ];
-
-
-  users= users.filter(function(item) {
-    for (var key in filter) {
-      if (item[key] === undefined || item[key] != filter[key])
-        return false;
-    }
-    return true;
-  });
-
-  console.log(users)
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-  // Needs fixing on the aMatch variable. Should return the right result.
-
-
-  console.log(filter);
-  var joinedValue = sourceFile.filter((sourceFile) => sourceFile.formulaJoined === theValue);
-  // var theRound = sourceFile.filter((sourceFile) => sourceFile.toRound === toRound;
-  console.log(joinedValue);
   var aMatch = joinedValue.filter(function(item) {
-    for (var key in filter) {
-      if (item[key] === undefined || item[key] != filter[key])
+    for (var key in myFilter) {
+      if (item[key] === undefined || item[key] != myFilter[key])
         return false;
-      }
+      };
     return true;
-  })
-  console.log('Match?');
-  console.log(aMatch);
+  }); // object in the array
+  var breakOut = aMatch[0];
+  return breakOut;
+};
+
+// delete
+var removeMaths = () => {
+  // var sourceFile = pullFromFile();
+  // var
 };
 
 // display
 var logIt = (returnFile) => {
-  console.log('-----');
   console.log(`Argument: ${returnFile.formulaJoined}`);
   console.log(`Round It: ${returnFile.toRound}`);
   var theFormula = returnFile.formulaJoined.split('');
@@ -141,10 +117,6 @@ var logIt = (returnFile) => {
   console.log('-----');
   // console.log(theFormula);
 };
-
-// delete
-var removeMaths
-
 
 // export
 module.exports = {
@@ -156,4 +128,4 @@ module.exports = {
   pullFromFile,
   removeMaths,
   writeToFile
-}
+};
