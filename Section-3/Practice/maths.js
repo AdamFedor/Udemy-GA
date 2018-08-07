@@ -9,13 +9,14 @@ var math_types = {
 
 var mathOutput = (a, b, c) => math_types[b](a, c);
 
-var checkArray = (mathValue) => {
-  var examp = mathValue.split('*' || '/' || '-' || '+').length;
+var checkArray = (mathValue) => { // find more efficient way
+  var plus1 = mathValue.split('+').length;
+  var minus1 = mathValue.split('-').length;
+  var times1 = mathValue.split('*').length;
+  var divide1 = mathValue.split('/').length;
+  examp = Math.max(plus1, minus1, times1, divide1);
   return examp;
 };
-///////////////
-// NOT ACCEPTING anything other than X or * for symbols
-///////////////
 
 var pullFromFile = () => {
   try {
@@ -54,9 +55,6 @@ var computeMaths = (theValue, toRound) => {
   if (checkIt !== -1) {
       formulaGiven[checkIt] = '*';
   };
-  ///////////////
-  // NOT ACCEPTING anything other than X or * for symbols
-  ///////////////
   var formulaJoined = formulaGiven.join('');
   var dateNow = new Date();
   var theDate = dateNow.toGMTString();
@@ -120,8 +118,8 @@ var logIt = (returnFile) => {
   console.log(`Argument: ${returnFile.formulaJoined}`);
   console.log(`Round It: ${returnFile.toRound}`);
   var theFormula = returnFile.formulaJoined.split('');
-  var calculatedOutput = mathOutput (theFormula[0], theFormula[1], theFormula[2]);
-  if (returnFile.toRound = 'yes') {
+  var calculatedOutput = mathOutput (Number(theFormula[0]), theFormula[1], Number(theFormula[2]));
+  if (returnFile.toRound === 'yes') {
     calculatedOutput = Math.round(calculatedOutput);
   };
   console.log('Output: ' + calculatedOutput);
