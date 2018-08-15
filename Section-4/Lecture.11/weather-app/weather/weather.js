@@ -2,7 +2,7 @@ const request = require('request');
 
 var getWeather = (lat, lng, callback) => {
   request({
-    url: `https://api.darksky.net/forecast/67482830f9c335b40fa455081a2243d3/${lat},${lng}`,
+    url: `https://api.darksky.net/forecast/67482830f9c335b40fa455081a2243d3/${lat},${lng}`, // key has since been changed
     json: true
   }, (error, response, body) => {
     if (error) {
