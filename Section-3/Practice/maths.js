@@ -32,6 +32,7 @@ var checkDup = (theValue, toRound, sourceData, return1, return2) => {
     formulaJoined: theValue,
     toRound: toRound
   };
+  // ERROR ON DUPLICATE DETECTION
   var checkTheDup = sourceData.filter(function(item) {
     for (var key in myFilter) {
       if (item[key] === undefined || item[key] !== myFilter[key])

@@ -1,11 +1,14 @@
 const axios = require('axios');
+const processData = require('./processing');
 
 //DOTENV
 require('dotenv').config();
 const keyGeo = process.env.WEATHERKEY;
 const keyDark = process.env.DARKSKY;
 
-//WEATHER CALL
+//CHECK IF DATE ALREADY STORED
+
+//WEATHER CALL IF NOT STORED
 var weatherCall = (addressRequested) => {
     var encodedAddress = encodeURIComponent(addressRequested);
     var geocodeURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${keyGeo}`
@@ -21,17 +24,17 @@ var weatherCall = (addressRequested) => {
         return axios.get(weatherURL);
     }).then((response) => {
         var darkSkyObject = new Object();
+        var thisDate = new Date();
         darkSkyObject.summary = [];
-        darkSkyObject.temperature = [];
-        darkSkyObject.apparentTemperature = [];
         darkSkyObject.temperatureHigh = [];
         darkSkyObject.temperatureLow = [];
         darkSkyObject.humidity = [];
         darkSkyObject.windSpeed = [];
         darkSkyObject.windGust = [];
+        darkSkyObject.date = thisDate.getUTCMonth()+'/'+thisDate.getUTCDate()+'/'+thisDate.getUTCFullYear();
         darkSkyObject.summary.push(response.data.currently.summary);
-        darkSkyObject.temperature.push(response.data.currently.temperature);
-        darkSkyObject.apparentTemperature.push(response.data.currently.apparentTemperature);
+        darkSkyObject.temperature = response.data.currently.temperature;
+        darkSkyObject.apparentTemperature = response.data.currently.apparentTemperature;
         darkSkyObject.humidity.push(response.data.currently.humidity);
         darkSkyObject.windSpeed.push(response.data.currently.windSpeed);
         darkSkyObject.windGust.push(response.data.currently.windGust);
@@ -45,7 +48,7 @@ var weatherCall = (addressRequested) => {
             darkSkyObject.windGust.push(response.data.daily.data[i].windGust);
         };
         //STORE RESPONSES
-        console.log(darkSkyObject);
+        processData.newData(darkSkyObject);
     }).catch((e) => {
     //ERROR HANDLING
         if(e.code === 'ENOTFOUND') {
