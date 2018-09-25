@@ -17,7 +17,7 @@ var pushData = (theData) => {
 };
 
 // CHECK NEW PUSH FOR DUPLICATES
-var checkDuplicates = (theDate, sourceData, return1, return2) => {
+var checkDuplicates = (theDate, sourceData) => {
     if (_.isEmpty(sourceData) === true) {
         sourceData = [{}];
     };
@@ -31,11 +31,13 @@ var checkDuplicates = (theDate, sourceData, return1, return2) => {
     return(duplicateReturn);
 };
 
+// REMOVE THIS - NOT NEEDED //
+//////////////////////////////
 //NEW WEATHER DATA
 var newData = (theData) => {
     var weatherSource = pullData();
     var dupFilter = theData.date;
-    var aMatch = checkDuplicates(dupFilter, weatherSource, true, false);
+    var aMatch = checkDuplicates(dupFilter, weatherSource);
     if (aMatch.date === dupFilter){
         console.log('Duplicate entry');
     } else {
@@ -44,9 +46,7 @@ var newData = (theData) => {
     };
     return dupFilter;
 };
-
-// var xyz = {"summary":["Mostly Cloudy","Light rain overnight.","Light rain until afternoon, starting again in the evening.","Partly cloudy throughout the day.","Partly cloudy in the morning.","Mostly cloudy starting in the afternoon.","Mostly cloudy until evening."],"temperatureHigh":[70.37,64.45,63.68,65.94,70.39,72.5],"temperatureLow":[55.09,49.14,44.71,43.15,43.86,45.65],"humidity":[0.57,0.66,0.81,0.8,0.78,0.75,0.7],"windSpeed":[3.36,3.96,6.19,2.11,1.55,1.66,2.07],"windGust":[8.95,18.92,26.07,13.36,7.91,7.18,7.81],"date":"8/22/2018","temperature":68.07,"apparentTemperature":68.07};
-// newData(xyz);
+//////////////////////////////
 
 //DISPLAY ALL WEATHER DATA DATES
 var displayAllDates = () => {
@@ -59,18 +59,19 @@ var displayAllDates = () => {
 };
 
 //DISPLAY ONE WEATHER DATA
-var displayOne = () => {
-    ////////////////////////////////////
+var displayOne = (oneDate) => {
+    var weatherSource = pullData();
+    var bMatch = checkDuplicates(oneDate, weatherSource);
+    if (bMatch.date === oneDate){
+        return bMatch;
+    } else {
+        console.log('No date found');
+    };
 };
 
 //REMOVE ALL WEATHER DATA
 var removeAll = () => {
     fs.writeFileSync('weather-data.json','');
-}
-
-//REMOVE ONE WEATHER DATA
-var removeOne = () => {
-    ////////////////////////////////////
 };
 
 //EXPORT
@@ -81,6 +82,5 @@ module.exports = {
     newData,
     displayAllDates,
     displayOne,
-    removeAll,
-    removeOne
+    removeAll
 }
