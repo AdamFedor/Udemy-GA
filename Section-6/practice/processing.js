@@ -45,9 +45,8 @@ var checkDuplicates = (theDate, sourceData) => {
 var newData = () => {
     var weatherSource = pullData();
     var aMatch = checkDuplicates(dateStamp, weatherSource);
-    console.log('aMatch:', aMatch);
     if (aMatch.date === dateStamp || "null"){
-        console.log('Duplicate entry');
+        return;
     } else {
         weatherSource.push(aMatch);
         pushData(weatherSource);
@@ -55,8 +54,8 @@ var newData = () => {
     return;
 };
 
-//DISPLAY ALL WEATHER DATA DATES
-var displayAllDates = () => {
+//FIND ALL WEATHER DATA DATES
+var findAllDates = () => {
     var weatherSource = pullData();
     var datesFound = [];
     for (var zzz = 0; zzz < weatherSource.length; zzz++) {
@@ -65,8 +64,8 @@ var displayAllDates = () => {
     return(datesFound);
 };
 
-//DISPLAY ONE WEATHER DATA
-var displayOne = (oneDate) => {
+//FIND ONE WEATHER DATA
+var findOne = (oneDate) => {
     var weatherSource = pullData();
     var bMatch = checkDuplicates(oneDate, weatherSource);
     if (bMatch.date === oneDate){
@@ -81,6 +80,26 @@ var removeAll = () => {
     fs.writeFileSync('weather-data.json','');
 };
 
+//DISPLAY TODAY
+var displayToday = (sourceData) => {
+    console.log('Display Today Only');
+    var todayArray = [];
+    todayArray.push(sourceData.summary[0]);
+    todayArray.push(sourceData.temperature);
+    todayArray.push(sourceData.apparentTemperature);
+    todayArray.push(sourceData.humidity[0]);
+    todayArray.push(sourceData.windSpeed[0]);
+    todayArray.push(sourceData.windGust[0]);
+    todayArray.push(sourceData.date);
+    console.log(todayArray);
+};
+
+//DISPLAY ALL
+var displayAll = (sourceData) => {
+    console.log('Display All');
+    
+};
+
 //EXPORT
 module.exports = {
     dateStamp,
@@ -88,7 +107,9 @@ module.exports = {
     checkDuplicates,
     pushData,
     newData,
-    displayAllDates,
-    displayOne,
-    removeAll
+    findAllDates,
+    findOne,
+    removeAll,
+    displayToday,
+    displayAll
 }

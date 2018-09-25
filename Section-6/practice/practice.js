@@ -31,27 +31,26 @@ if (command === 'today'){
     //TODAYS WEATHER
     console.log('========================');
     processData.newData();
-    var readOne = processData.displayOne(processData.dateStamp());
-    console.log(readOne);
-    // ========== display day only [ACTION]
+    var readOne = processData.findOne(processData.dateStamp());
+    processData.displayToday(readOne);
     console.log('========================');
 } else if (command === 'forecast') {
     //WEEKS WEATHER
     console.log('========================');
     processData.newData();
-    var readOne = processData.displayOne(processData.dateStamp());
-    console.log(readOne);
+    var readOne = processData.findOne(processData.dateStamp());
+    processData.displayAll(readOne);
     console.log('========================');
 } else if (command === 'list') {
     //LIST DATES OF CACHE
-    var listAll = processData.displayAllDates(argv.date, argv.timing);
+    var listAll = processData.findAllDates(argv.date, argv.timing);
     console.log('========================');
     console.log(listAll);
     console.log('========================');
 } else if (command === 'read') {
     //READ FROM FILE
     console.log('========================');
-    var readOne = processData.displayOne(argv.date);
+    var readOne = processData.findOne(argv.date);
     console.log(readOne);
     console.log('========================');
 } else {
