@@ -4,12 +4,6 @@ const weather = require('./weather.js');
 const processData = require('./processing');
 
 //COMMAND INPUTS
-//ADD DATE FOR HISTORY PULLS OF INFORMATION PREVIOUSLY COLLECTED
-// const dateOptions = {
-//     describe: 'Day Temperature: today, tomorrow, week',
-//     demand: true,
-//     alias: 'd'
-// };
 const dateGiven = {
     describe: 'Date of cached available options: MM/DD/YYYY, no zeros',
     demand: true,
@@ -18,6 +12,10 @@ const dateGiven = {
 
 //YARGS
 const argv = yargs
+.command('today', 'Todays weather',{
+})
+.command('week', 'Todays weather',{
+})
 .command('list', 'List all days stored in local cache',{
 })
 .command('read','Read out details from a single stored',{
@@ -29,37 +27,33 @@ const argv = yargs
 var command = argv._[0];
 
 //PROCESSING COMMAND
-if (command === 'day'){
-    //PROCESS CALL
-    //READ FROM FILE
-    console.log('--------------');
-    console.log('Weather for a given day');
-    console.log('Day: ', argv.date);
-    console.log('Type: ', argv.type);
-    console.log('--------------');
+if (command === 'today'){
+    //TODAYS WEATHER
+    console.log('========================');
+    processData.newData();
+    var readOne = processData.displayOne(processData.dateStamp());
+    console.log(readOne);
+    // ========== display day only [ACTION]
+    console.log('========================');
 } else if (command === 'forecast') {
-    //PROCESS CALL
-    //READ FROM FILE
-    console.log('--------------');
-    console.log('Weather forecast');
-    console.log('Type: ', argv.type);
-    console.log('--------------');
+    //WEEKS WEATHER
+    console.log('========================');
+    processData.newData();
+    var readOne = processData.displayOne(processData.dateStamp());
+    console.log(readOne);
+    console.log('========================');
 } else if (command === 'list') {
     //LIST DATES OF CACHE
-    var listAll = processData.displayAllDates();
+    var listAll = processData.displayAllDates(argv.date, argv.timing);
+    console.log('========================');
     console.log(listAll);
+    console.log('========================');
 } else if (command === 'read') {
     //READ FROM FILE
-    console.log('--------------');
-    console.log(argv.date);
-    console.log(typeof(argv.date));
+    console.log('========================');
     var readOne = processData.displayOne(argv.date);
     console.log(readOne);
-    console.log('--------------');
+    console.log('========================');
 } else {
     console.log('Not a valid command');
 };
-
-//STORE WEATHER TO DATE - CACHE
-//PULL WEATHER FROM STORED FILE - MINIMIZES CALLS
-//READ OUT WEATHER TO USER ON PAGE

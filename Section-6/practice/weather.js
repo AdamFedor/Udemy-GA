@@ -8,12 +8,7 @@ const keyDark = process.env.DARKSKY;
 
 //WEATHER CALL
 var weatherCall = (addressRequested) => {
-    //NEW DATE STAMP
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1;
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    var thisDate = month + "/" + day + "/" + year;
+    var thisDate = processData.dateStamp();
     //CHECK IF DUP
     var sourceData = processData.pullData();
     var sourceDup = processData.checkDuplicates(thisDate, sourceData);

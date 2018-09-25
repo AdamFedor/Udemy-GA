@@ -1,6 +1,16 @@
 const fs = require('fs');
 const _ = require('lodash');
 
+//NEW DATE STAMP
+const dateStamp = () => {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1;
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    var thisDate = month + "/" + day + "/" + year;
+    return thisDate;
+};
+
 //PULL WEATHER DATA
 var pullData = () => {
     try {
@@ -31,22 +41,19 @@ var checkDuplicates = (theDate, sourceData) => {
     return(duplicateReturn);
 };
 
-// REMOVE THIS - NOT NEEDED //
-//////////////////////////////
 //NEW WEATHER DATA
-var newData = (theData) => {
+var newData = () => {
     var weatherSource = pullData();
-    var dupFilter = theData.date;
-    var aMatch = checkDuplicates(dupFilter, weatherSource);
-    if (aMatch.date === dupFilter){
+    var aMatch = checkDuplicates(dateStamp, weatherSource);
+    console.log('aMatch:', aMatch);
+    if (aMatch.date === dateStamp || "null"){
         console.log('Duplicate entry');
     } else {
-        weatherSource.push(theData);
+        weatherSource.push(aMatch);
         pushData(weatherSource);
     };
-    return dupFilter;
+    return;
 };
-//////////////////////////////
 
 //DISPLAY ALL WEATHER DATA DATES
 var displayAllDates = () => {
@@ -76,6 +83,7 @@ var removeAll = () => {
 
 //EXPORT
 module.exports = {
+    dateStamp,
     pullData,
     checkDuplicates,
     pushData,
