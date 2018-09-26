@@ -9,12 +9,19 @@ const dateGiven = {
     demand: true,
     alias: 'd'
 };
+const zip = {
+    describe: 'zip code or address of location',
+    demand: true,
+    alias: 'z'
+};
 
 //YARGS
 const argv = yargs
 .command('today', 'Todays weather',{
+    zipCode: zip
 })
 .command('week', 'Todays weather',{
+    zipCode: zip
 })
 .command('list', 'List all days stored in local cache',{
 })
@@ -30,8 +37,9 @@ var command = argv._[0];
 if (command === 'today'){
     //TODAYS WEATHER
     console.log('========================');
-    weather.weatherCall('98272');
-    var readOne = processData.findOne(processData.dateStamp());
+    // weather.weatherCall(argv.zipCode);
+    var weather = yield.wait.for(weather.weatherCall(argv.zipCode));
+    // var readOne = processData.findOne(processData.dateStamp());
     // processData.displayToday(readOne);
 
     // FIX --> run first time it pulls the data, run the second time it displays the data

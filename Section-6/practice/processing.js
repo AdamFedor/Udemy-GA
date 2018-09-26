@@ -28,7 +28,7 @@ var pushData = (theData) => {
 };
 
 // CHECK NEW PUSH FOR DUPLICATES
-var checkDuplicates = (theDate, sourceData) => {
+var checkDuplicates = (theDate, sourceData, zipCode) => {
     if (_.isEmpty(sourceData) === true) {
         sourceData = [{}];
     };
@@ -41,21 +41,6 @@ var checkDuplicates = (theDate, sourceData) => {
     }
     return(duplicateReturn);
 };
-
-// //NEW WEATHER DATA
-// var newData = () => {
-//     var weatherSource = pullData();
-//     var dateNow = dateStamp();
-//     // var aMatch = checkDuplicates(dateNow, weatherSource);
-//     if (aMatch.date === dateNow){
-//         console.log('duplicate');
-//         return;
-//     } else {
-//         weatherSource.push(aMatch);
-//         pushData(weatherSource);
-//     };
-//     return;
-// };
 
 //FIND ALL WEATHER DATA DATES
 var findAllDates = () => {
@@ -88,19 +73,22 @@ var displayToday = (sourceData) => {
     console.log('Display Today Only');
     var todayArray = [];
     todayArray.push(sourceData.summary[0]);
-    todayArray.push(sourceData.temperature);
-    todayArray.push(sourceData.apparentTemperature);
+    todayArray.push(sourceData.temperatureHigh[0]);
+    todayArray.push(sourceData.temperatureLow[0]);
     todayArray.push(sourceData.humidity[0]);
     todayArray.push(sourceData.windSpeed[0]);
     todayArray.push(sourceData.windGust[0]);
+    todayArray.push(sourceData.temperatureNow);
+    todayArray.push(sourceData.apparentTemperature);
     todayArray.push(sourceData.date);
+    todayArray.push(sourceData.zip);
     console.log(todayArray);
 };
 
 //DISPLAY ALL
 var displayAll = (sourceData) => {
     console.log('Display All');
-    
+    // loop today function and combine
 };
 
 //EXPORT
