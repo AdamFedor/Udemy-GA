@@ -30,16 +30,19 @@ var command = argv._[0];
 if (command === 'today'){
     //TODAYS WEATHER
     console.log('========================');
-    processData.newData();
+    weather.weatherCall('98272');
     var readOne = processData.findOne(processData.dateStamp());
-    processData.displayToday(readOne);
+    // processData.displayToday(readOne);
+
+    // FIX --> run first time it pulls the data, run the second time it displays the data
+    
     console.log('========================');
 } else if (command === 'forecast') {
     //WEEKS WEATHER
     console.log('========================');
-    processData.newData();
-    var readOne = processData.findOne(processData.dateStamp());
-    processData.displayAll(readOne);
+    // processData.newData();
+    // var readOne = processData.findOne(processData.dateStamp());
+    // processData.displayAll(readOne);
     console.log('========================');
 } else if (command === 'list') {
     //LIST DATES OF CACHE

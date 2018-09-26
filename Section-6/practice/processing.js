@@ -2,7 +2,7 @@ const fs = require('fs');
 const _ = require('lodash');
 
 //NEW DATE STAMP
-const dateStamp = () => {
+const dateStamp = () => { // currently not adjusted to timezone
     var dateObj = new Date();
     var month = dateObj.getUTCMonth() + 1;
     var day = dateObj.getUTCDate();
@@ -10,6 +10,7 @@ const dateStamp = () => {
     var thisDate = month + "/" + day + "/" + year;
     return thisDate;
 };
+dateStamp();
 
 //PULL WEATHER DATA
 var pullData = () => {
@@ -41,18 +42,20 @@ var checkDuplicates = (theDate, sourceData) => {
     return(duplicateReturn);
 };
 
-//NEW WEATHER DATA
-var newData = () => {
-    var weatherSource = pullData();
-    var aMatch = checkDuplicates(dateStamp, weatherSource);
-    if (aMatch.date === dateStamp || "null"){
-        return;
-    } else {
-        weatherSource.push(aMatch);
-        pushData(weatherSource);
-    };
-    return;
-};
+// //NEW WEATHER DATA
+// var newData = () => {
+//     var weatherSource = pullData();
+//     var dateNow = dateStamp();
+//     // var aMatch = checkDuplicates(dateNow, weatherSource);
+//     if (aMatch.date === dateNow){
+//         console.log('duplicate');
+//         return;
+//     } else {
+//         weatherSource.push(aMatch);
+//         pushData(weatherSource);
+//     };
+//     return;
+// };
 
 //FIND ALL WEATHER DATA DATES
 var findAllDates = () => {
@@ -106,7 +109,6 @@ module.exports = {
     pullData,
     checkDuplicates,
     pushData,
-    newData,
     findAllDates,
     findOne,
     removeAll,

@@ -54,8 +54,9 @@ var weatherCall = (addressRequested) => {
                 darkSkyObject.windGust.push(response.data.daily.data[i].windGust);
             };
             //STORE RESPONSES
+            sourceData.push(darkSkyObject);
+            processData.pushData(sourceData);
             console.log('New entry cached');
-            processData.newData(darkSkyObject);
         }).catch((e) => {
         //ERROR HANDLING
             if (e.code === 'ENOTFOUND') {
