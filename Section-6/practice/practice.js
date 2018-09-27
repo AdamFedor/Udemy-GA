@@ -37,19 +37,16 @@ var command = argv._[0];
 if (command === 'today'){
     //TODAYS WEATHER
     console.log('========================');
-        var useData = async () => {
-        try {
-            await new Promise(resolve => {weather.weatherCall(argv.zipCode);});
-        } catch(e) {
-            console.log(e);
-        };
-    };
-    useData();
-    // weather.weatherCall(argv.zipCode);
-    // var readOne = processData.findOne(processData.dateStamp());
-    // processData.displayToday(readOne);
-            // FIX --> run first time it pulls the data, run the second time it displays the data
-    console.log('========================');
+    // ADD A CALLBACK TO WEATHERCALL - THAT WILL MAKE THE REST WAIT
+    var duplicateResponse = processData.dateDup(argv.zipCode);
+    console.log(duplicateResponse);
+    weather.weatherCall(argv.zipCode);
+    // var doIt = () => {
+    //     var readOne = processData.findOne(processData.dateStamp());
+    //     processData.displayToday(readOne);
+    //     console.log('========================');
+    // }
+    // setTimeout(doIt, 1500);
 } else if (command === 'forecast') {
     //WEEKS WEATHER
     console.log('========================');

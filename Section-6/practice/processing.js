@@ -12,6 +12,25 @@ const dateStamp = () => { // currently not adjusted to timezone
 };
 dateStamp();
 
+//IS DATE DUPLICATE
+const dateDup = (addressRequested) => {
+    console.log(addressRequested);
+    if (addressRequested.length === 5) {
+        var thisDate = dateStamp();
+        var sourceData = pullData();
+        var sourceDup = checkDuplicates(thisDate, sourceData, addressRequested);
+        if (sourceDup.date === thisDate){
+            return true;
+        } else {
+            return false;
+        };
+    } else {
+        console.log('not 5 digits');
+        // Need to run Google on identifying zip code
+        return false;
+    }
+};
+
 //PULL WEATHER DATA
 var pullData = () => {
     try {
@@ -94,6 +113,7 @@ var displayAll = (sourceData) => {
 //EXPORT
 module.exports = {
     dateStamp,
+    dateDup,
     pullData,
     checkDuplicates,
     pushData,
