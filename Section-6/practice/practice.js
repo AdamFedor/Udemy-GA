@@ -37,13 +37,18 @@ var command = argv._[0];
 if (command === 'today'){
     //TODAYS WEATHER
     console.log('========================');
+        var useData = async () => {
+        try {
+            await new Promise(resolve => {weather.weatherCall(argv.zipCode);});
+        } catch(e) {
+            console.log(e);
+        };
+    };
+    useData();
     // weather.weatherCall(argv.zipCode);
-    var weather = yield.wait.for(weather.weatherCall(argv.zipCode));
     // var readOne = processData.findOne(processData.dateStamp());
     // processData.displayToday(readOne);
-
-    // FIX --> run first time it pulls the data, run the second time it displays the data
-    
+            // FIX --> run first time it pulls the data, run the second time it displays the data
     console.log('========================');
 } else if (command === 'forecast') {
     //WEEKS WEATHER

@@ -8,7 +8,7 @@ const keyGeo = process.env.WEATHERKEY;
 const keyDark = process.env.DARKSKY;
 
 //WEATHER CALL
-var weatherCall = (addressRequested, callback) => {
+var weatherCall = (addressRequested) => {
     var thisDate = processData.dateStamp();
     //CHECK IF DUP
     var sourceData = processData.pullData();
@@ -24,10 +24,11 @@ var weatherCall = (addressRequested, callback) => {
         var encodedAddress = encodeURIComponent(addressRequested);
         var geocodeURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${keyGeo}`
         //GEOCODE
-        axios.get(geocodeURL).then((response, zip) => {
+        axios.get(geocodeURL).then((response) => {
             if (response.data.status === 'ZERO RESULTS') {
                 throw new Error('Unable to find address');
             };
+            console.log('got here');///////////////////////////////////////
             var lat = response.data.results[0].geometry.location.lat;
             var lng = response.data.results[0].geometry.location.lng;
             storeIt.push(response.data.results[0].address_components[0].short_name);
@@ -77,7 +78,6 @@ var weatherCall = (addressRequested, callback) => {
             };
         });
     };
-    callback();
 };
 
 //EXPORT
