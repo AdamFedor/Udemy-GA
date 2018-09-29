@@ -1,0 +1,577 @@
+/******************************************/
+/*                 Setup                  */
+/******************************************/
+
+/* Box Model Hack */
+* {
+  -moz-box-sizing: border-box; /* Firexfox */
+  -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
+  box-sizing: border-box; /* IE */
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.zeroOut {
+  margin: 0;
+  padding: 0;
+}
+
+/******************************************/
+/*              Base Layout               */
+/******************************************/
+
+body {
+  font-size: 20px;
+  line-height: 1.2;
+  color: #000000;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.logo {
+  font-size: 1.8em;
+  font-weight: 800;
+}
+
+.centered {
+  text-align: center;
+}
+
+.floatLeft, .indecisiveFloat {
+  float: left;
+  margin-right: 25px;
+}
+
+.floatRight {
+  float: right;
+}
+
+.separateAdd {
+  border-bottom: 2px solid black;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.linkFormat:hover {
+  color: #00a1ff;
+}
+
+/******************************************/
+/*                Buttons                 */
+/******************************************/
+
+.btn{
+     color: #ffffff;
+     border-color: #357ebd;
+     padding-left: 40px;
+     padding-right: 40px;
+     margin-bottom: 0;
+     font-size: 14px;
+     font-weight: normal;
+     text-align: center;
+     white-space: nowrap;
+     vertical-align: middle;
+     cursor: pointer;
+     border: 1px solid transparent;
+     border-radius: 4px;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     -o-user-select: none;
+     user-select: none;
+}
+
+.yellowButton:hover, .yellowButton:focus {
+  color: yellow;
+}
+
+.blueButton {
+   background-color: #428bca;
+   padding-top: 6px;
+   padding-bottom: 6px;
+   margin-top: 5px;
+}
+
+.orangeButton {
+   background-color: #e09408;
+   padding-top: 16px;
+   padding-bottom: 16px;
+}
+
+.grayButton {
+  color: #000000;
+  background-color: #d3d3d3;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+
+.muteButton {
+  display: none;
+}
+
+.yellowButton {
+  border-color: #f9e42e;
+  background-color: black;
+  margin-top: 20px;
+}
+
+/******************************************/
+/*                Tooltips                */
+/******************************************/
+
+.roundTooltip {
+  padding: 0 5px;
+  margin-bottom: 1px;
+  margin-top: 1px;
+  font-size: .7em;
+  font-weight: 900;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.blueNotification {
+  color: #ffffff;
+  background-color: #3333ff;
+}
+
+.yellowCaution {
+  color: #000000;
+  background-color: #ffcc00;
+  padding: 0 6.5px;
+}
+
+.redWarning {
+  color: #ffffff;
+  background-color: #b30838;
+}
+
+.tooltip-inner {
+    text-align: left;
+}
+
+ .tooltip.right .tooltip-arrow {
+  border-right-color: #202020;
+}
+
+.tooltip-inner {
+  background-color:#202020;
+}
+
+.muteTooltip {
+  display: none;
+}
+
+/******************************************/
+/*                 Header                 */
+/******************************************/
+
+header {
+  background-color: #000000;
+  background-image: url('../img/header_img.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 25px 0;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+}
+
+header .logo {
+  color: #fff;
+  float: left;
+  text-shadow: 1px 1px 2px black;
+}
+
+header nav {
+  float: right;
+  margin-top: 7px;
+  display: block;
+}
+
+header nav ul li {
+  display: inline-block;
+  margin: 0 0 0 40px;
+  font-size: 1em;
+}
+
+header a {
+    border: 2px solid #f9e42e;
+    /*background-color: #2D2B2E;*/
+    background-color: rgba(45,43,46,.8);
+}
+
+header a, footer a {
+  padding: 5px;
+  color: #f9e42e;
+}
+
+/******************************************/
+/*                Section                 */
+/******************************************/
+
+section {
+  padding: 25px 0;
+}
+section p {
+  margin: 5px 0 35px 0;
+  font-size: .9em;
+}
+
+/******************************************/
+/*                Article                 */
+/******************************************/
+
+.selections {
+  width: 400px;
+  float: left;
+  height: 460px;
+  background: white;
+  border: 1px black solid;
+  margin-bottom: 50px;
+}
+
+.resultsSizeLeft {
+  width: 35%;
+  display: inline-block;
+}
+.resultsSizeRight {
+  width: 65%;
+  display: inline-block;
+}
+
+.resultsRight {
+  height: 380px;
+  width: 49.4%;
+  display: inline-block;
+}
+
+.textWrap {
+  margin-left: 25px;
+  text-indent: -25px;
+}
+
+.textWrapNotTooltip {
+  margin-left: 0;
+  text-indent: 0;
+}
+
+.amplifierImg {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.speakerImg {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.indentResultDetails {
+  padding-left: 23px;
+}
+
+.font8em {
+  font-size: .8em;
+}
+
+.amplifier {
+  float: left;
+  margin-left: 5%;
+}
+
+.speaker {
+  float: right;
+  margin-right: 5%;
+}
+
+.imgPlaceHolder {
+  width: 90%;
+  height: 350px;
+  border: none;
+  margin-left: 5%;
+}
+
+.defaultspeaker {
+  background-image: url('../img/default_speaker.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.defaultamp {
+  background-image: url('../img/default_amp.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+h3 {
+  margin: 10px 0;
+  padding: 0;
+}
+
+h4 {
+  margin: 0;
+  padding: 6px 0;
+  font-size: .8em;
+}
+
+select {
+  margin-top: 15px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+/******************************************/
+/*                 Footer                 */
+/******************************************/
+
+footer {
+  background: black;
+  margin-top: 20px;
+  box-shadow: 0px 500px 0px 500px #000;
+}
+
+footer p {
+  margin: 0;
+  padding: 25px 0;
+  color: white;
+  font-size: .8em;
+}
+
+/******************************************/
+/*           Breakpoint: 1200px           */
+/******************************************/
+
+@media only screen and (max-width: 1201px) {
+  /*****************Basic******************/
+  .container {
+    padding-left: 3%;
+    padding-right: 3%;
+    width: 100%;
+  }
+
+  .resultsRight {
+    height: 300px;
+    margin-top: 0;
+  }
+}
+
+/******************************************/
+/*           Breakpoint: 1024px           */
+/******************************************/
+
+@media only screen and (max-width: 1024px) {
+  /*****************Basic******************/
+  .selections {
+    width: 49%;
+    height: 400px;
+  }
+
+  /****************Section*****************/
+  .amplifier {
+    margin-left: 0;
+  }
+
+  .speaker {
+    margin-right: 0;
+  }
+
+  /*****************Article****************/
+  .imgPlaceHolder {
+    height: 250px;
+  }
+
+  .btn{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .resultsSizeLeft{
+    width: 40%;
+  }
+
+  .resultsSizeRight {
+    width: 55%;
+  }
+
+  .resultsRight {
+    height: 220px;
+    width: 100%;
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+/******************************************/
+/*           Breakpoint: 845px            */
+/******************************************/
+
+@media only screen and (max-width: 845px) {
+  .selections {
+    width: 100%;
+  }
+  /****************Section*****************/
+  section p {
+    font-size: .8em;
+    margin-bottom: 25px;
+  }
+
+  article {
+    width: 100%;
+  }
+
+  .amplifier, .speaker {
+    float: none;
+    display: block;
+  }
+
+  .amplifier {
+    margin-bottom: 25px;
+  }
+
+  /******************h2********************/
+  h2 {
+    font-size: 1.4em;
+    margin: 15px 0;
+  }
+
+  /*****************Button*****************/
+  .orangeButton {
+    float: none;
+    display: block;
+    margin-top: 25px;
+    Clear: both;
+    width: 50%;
+    margin-left: 25%;
+  }
+
+  .grayButton {
+    padding: 15px 0;
+    width: 60%;
+  }
+
+  .blueButton {
+    width: 200px;
+    padding: 15px 0;
+  }
+
+  .indecisiveFloat {
+    float: right;
+  }
+
+  .example:after { /* to be replaced with JS */
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+    width: 100%;
+  }
+  ul {
+    padding-left: 0;
+  }
+}
+
+/******************************************/
+/*           Breakpoint: 640px            */
+/******************************************/
+
+@media only screen and (max-width: 640px) {
+  /***************Base Layout**************/
+  .container {
+    padding: 0 5px;
+  }
+
+  .logo {
+    display: block;
+  }
+
+  .orangeButton {
+    padding: 15px 0;
+    width: 100%;
+    margin-left: 0;
+  }
+  .blueButton {
+    width: 170px;
+    margin: 0;
+    font-size: .6em;
+  }
+  .btn {
+       padding-left: 20;
+       padding-right: 20;
+  }
+  ul {
+    padding-right: 10;
+  }
+}
+
+/******************************************/
+/*           Breakpoint: 480px            */
+/******************************************/
+
+@media only screen and (max-width: 480px) {
+  .logo {
+    font-size: 1.5em;
+  }
+  header nav ul li {
+    margin-left: 0;
+  }
+  header {
+    padding: 0;
+  }
+
+  .btn {
+       padding-left: 10;
+       padding-right: 10;
+  }
+  header nav {
+    margin-top: 0;
+  }
+  .resultsSizeRight {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+  .resultsSizeLeft {
+    width: 100%;
+  }
+  .resultsRight {
+    width: 100%;
+  }
+}

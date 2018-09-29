@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+.clearfix:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    border-bottom: 2px solid black;
+}
+
+main {
+    margin: 0 -1%;
+}
+
+.gallery-item {
+    float: left;
+    width: calc(25% - (2 * 1%));
+    margin: 0 1%;
+}
+
+.frame {
+    height: 0;
+    position: relative;
+    padding-bottom: 100%;
+    overflow: hidden;
+}
+
+.gallery-item img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: transform 250ms;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+}
+
+.gallery-item img:hover{
+    transform: translateX(-50%) translateY(-50%) scale(1.2);
+}

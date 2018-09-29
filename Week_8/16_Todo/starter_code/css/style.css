@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+}
+
+.clearfix:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+
+body {
+    font-family: 'Bellefair', serif;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Plaster', cursive;
+}
+
+h1 {
+    font-size: 2em;
+    border-bottom: .2rem solid black;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#tasks {
+  min-height: 3rem;
+}
+
+.task {
+    font-size: 1.4em;
+    margin: 1rem 0;
+    padding: 1rem 0;
+    border-bottom: 0.1rem solid black;
+}
+
+.task-text {
+    display: block;
+    float: left;
+    max-width: 80%;
+}
+
+.task-done .task-text {
+  text-decoration: line-through;
+}
+
+.task:last-child{
+    border-bottom: none;
+}
+
+.controls {
+    float: right;
+}
+
+.left {
+    float: left;
+    margin-right: 1rem;
+}
+
+.move-up, .move-down {
+    width: 100%;
+}
+
+.complete {
+    font-family: sans-serif;
+    height: 100%;
+    font-size: 2em;
+    float: right;
+}
+
+
+form input,
+form button {
+    font-size: 1.6em;
+    line-height: 1;
+    float: left;
+}
+
+#new-task {
+    width: 75%;
+    margin-right: 5%;
+}
+
+form input,
+form button {
+    font-family: 'Bellefair', serif;
+    font-size: 1.6em;
+}
+
+form button {
+    width: 20%;
+}

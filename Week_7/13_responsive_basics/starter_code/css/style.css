@@ -1,0 +1,80 @@
+
+*{
+  box-sizing: border-box;
+}
+.clearfix:after{
+  clear: both;
+  content:'';
+  display: block;
+}
+
+header,
+nav a,
+.hamburder,
+.hero,
+.col-3,
+footer,
+.col-4 {
+  border: 2px solid black;
+}
+
+.container,
+header {
+  padding: 10px;
+}
+
+header a{
+  display: block;
+  float: left;
+  height: 50px;
+  width: 100px;
+  margin-right: 5px;
+}
+
+.hamburger{
+  height: 50px;
+  width: 65px;
+  float: right;
+  padding: 0 15px;
+  display: none;
+}
+
+nav{
+  float: left;
+}
+
+.line{
+  height: 2px;
+  background: #000;
+  margin-top: 10px;
+}
+
+.hero{
+  height: 150px;
+}
+
+.col-3 {
+  height: 125px;
+  width: calc(85%/4);
+  float: left;
+  margin: 10px 5% 10px 0;
+}
+
+.col-3:last-child {
+  margin-right: 0;
+}
+
+footer{
+  padding: 15px;
+}
+
+.col-4 {
+  height: 125px;
+  float: left;
+  width: calc(90%/3);
+  margin-right: 5%;
+}
+
+.col-4:last-child{
+  margin-right: 0;
+}

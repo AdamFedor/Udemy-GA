@@ -1,0 +1,72 @@
+*{
+  box-sizing: border-box;
+}
+
+.clearfix:after{
+  clear: both;
+  content:'';
+  display: block;
+}
+
+body {
+  padding: 0 10px;
+}
+
+header,
+nav a,
+.hamburger,
+.hero,
+.col-3,
+footer,
+.col-4 {
+  border: 2px solid black;
+}
+
+header {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+nav {
+  display: none;
+}
+
+.hamburger {
+  height: 50px;
+  width: 65px;
+  float: right;
+  padding: 0 15px;
+}
+
+.line {
+  height: 2px;
+  background: #000;
+  margin-top: 10px;
+}
+
+.hero {
+  height: 150px;
+}
+
+.col-3 {
+  margin-top: 5px;
+  height: 125px;
+}
+
+.col-3:last-child {
+  display: none;
+}
+
+footer {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.col-4 {
+  height: 130px;
+  margin-top: 5px;
+}
+
+.col-4:first-child {
+  margin-top: 0;
+}

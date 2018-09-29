@@ -1,0 +1,99 @@
+/******************************************
+/* SETUP
+/*******************************************/
+
+/* Box Model Hack */
+* {
+  -moz-box-sizing: border-box; /* Firexfox */
+  -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
+  box-sizing: border-box; /* IE */
+}
+
+/* Clear fix hack */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.alignright {
+  float: right;
+  padding: 0 0 10px 10px; /* note the padding around a right floated image */
+}
+
+.alignleft {
+  float: left;
+  padding: 0 10px 10px 0; /* note the padding around a left floated image */
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+  color: #000000;
+  font-size: 26px;
+  line-height: 1.4;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+a {
+  text-decoration: none;
+}
+span {
+  display: inline-block;
+}
+div {
+  font-size: 12px;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+/* Center the container */
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.borderBottom{
+  border-bottom: 2px gray solid;
+}
+.miniMe{
+  border-radius: 5px;
+  font-weight: 800;
+  padding: 0 5px;
+  font-size: 15px;
+  width: 20px;
+  text-align: center;
+  display: block;
+  margin: 0 2px 0 0;
+}
+.bigX {
+  font-size: 40px;
+}
+.submitter {
+  border-radius: 5px;
+  font-weight: 800;
+  padding: 10px 0;
+  width: 21%;
+  font-size: 1.08em;
+  text-align: center;
+  display: block;
+  margin: 0 0 0 2%;
+  float: right;
+}
+#newToDo {
+  width: 76%;
+  margin: 0;
+  float: left;
+  padding: 10px 0;
+}

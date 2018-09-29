@@ -1,0 +1,296 @@
+/*
+Project Name: Relaxr
+Client: Self
+Author: Adam Fedor
+Developer @GA in SEA
+*/
+
+
+/******************************************
+/* SETUP
+/*******************************************/
+
+/* Box Model Hack */
+* {
+     -moz-box-sizing: border-box; /* Firexfox */
+     -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
+     box-sizing: border-box; /* IE */
+}
+
+/* Clear fix hack */
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.alignright {
+  float: right;
+  padding: 0 0 10px 10px; /* note the padding around a right floated image */
+}
+
+.alignleft {
+  float: left;
+  padding: 0 10px 10px 0; /* note the padding around a left floated image */
+}
+
+/******************************************
+/* BASE STYLES - changed from basic spec for appearance and experimentation.
+/*******************************************/
+#containerID {
+  margin: auto;
+  text-align: center;
+}
+body {
+     color: #000;
+     font-size: 12px;
+     line-height: 1.4;
+     font-family: 'Open Sans', sans-serif;
+     margin: 0;
+     color: #033048;
+}
+body > div {
+       background: #efefee;
+}
+header {
+  background: #033048;
+}
+h1 {
+  color: #fff;
+  float: left;
+  margin: 3% auto;
+  overflow: auto;
+}
+article {
+  border-bottom: 1px solid black;
+  text-align: left;
+}
+footer {
+  background: #333333;
+  color: #fff;
+}
+footer > h2 {
+  color: #f9e42e;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+footer > p {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+section {
+  width: 73%;
+  margin-right: 1%;
+  float: left;
+}
+aside {
+  width: 26%;
+  float: right;
+  text-align: left;
+}
+aside > h3:first-child {
+  padding-left: 1.5%;
+}
+h3 {
+  font-size: 20px;
+  margin-bottom: 5%;
+}
+ul {
+  list-style: none;
+  padding-left: 3%;
+  margin: 0;
+}
+a:hover {
+  color: blue;
+}
+li a {
+  text-decoration: none;
+  color: #033048;
+  font-weight: 100;
+  font-size: 14px;
+}
+article img, aside img {
+  width: 100%;
+}
+div > .button {
+  background: #033048;
+  color: #fff;
+  font-weight: 500;
+  font-size: 25px;
+  padding: 14.5px 0;
+  margin: 1.5% auto;
+  display: block;
+}
+article > h2 {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  margin-bottom: 1.5%;
+}
+article > p::first-letter {
+  font-size: 32px;
+  float: left;
+}
+article > p {
+  font-weight: 100;
+  margin-bottom: 0;
+  color: #5b5b5b;
+}
+article:last-child {
+  margin-bottom: 10px;
+}
+aside > p {
+  margin: 0;
+  font-weight: 100;
+}
+aside > img { /*Use a background image for the headers*/
+  margin-top: 40px;
+}
+header nav {
+  color: #f9e42e;
+  float: right;
+  margin: 0 2% 0 2%;
+}
+.navLinks {
+  text-decoration: none;
+  color: #ffee00;
+  font-size: 14px;
+  padding-right: 10px;
+}
+.navLinks:last-child {
+  padding-right: 0;
+}
+.yellow {
+  background: #f9e42e;
+  overflow: auto;
+}
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+.logo {
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 50px;
+    display: block;
+}
+.button {
+  border-style: none;
+  border-radius: 6px;
+  width: 300px;
+}
+.moreLink {
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration: none;
+  color: #033048;
+  font-family: 'Roboto', sans-serif;
+}
+.rightLink {
+  text-align: right;
+  margin: 25px 0 15px 0;
+}
+
+/******************************************
+/* Nav break - just playing around with it.
+/*******************************************/
+
+@media (min-width:531px){
+  header nav {
+    color: #f9e42e;
+    float: right;
+    margin: 45px 2% 0 2%;
+  }
+}
+
+/******************************************
+/* 768 break
+/*******************************************/
+
+@media (min-width:768px){
+  #containerID {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+  footer {
+    overflow: auto;
+  }
+  footer h2 {
+    padding: 1% 0 0 0;
+    margin: 0 0 1% 0;
+  }
+  footer img {
+    margin: 0 2.8%;
+  }
+  footer p {
+    font-size: 16px;
+    margin: 1% 0 0 0;
+    padding: 0 0 1% 0;
+  }
+  section {
+    width: 72%;
+    margin-right: 2%;
+  }
+  article > h2 {
+    font-size: 26px;
+    font-weight: 500;
+  }
+  article:last-child {
+    margin-bottom: 40px;
+  }
+  .navLinks {
+    font-size: 16px;
+    padding-right: 25px;
+    padding-right: 20px;
+  }
+  header nav {
+    margin: 8%;
+  }
+}
+
+/******************************************
+/* 1024 break
+/*******************************************/
+
+@media (min-width: 1024px){
+  #containerID {
+    max-width: 1200px;
+    min-width: 825px;
+    margin: auto;
+    text-align: center;
+  }
+  footer > h2 {
+    padding: 5% 0 0 0;
+    margin: 0 0 5% 0;
+  }
+  footer > img {
+    margin: 0 2.8%;
+  }
+  footer > p {
+    font-size: 16px;
+    margin: 7% 0 0 0;
+    padding: 0 0 1% 0;
+  }
+  article > h2 {
+    font-size: 32px;
+    font-weight: 500;
+  }
+  article:last-child {
+    margin-bottom: 80px;
+  }
+  .navLinks {
+    font-size: 18px;
+    padding-right: 30px;
+  }
+  header nav {
+    margin: 6%;
+  }
+}

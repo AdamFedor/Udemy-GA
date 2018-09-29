@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+.clearfix:after {
+    content: ''; /* puts an inline element there */
+    clear: both;
+    display: block; /* now puts a block element there */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    border-bottom: 2px solid black;
+}
+
+main {
+    margin: 0 -1%;
+}
+
+.gallery-item {
+  float: left;
+  width: calc(25% - (2 * 1%));
+  margin: 0 1%;
+}
+
+.frame {
+  height: 0;
+  position: relative;
+  padding-bottom: 100%;
+  overflow: hidden; /* nothing overflows past this frame */
+}
+
+.gallery-item img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: transform 250ms;
+  transform: translateX(-50%) translateY(-50%); /*this shifts it over from center to top left. If start and center is middle, then 50% over is left. For example. With the mix of position absolute and others */
+  width: 100%;
+}
+
+.gallery-item img:hover{
+  transform: translateX(33%) translateY(80%) scale(5.2); /* can do this in console selecting under styles :hover to know how it looks when hovered. */
+}

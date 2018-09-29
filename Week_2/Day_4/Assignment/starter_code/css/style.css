@@ -1,0 +1,193 @@
+/*
+Project Name: Blank Template
+Client: Your Client
+Author: Your Name
+Developer @GA in NYC
+*/
+
+
+/******************************************
+/* SETUP
+/*******************************************/
+
+/* Box Model Hack */
+* {
+     -moz-box-sizing: border-box; /* Firexfox */
+     -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
+     box-sizing: border-box; /* IE */
+}
+
+/* Clear fix hack */
+/*.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.alignright {
+  float: right;
+  padding: 0 0 10px 10px;
+}
+
+.alignleft {
+  float: left;
+  padding: 0 10px 10px 0;
+}
+*/
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+     color: #000;
+     line-height: 1.4;
+     font-family: 'Open Sans', sans-serif;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+/*  Note:
+    spec details have been changed to replicate image of assignment */
+
+#container {
+  max-width: 1200px;
+  min-width: 825px;
+  margin: auto;
+  text-align: center;
+}
+header{
+  color: #fff;
+  background-image: url(../images/header_bg.jpg);
+  background-size: cover;
+  background-position: top;
+  padding-bottom: 30%;
+}
+header h1{
+  text-align: left;
+  margin: 0 0 0 0;
+  padding: 20px 0 0 60px;
+}
+header h2{
+  font-weight: 500;
+  font-size: 50px;
+  margin: 0 0 0 0;
+  padding: 100px 0 72px 0;
+}
+header .button{
+  background: #f9e42e;
+  color: #033048;
+  font-weight: 500;
+  font-size: 30px;
+  padding: 11.5px 60px;
+}
+p{
+  margin: 10px 0 0 0;
+}
+footer {
+  background: #333333;
+  color: #fff;
+  height: 350px;
+}
+footer h2{
+  color: #f9e42e;
+  padding: 50px 0 0 0;
+  margin: 0 0 50px 0;
+}
+footer img{
+  margin: 0 30px;
+}
+footer p{
+  font-size: 16px;
+  margin: 85px 0 0 0;
+}
+section{
+  background: #f0efef;
+  color: #606161;
+  font-weight: 100;
+  font-size: 25px;
+  height: 600px;
+  overflow: auto;
+  text-align: left;
+}
+section h2{
+  color: #033048;
+  font-weight:500;
+}
+section p, section li{
+  text-align: left;
+}
+section + div {
+  background-image: url(../images/header_bg.jpg);
+  background-size: 250%;
+  background-position: bottom;
+  height: 390px;
+  color: #fff;
+  font-size: 37px;
+  font-weight: 100;
+  padding: 0 0 0 0;
+  overflow:auto;
+}
+section > div{
+  width: 600px;
+  margin: 75px 0 0 110px;
+}
+div > .button{
+  background: #033048;
+  color: #fff;
+  margin: 27.5px 0 0 0;
+  font-weight: 500;
+  font-size: 25px;
+  padding: 14.5px 60px;
+}
+ul{
+  margin: 50px 0 0 0;
+}
+li{
+  margin: 10px 0 0 0;
+}
+.button{
+  border-style: none;
+  border-radius: 6px;
+}
+.logo{
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 50px;
+}
+.thinFont{
+  font-weight: 100;
+  font-size: 24px;
+}
+.boldFont{
+  font-weight: 700;
+  font-size: 40px;
+}
+.yellow{
+  background: #f9e42e;
+  height: 120px;
+}
+.italicQuote{
+  font-style: italic;
+  font-size: 38px;
+  font-weight: 100px;
+  margin: 50px 0 0 0;
+}
+.quotes{
+  width: 720px;
+}
+.smallBullets{
+  width: 450px;
+  margin: 0 0 0 50px;
+}
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
