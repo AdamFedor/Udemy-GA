@@ -1,0 +1,100 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.container > h1 {
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.clearfix:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.exercise{
+    margin-bottom: 20px;
+}
+
+.exercise > div{
+    padding: 10px;
+    background: #efefef;
+    border: 1px solid black;
+}
+
+.outer {
+    background: #ccc;
+}
+
+/* Exercise One */
+
+.one .outer{
+    padding: 15px;
+}
+
+.one  .left{
+    float: left;
+    width: 30%;
+    height: 100px;
+    background: red;
+    margin-bottom: 15px;
+}
+
+.one .right {
+    float: right;
+    width: 80%;
+    height: 100px;
+    background: yellow;
+}
+
+/* Exercise Two */
+
+.two .outer{
+    overflow: auto;
+}
+
+.two .inner {
+    height: 100px;
+    width: 20%;
+    background: blue;
+    margin: 10px auto;
+}
+
+/* Exercise Three */
+
+.three .outer{
+    /* try turning this off. What happens? */
+    overflow: auto;
+}
+
+.three .inner{
+    height: 100px;
+    width: 40%;
+    background: green;
+    margin: 10px;
+    float: right;
+}
+
+/* Exercise Four */
+.four .inner {
+    width: 33%;
+    float: left;
+    padding: 15px;
+    border-right: 1px solid black;
+}
+
+.four .inner:last-child{
+    border-right: none;
+}

@@ -1,0 +1,82 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.container > h1 {
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.clearfix:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.exercise{
+    margin-bottom: 20px;
+}
+
+.exercise > div{
+    padding: 10px;
+    background: #efefef;
+    border: 1px solid black;
+}
+
+.outer {
+    background: #ccc;
+}
+
+/* Exercise One */
+
+.one .outer{
+
+}
+
+.one  .left{
+
+}
+
+.one .right {
+
+}
+
+/* Exercise Two */
+
+.two .outer{
+
+}
+
+.two .inner {
+
+}
+
+/* Exercise Three */
+
+.three .outer{
+
+}
+
+.three .inner{
+
+}
+
+/* Exercise Four */
+.four .inner {
+
+}
+
+.four .inner:last-child{
+
+}

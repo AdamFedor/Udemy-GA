@@ -1,0 +1,50 @@
+#main {
+  width: 536px;
+  margin: 0 auto;
+}
+
+#cards {
+  margin: 0 -10px;
+}
+
+.card_container { 
+  width: 114px;
+  height: 156px;
+  position: relative;
+  perspective: 800px;
+  float: left;
+  margin: 10px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.card figure {
+  margin: 0;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card .back {
+  background-image: url("../img/card_back.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.card .front {
+  background-image: url("../img/card_spritesheet.jpg");
+  background-size: contain;
+  background-size: 1300% 400%;
+  transform: rotateY( 180deg );
+}
+
+.card_container.flipped .card {
+  transform: rotateY( 180deg );
+}

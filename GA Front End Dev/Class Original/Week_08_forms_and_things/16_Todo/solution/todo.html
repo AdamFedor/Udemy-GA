@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To do</title>
+    <link href="https://fonts.googleapis.com/css?family=Bellefair|Plaster" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="x-template" id="task-template">
+        <li class="task clearfix">
+            <span class="task-text"></span>
+            <form class="hidden">
+                <input type="text" name="edit-task-text"/>
+                <button type="submit">Submit</button>
+            </form>
+            <div class="controls clearfix">
+                <div class="left">
+                    <div class="edit-task"></div>
+                </div>
+                <div class="left">
+                    <div class="move-up">&#x25B2;</div>
+                    <div class="move-down">&#x25BC;</div>
+                </div>
+                <div class="complete">X</div>
+            </div>
+        </li>
+    </script>
+</head>
+<body>
+    <section class="container">
+        <h1>TODO</h1>
+        <ol id="tasks">
+        </ol>
+        <form class="clearfix add-task">
+            <input id="new-task" placeholder="Enter a new task" name="new-task"></input>
+            <button type="submit">Add Task</button>
+            <button type="button" id="remove-completed">Clear Complete</button>
+            <button type="button" id="clear-list">Reset</button>
+        </form>
+        </section>
+        <script
+        src="http://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+        <script src="js/main.js"></script>
+    </body>
+    </html>

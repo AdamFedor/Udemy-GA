@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  min-height: 100%;
+}
+
+.box {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 20px;
+  background: rgba(255, 0, 0, .4);
+  transform: translateX(-50%);
+  left: calc(50% - 250px / 2);
+  position: relative;
+}
+
+.shift .box {
+  left: calc(50% + 250px / 2);
+  background: rgba(255, 0, 0, .8);
+}
+
