@@ -14,6 +14,27 @@ readFile("./files/demofile.txt", "utf-8")
     .then(...)
 });
 ```
+## My Answer
+Make it do promises instead.
+
+```js
+const fs = require("fs");
+
+function readFile(filename, encoding) {
+  return new Promise ((resolve, reject) => {
+    fs.readFile(filename, encoding, (err, data) => {
+      if (err){ //faster as:  if (err) return reject(err); resolve (data);
+        console.log('err');
+        reject(err);
+      } else {
+        resolve(data);
+      };
+    });  
+  });
+};
+readFile("./files/demofile.txt", "utf-8")
+.then(good => console.log(good), error => console.error(err));
+```
 
 # Question 2
 
@@ -43,9 +64,82 @@ readFile("./files/demofile.txt", "utf-8")
 });
 ```
 
+## My Answer
+
+```js
+const fs = require('fs');
+const util = require('util');
+const zlib = require('zlib');
+
+let gzip = (data) => {
+  return new Promise((resolve, reject) => {
+    zlib.gzip(data, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+}
+
+let readFile = (filename, encoding) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, encoding, (err, data) => {
+      if (err) return reject(err);
+      resolve(data);
+    });
+  });
+}
+
+readFile('./files/demofile.txt', 'utf-8').then(
+  data => {
+    gzip(data).then(
+      res => console.log(res),
+      err => console.error('Failed To Zip', err)
+    );
+  },
+  err => console.error('Failed To Read', err)
+);
+```
+
 # Question 3
 
 Convert the previous code so that it now chains the promise as well.
+
+## My Answer
+
+```js
+const fs = require('fs');
+const util = require('util');
+const zlib = require('zlib');
+
+let gzip = (data) => {
+  return new Promise((resolve, reject) => {
+    zlib.gzip(data, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+}
+
+let readFile = (filename, encoding) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, encoding, (err, data) => {
+      if (err) return reject(err);
+      resolve(data);
+    });
+  });
+}
+
+readFile('./files/demofile.txt', 'utf-8')
+  .then(
+    data => {
+      return gzip(data)
+    },
+    err => console.error('Failed To Read', err)
+  ).then(
+    res => console.log(res),
+    err => console.error('Failed To Gzip', err)
+);
+```
 
 # Question 4
 
