@@ -145,6 +145,43 @@ readFile('./files/demofile.txt', 'utf-8')
 
 Convert the previous code so that it now handles errors using the catch handler
 
+## My Answer
+
+```js
+const fs = require('fs');
+const util = require('util');
+const zlib = require('zlib');
+
+let gzip = (data) => {
+  return new Promise((resolve, reject) => {
+    zlib.gzip(data, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+}
+
+let readFile = (filename, encoding) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, encoding, (err, data) => {
+      if (err) return reject(err);
+      resolve(data);
+    });
+  });
+}
+
+readFile('./files/demofile.txt', 'utf-8')
+  .then(
+    data => {
+      return gzip(data)
+    }
+  ).then(
+    res => console.log(res),
+  ).catch(
+    err => console.error('Failed', err)
+  );
+```
+
 # Question 5
 
 Create some code that tries to read from disk a file and times out if it takes longer than 1 seconds, use `Promise.race`
@@ -157,9 +194,24 @@ function readFileFake(sleep) {
 readFileFake(5000); // This resolves a promise after 5 seconds, pretend it's a large file being read from disk
 ```
 
+## My Answer
+
+```js
+function readFileFake(sleep) {
+  let doIt = new Promise(resolve => setTimeout(resolve, sleep, 'good'));
+  let didntIt = new Promise (reject => setTimeout(reject, 1000, 'bad'));
+  Promise.race([doIt, didntIt]).then(value => console.log(value))
+    .catch(err => console.error('Woops! An error occured:', err));  
+}
+
+readFileFake(10000);
+```
+
 # Question 6
 
-Create a process flow which publishes a file from a server, then realises the user needs to login, then makes a login request, the whole chain should error out if it takes longer than 1 seconds. Use `catch` to handle errors and timeouts.
+Create a process flow which publishes a file from a server, then realises the user needs to login, 
+then makes a login request, the whole chain should error out if it takes longer than 1 seconds. 
+Use `catch` to handle errors and timeouts.
 
 ```js
 function authenticate() {
@@ -180,4 +232,44 @@ Promise.race( [publish(), timeout(3000)])
   .then(...)
   .then(...)
   .catch(...);
+```
+
+## My Answer
+
+```js
+function authenticate() {
+  console.log('Authenticating');
+  return new Promise(resolve => setTimeout(resolve, 200, { status: 200 }));
+}
+
+function publish() {
+  console.log('Publishing');
+  return new Promise(resolve => setTimeout(resolve, 2000, { status: 403 }));
+}
+
+function authPublish() {
+  return publish().then(val => {
+    console.log('Validating');
+    let auth = {status: 403}
+    if (val.status === auth.status) {
+      console.log('Returned status:', val.status);
+      return authenticate ();
+    }
+    return val;
+  })
+}
+
+function timeout(sleep) {
+  return new Promise((resolve, reject) => setTimeout(reject, sleep, "timeout"));
+}
+
+Promise.race( [authPublish(), timeout(3000)])
+  .then(val => console.log('Published'))
+  .catch(err => {
+    if (err === 'timeout'){
+      console.error('Request timed out');
+    } else {
+      console.error('Whoops! An error occurred.', err);
+    }
+  })
 ```
