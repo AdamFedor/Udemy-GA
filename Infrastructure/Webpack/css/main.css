@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#first {
+    background: teal;
+}
+
+#second {
+    background: blue;
+}
+
+#third {
+    background: crimson;
+}
+
+body {
+    font-size: 24px;
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    background: url('../img/webpack.png');
+    background-size: 400px;
+    background-repeat: repeat-x repeat-y;
+}
+
+p {
+    margin: 100px;
+}
