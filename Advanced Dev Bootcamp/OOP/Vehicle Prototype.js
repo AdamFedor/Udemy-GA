@@ -1,14 +1,24 @@
 // constructor object for a vehicle
-// Every new object will have make/model/year
 function vehicle (make, model, year) {
     this.make = make;
     this.model = model;
     this.year = year;
+    this.isRunning = false;
 }
-// Each object should have a property called isRunning which is set to false
-vehicle.prototype.isRunning = false;
+
+vehicle.prototype.turnOn = function() {
+    this.isRunning = true;
+}
+
+vehicle.prototype.turnOff = function() {
+    this.isRunning = false;
+}
+
+vehicle.prototype.honk = function() {
+    if (this.isRunning === true) {
+        return "beep!";
+    }
+}
 
 var liberty = new vehicle("Jeep", "Liberty", "2007");
 
-console.log(liberty);
-console.log(liberty.__proto__);
