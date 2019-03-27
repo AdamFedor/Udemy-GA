@@ -1,3 +1,6 @@
+// Examples of time, but time is subjective to what is running it.
+// So this is not the right path to follow.
+
 function addUpTo(n) {
     let total = 0;
     for (let i = 1; i <= n; i++) {
