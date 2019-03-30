@@ -23,6 +23,12 @@ function HtmlSelectElement (items = []) {
     this.removeItem = function(item) {
         this.items.splice(this.items.indexOf(item), 1); // indexOf for where, 1 is deleteCount, then nothing after to replace. So it's removed.
     }
+    this.render = function () {
+        return `
+        <select>${this.items.map(item => `
+        <option>${item}</option>`).join('')}
+        </select>`;
+    }
 }
 
 // Cannot do Object.create here
