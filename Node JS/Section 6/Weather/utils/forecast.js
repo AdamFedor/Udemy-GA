@@ -13,13 +13,13 @@ require('dotenv').config()
 
 const forecast = (latitude, longitude, callback) => {
     const url = "https://api.darksky.net/forecast/" + process.env.DARKSKY + "/" + latitude + "," + longitude
-    request({url:url, json:true},(error, response) => {
+    request({url, json:true},(error, {body}) => { // removed url: url and used url instead as property shorthand, removed 'response' since we are using body and replaced it with destructuring as {body}
         if (error) {
             callback('Unable to connect to weather service!')
-        } else if (response.body.error) {
+        } else if (body.error) {
             callback('Unable to find weather.')
         } else {
-            callback(undefined, response.body.daily.data[0].summary + ' It is currently ' + response.body.currently.temperature + ' degrees out.')
+            callback(undefined, body.daily.data[0].summary + ' It is currently ' + body.currently.temperature + ' degrees out.') // removed response.body since I used destructuring above
         }
     })
 }
