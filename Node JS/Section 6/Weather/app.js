@@ -1,11 +1,21 @@
-const request = require('request')
-require('dotenv').config()
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
-// process.env.DARKSKY_KEY
-const url = "https://api.darksky.net/forecast/" + process.env.DARKSKY_KEY + "/37.8267,-122.4233"
+const address = process.argv[2]
 
-// console.log(url);
-
-request({url:url, json:true}, (error, response) => {
-    console.log(response.body.daily.data[0].summary + ' It is currently ' + response.body.currently.temperature + ' degrees out.')
-})
+if (!address) {
+    return console.log('Please provide an address')
+} else {
+    geocode(address, (error, data) => {
+        if (error) {
+            return console.log('Geo Error:', error)
+        } // could do else and not the return above
+        forecast(data.latitude, data.longitude, (error, data2) => {
+            if (error) {
+                return console.log('Weather Error', error)
+            }
+            console.log(data.location)
+            console.log(data2)
+        })
+    })
+}
