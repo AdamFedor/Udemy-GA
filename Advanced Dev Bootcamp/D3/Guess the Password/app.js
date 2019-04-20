@@ -3,27 +3,38 @@ document.addEventListener('DOMContentLoaded', function() {
   var guessCount = 4;
   var password = '';
 
-  var start = document.getElementById('start');
-  start.addEventListener('click', function() {
-    toggleClasses(document.getElementById('start-screen'), 'hide', 'show');
-    toggleClasses(document.getElementById('game-screen'), 'hide', 'show');
-    startGame();
-  });
+  // var start = document.getElementById('start');
+  // start.addEventListener('click', function() {
+  //   toggleClasses(document.getElementById('start-screen'), 'hide', 'show');
+  //   toggleClasses(document.getElementById('game-screen'), 'hide', 'show');
+  //   startGame();
+  // });
+  var start = d3.select('#start')
+    .on('click',function(){
+      toggleClasses(d3.select('#start-screen'), 'hide', 'show')
+      toggleClasses(d3.select('#game-screen'), 'hide', 'show')
+      startGame();
+    })
 
-  function toggleClasses(element) {
+  function toggleClasses(selection) {
     for (var i = 1; i < arguments.length; i++) {
-      element.classList.toggle(arguments[i]);
+      var classIsSet = selection.classed(arguments[i]);
+      // element.classList.toggle(arguments[i]);
+      selection.classed(arguments[i], !classIsSet); // this toggles by doing false if true and true if false on the argument since there is no toggle in d3
     }
   }
 
   function startGame() {
     // get random words and append them to the DOM
-    var wordList = document.getElementById("word-list");
+    // var wordList = document.getElementById("word-list");
+    var wordList = d3.select("#word-list");
     var randomWords = getRandomValues(words, wordCount);
     randomWords.forEach(function(word) {
-      var li = document.createElement("li");
-      li.innerText = word;
-      wordList.appendChild(li);
+      // var li = document.createElement("li");
+      // li.innerText = word;
+      // wordList.appendChild(li);
+      wordList.append('li')
+        .text(word);
     });
 
     // set a secret password and the guess count display
@@ -31,7 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setGuessCount(guessCount);
 
     // add update listener for clicking on a word
-    wordList.addEventListener('click', updateGame);
+    // wordList.addEventListener('click', updateGame);
+    wordList.on('click', updateGame);
   }
 
   function getRandomValues(array, numberOfVals) {
@@ -54,25 +66,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function setGuessCount(newCount) {
     guessCount = newCount;
-    document.getElementById("guesses-remaining").innerText = "Guesses remaining: " + guessCount + ".";
+    // document.getElementById("guesses-remaining").innerText = "Guesses remaining: " + guessCount + ".";
+    d3.select('#guesses-remaining')
+      .text("Guesses remaining: " + guessCount + ".");
   }
 
-  function updateGame(e) {
-    if (e.target.tagName === "LI" && !e.target.classList.contains("disabled")) {
+  // function updateGame(e) {
+  function updateGame() { // remove e since we get the event from the d3 object
+    var tgt = d3.select(d3.event.target); // so we can use d3 on the targets
+    // if (e.target.tagName === "LI" && !e.target.classList.contains("disabled")) {
+    if (tgt.node().tagName === "LI" && !tgt.classed("disabled")) {
       // grab guessed word, check it against password, update view
-      var guess = e.target.innerText;
+      var guess = tgt.text();
       var similarityScore = compareWords(guess, password);
-      e.target.classList.add("disabled");
-      e.target.innerText = e.target.innerText + " --> Matching Letters: " + similarityScore;
+      tgt.classed('disabled', true)
+        .text(guess + " --> Matching Letters: " + similarityScore)
+      // e.target.classList.add("disabled");
+      // e.target.innerText = e.target.innerText + " --> Matching Letters: " + similarityScore;
       setGuessCount(guessCount - 1);
 
       // check whether the game is over
       if (similarityScore === password.length) {
-        toggleClasses(document.getElementById("winner"), 'hide', 'show');
-        this.removeEventListener('click', updateGame);
+        // toggleClasses(document.getElementById("winner"), 'hide', 'show');
+        toggleClasses(d3.select("#winner"), 'hide', 'show');
+        // this.removeEventListener('click', updateGame);
+        d3.select(this).on('click', null);
       } else if (guessCount === 0) {
-        toggleClasses(document.getElementById("loser"), 'hide', 'show');
-        this.removeEventListener('click', updateGame);
+        // toggleClasses(document.getElementById("loser"), 'hide', 'show');
+        toggleClasses(d3.select("#loser"), 'hide', 'show');
+        // this.removeEventListener('click', updateGame);
+        d3.select(this).on('click', null);
       }
     }
   }
