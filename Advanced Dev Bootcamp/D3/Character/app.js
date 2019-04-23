@@ -1,12 +1,3 @@
-
-
-        
-
-
-
-
-
-
 var width = 800;
 var height = 400;
 var barPadding = 10;
