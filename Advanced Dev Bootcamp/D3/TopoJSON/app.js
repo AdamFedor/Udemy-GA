@@ -1,4 +1,4 @@
-d3.json('./sample_geo.json', function(error, data) {
+d3.json('./sample_topo.json', function(error, data) {
   if (error) throw error;
 
   var path = d3.geoPath();
@@ -9,7 +9,7 @@ d3.json('./sample_geo.json', function(error, data) {
       .attr('width', width)
       .attr('height', height)
     .selectAll('path')
-    .data(data.features)
+    .data(topojson.feature(data, data.objects.collection).features)
     .enter()
     .append('path')
       .attr('d', path)
