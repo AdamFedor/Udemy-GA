@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CJSX with JS</title>
+    <link rel="stylesheet" href="first-component.css">
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class FormInput extends React.Component {
+            render() {
+                const liStyle = {fontSize: '1.5em'};
+                return (
+                    <div className="card">
+                        <p>Random Form</p>
+                        <form>
+                            <input type="text" name="whatever" />
+                        </form>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<FormInput />, document.getElementById("app"))
+    </script>
+</body>
+</html>
+
