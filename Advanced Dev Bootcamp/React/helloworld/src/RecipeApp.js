@@ -6,7 +6,12 @@ import Recipe from './Recipe';
 function RecipeApp() {
   return (
     <div className="App">
-      <Recipe title="pasta" ingredients={['flour', 'water']}/>
+      <Recipe
+        title="pasta"
+        ingredients={['flour', 'water']}
+        instructions="Mix ingredients"
+        img="spaghetti.jpg"
+        />
     </div>
   );
 }
