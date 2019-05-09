@@ -1,17 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import './RecipeApp.css';
 import Recipe from './Recipe';
+import Navbar from './navbar';
+import RecipeList from './RecipeList';
 
 function RecipeApp() {
   return (
     <div className="App">
-      <Recipe
-        title="pasta"
-        ingredients={['flour', 'water']}
-        instructions="Mix ingredients"
-        img="spaghetti.jpg"
-        />
+      <Navbar />
+      <RecipeList />
     </div>
   );
 }
