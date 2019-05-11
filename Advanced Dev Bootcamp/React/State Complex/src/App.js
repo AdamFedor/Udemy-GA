@@ -2,20 +2,36 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 
-class InstructorItem extends Component {
-  static propTypes = {
-    name: PropTypes.string,
-    hobbies: PropTypes.arrayOf(PropTypes.string)
-  }
-  render() {
-    return (
-      <li>
-        <h3>{this.props.name}</h3>
-        <h4>Hobbies: {this.props.hobbies.join(", ")}</h4>
-      </li>
-    )
-  }
+// Stateless example - props is now a parameter //
+const InstructorItem = props => {
+  return (
+    <li>
+      <h3>{props.name}</h3>
+      <h4>Hobbies: {props.hobbies.join(", ")}</h4>
+    </li>
+  );
 }
+  // adding prop types to the stateless functional component
+InstructorItem.PropTypes = {
+  name: PropTypes.string,
+  hobbies: PropTypes.arrayOf(PropTypes.string)
+};
+
+// Not a stateless functional component //
+// class InstructorItem extends Component {
+//   static propTypes = {
+//     name: PropTypes.string,
+//     hobbies: PropTypes.arrayOf(PropTypes.string)
+//   }
+//   render() {
+//     return (
+//       <li>
+//         <h3>{this.props.name}</h3>
+//         <h4>Hobbies: {this.props.hobbies.join(", ")}</h4>
+//       </li>
+//     )
+//   }
+// }
 class App extends Component {
   constructor(props) {
     super(props);
