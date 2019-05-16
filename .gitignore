@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 .DS_Store
 
->>>>>>> old_node/master
 # Logs
 logs
 *.log
