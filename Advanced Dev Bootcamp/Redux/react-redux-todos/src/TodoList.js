@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
 import { connect } from 'react-redux';
+import { AddTodo, RemoveTodo } from './actionCreators';
 
 class TodoList extends Component {
     constructor (props) {
@@ -16,10 +17,7 @@ class TodoList extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        this.props.dispatch({
-            type: "ADD_TODO",
-            task: this.state.task
-        });
+        this.props.AddTodo(this.state.task)
         e.target.reset();
     }
     handleChange(e) {
@@ -28,10 +26,7 @@ class TodoList extends Component {
         })
     }
     removeTodo(id) {
-        this.props.dispatch({
-            type: "REMOVE_TODO",
-            id  
-        })
+        this.props.RemoveTodo(id)
     }
     render () {
         let todos = this.props.todos.map((val, index) => (
@@ -61,4 +56,4 @@ function mapStateToProps(reduxState) {
     }
 }
 
-export default connect(mapStateToProps)(TodoList);
+export default connect(mapStateToProps, { AddTodo, RemoveTodo})(TodoList);
