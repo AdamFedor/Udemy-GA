@@ -10,14 +10,14 @@ app.use(bodyParser.json()); // not URL encoded, since this is the type of reques
 app.use(cors());
 app.use('/api/todos', todoRoutes); // for any routes that come in, prefix with this
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     // Error Handling: any kind of request we don't know about, throw and error
     let err = new Error('Not Found');
     err.status = 404;
     next(err)
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // Catch the error, whatever status is or 500
     res.status(err.status || 500);
     res.send({
@@ -26,6 +26,6 @@ app.use(function(err, req, res, next) {
     })
 });
 
-app.listen(3001, function() {
+app.listen(3001, function () {
     console.log("server starting on port 3001");
 });

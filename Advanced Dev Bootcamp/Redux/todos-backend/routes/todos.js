@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Todo = require('../models/todo');
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     Todo.find({})
     .then(todos => res.send(todos))
     .catch(err => next(err));
@@ -10,13 +10,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function (req, res, next) {
     Todo.create(req.body) // not the most secure
-        .then(todos => req.status(201).send(todos)) // set 201 status and send todos
+        .then(todo => res.status(201).send(todo)) // set 201 status and send todos
         .catch(err => next(err));
 }); // creating our todo
 
-router.post('/:id', function (req, res, next) {
+router.delete('/:id', function (req, res, next) {
     Todo.findByIdAndRemove(req.params.id) // find the id in req.params.id and remove it
-        .then(todos => req.send(todos)) // send todo that was deleted
+        .then(todo => res.send(todo)) // send todo that was deleted
         .catch(err => next(err));
 }); // delete a todo
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Todo from './Todo';
 import NewTodoForm from './NewTodoForm';
 import { connect } from 'react-redux';
-import { AddTodo, RemoveTodo } from './actionCreators';
+import { AddTodo, RemoveTodo, getTodos } from './actionCreators'; // these are all thunks
 import { Route } from 'react-router-dom';
 
 class TodoList extends Component {
@@ -11,6 +11,9 @@ class TodoList extends Component {
         // where you do method binding, must be here
         this.handleAdd = this.handleAdd.bind(this);
     }
+    componentDidMount() {
+        this.props.getTodos(); // goes to action creator, run todos, ajax req, then dispatch(handle..)
+    }
     handleAdd(val) {
         this.props.addTodo(val);
     }
@@ -18,11 +21,11 @@ class TodoList extends Component {
         this.props.RemoveTodo(id)
     }
     render () {
-        let todos = this.props.todos.map((val, index) => (
+        let todos = this.props.todos.map((val) => (
             <Todo
-                removeTodo={this.removeTodo.bind(this, val.id)}
+                removeTodo={this.removeTodo.bind(this, val._id)}
                 task={val.task}
-                key={index}
+                key={val._id}
             />
         ));
         return (
@@ -45,4 +48,4 @@ function mapStateToProps(reduxState) {
     }
 }
 
-export default connect(mapStateToProps, { AddTodo, RemoveTodo})(TodoList);
+export default connect(mapStateToProps, { AddTodo, RemoveTodo, getTodos })(TodoList);
