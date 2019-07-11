@@ -7,11 +7,12 @@ const async = require('async');
 
 let list1 = './list1.txt';
 let list2 = './list2.txt';
-let obj = {};
+// let obj = {};
 
 let callback = function (err, data) {
     if (err) {
-        return console.error(err);
+        // return console.error(err);
+        reject(err);
     } else {
         let arr = data.split('\n').forEach(function (element) {
             // loop in loop isn't as efficient as it could be straight to object
@@ -19,18 +20,54 @@ let callback = function (err, data) {
                 obj[element] = (obj[element] || 0) + 1
             }
         });
-        console.log(obj['Sonus Faber'])
-        return obj;
+        console.log(obj['Sonus Faber']);
+        resolve("done");
+        // return obj;
     }
 }
 
-// must run these asynchronous
 let file1 = () => {
-    let comp = fs.readFile(list1, 'utf8', callback);
+    return new Promise((resolve, reject) => {
+        let obj = {}
+        let comp = fs.readFile(list1, 'utf8', function (err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                let arr = data.split('\n').forEach(function (element) {
+                    for (let val of element) {
+                        obj[element] = (obj[element] || 0) + 1
+                    }
+                });
+                console.log(obj['Sonus Faber']);
+                resolve(obj);
+            };
+        });
+    });
 };
 
 let file2 = () => {
-    let comp = fs.readFile(list2, 'utf8', callback);
-}
+    return new Promise((resolve, reject) => {
+        let obj = {}
+        let comp = fs.readFile(list1, 'utf8', function (err, data) {
+            if (err) {
+                reject(err);
+            } else {
+                let arr = data.split('\n').forEach(function (element) {
+                    for (let val of element) {
+                        obj[element] = (obj[element] || 0) + 1
+                    }
+                });
+                console.log(obj['Sonus Faber']);
+                resolve(obj);
+            };
+        });
+    });
+};
 
-file1()
+file1().then(val => console.log(val['Sonus Faber']))
+
+
+// Merge Pseudocode
+// 1. Search through object by key and store in an array
+// 2. Pivot the object sorting and placing - play on efficiency of the sort
+// 3. Output the top 10 with values.
