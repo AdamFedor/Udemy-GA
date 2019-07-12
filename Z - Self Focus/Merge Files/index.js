@@ -2,11 +2,9 @@
 // in both files sorted by number of total occurences. Number of occurances should
 // be printed as well.
 
-// Actions
-// Fundamental flaw in forEach loop. It is adding each character count for the entire word.
-
 const fs = require('fs');
 let obj = {};
+let arr = [];
 
 let list1 = './list1.txt';
 let list2 = './list2.txt';
@@ -37,15 +35,17 @@ let file2 = new Promise((resolve, reject) => {
     });
 });
 
-let mergeTen = () => {
-// Switching to async to promises, instead just storing in global obj
-// Output the top 10 with values.
-// Sorting focus on data that is sorted, random, nearly sorted, and reverse.
-// Since unique vals, sort criterion does not focus on when only a few values are no longer unique.);
-    // let mergedArray = Object.values(obj).sort((a, b) => {return obj[a]-obj[b]})
-    // let mergedArray = Object.entries(obj)
-    // console.log(mergedArray);
-
+let exportTen = () => {
+    for (var audiofool in obj) {
+        arr.push(`\n${[audiofool]} ${obj[audiofool]}`)
+        arr.sort((a, b) => { return b[1] - a[1] });
+    }
+    let exportArr = arr.slice(1, 10);
+    console.log(exportArr)
+    fs.writeFile('export.txt',exportArr,(err) => {
+        if (err) throw err;
+        console.log('Exported successfully.')
+    })
 }
 
-Promise.all([file1, file2]).then(val => {mergeTen()}).catch(err => console.error(err))
+Promise.all([file1, file2]).then(val => {exportTen()}).catch(err => console.error(err))

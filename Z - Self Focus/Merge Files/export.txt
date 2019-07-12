@@ -1,0 +1,10 @@
+
+Focal 18,
+JL Audio 18,
+Wilson Audio 21,
+Polk Audio 21,
+Klipsch 18,
+REL 27,
+NAIM 36,
+Harmon Kardon 36,
+Transparent 48
