@@ -40,9 +40,8 @@ let exportTen = () => {
         arr.push([audiofool, obj[audiofool]])
         arr.sort((a, b) => { return b[1] - a[1] });
     }
-    console.log(arr)
     let exportArr = arr.slice(0, 10);
-    fs.writeFile('export.txt','',(err) => { // exports and wipes out history
+    fs.writeFile('export.txt','',(err) => {
         if (err) throw err;
         console.log('Exported successfully.')
     })
