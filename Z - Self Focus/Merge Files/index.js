@@ -3,71 +3,48 @@
 // be printed as well.
 
 const fs = require('fs');
-const async = require('async');
+let obj = {};
 
 let list1 = './list1.txt';
 let list2 = './list2.txt';
-// let obj = {};
 
-let callback = function (err, data) {
-    if (err) {
-        // return console.error(err);
-        reject(err);
-    } else {
-        let arr = data.split('\n').forEach(function (element) {
-            // loop in loop isn't as efficient as it could be straight to object
-            for (let val of element) {
-                obj[element] = (obj[element] || 0) + 1
-            }
-        });
-        console.log(obj['Sonus Faber']);
-        resolve("done");
-        // return obj;
-    }
+let file1 = new Promise((resolve, reject) => {
+    fs.readFile(list1, 'utf8', function (err, data) {
+        if (err) {
+            reject(err);
+        } else {
+            let arr = data.split('\n').forEach(function (element) {
+                for (let val of element) {
+                    obj[element] = (obj[element] || 0) + 1
+                }
+            });
+            resolve();
+        };
+    });
+});
+
+let file2 = new Promise((resolve, reject) => {
+    fs.readFile(list2, 'utf8', function (err, data) {
+        if (err) {
+            reject(err);
+        } else {
+            let arr = data.split('\n').forEach(function (element) {
+                for (let val of element) {
+                    obj[element] = (obj[element] || 0) + 1
+                }
+            });
+            resolve();
+        };
+    });
+});
+
+let mergeTen = () => {
+// Merge Pseudocode
+// 1. Switching to async to promises, instead just storing in global obj
+// 2. Output the top 10 with values.
+// Sorting focus on data that is sorted, random, nearly sorted, and reverse.
+// Since unique vals, sort criterion does not focus on when only a few values are no longer unique.
+    console.log(obj);
 }
 
-let file1 = () => {
-    return new Promise((resolve, reject) => {
-        let obj = {}
-        let comp = fs.readFile(list1, 'utf8', function (err, data) {
-            if (err) {
-                reject(err);
-            } else {
-                let arr = data.split('\n').forEach(function (element) {
-                    for (let val of element) {
-                        obj[element] = (obj[element] || 0) + 1
-                    }
-                });
-                console.log(obj['Sonus Faber']);
-                resolve(obj);
-            };
-        });
-    });
-};
-
-let file2 = () => {
-    return new Promise((resolve, reject) => {
-        let obj = {}
-        let comp = fs.readFile(list1, 'utf8', function (err, data) {
-            if (err) {
-                reject(err);
-            } else {
-                let arr = data.split('\n').forEach(function (element) {
-                    for (let val of element) {
-                        obj[element] = (obj[element] || 0) + 1
-                    }
-                });
-                console.log(obj['Sonus Faber']);
-                resolve(obj);
-            };
-        });
-    });
-};
-
-file1().then(val => console.log(val['Sonus Faber']))
-
-
-// Merge Pseudocode
-// 1. Search through object by key and store in an array
-// 2. Pivot the object sorting and placing - play on efficiency of the sort
-// 3. Output the top 10 with values.
+Promise.all([file1, file2]).then(val => {mergeTen()}).catch(err => console.error(err))
