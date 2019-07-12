@@ -39,12 +39,12 @@ let file2 = new Promise((resolve, reject) => {
 });
 
 let mergeTen = () => {
-// Merge Pseudocode
-// 1. Switching to async to promises, instead just storing in global obj
-// 2. Output the top 10 with values.
+// Switching to async to promises, instead just storing in global obj
+// Output the top 10 with values.
 // Sorting focus on data that is sorted, random, nearly sorted, and reverse.
 // Since unique vals, sort criterion does not focus on when only a few values are no longer unique.
     console.log(obj);
+
 }
 
 Promise.all([file1, file2]).then(val => {mergeTen()}).catch(err => console.error(err))
