@@ -37,15 +37,20 @@ let file2 = new Promise((resolve, reject) => {
 
 let exportTen = () => {
     for (var audiofool in obj) {
-        arr.push(`\n${[audiofool]} ${obj[audiofool]}`)
+        arr.push([audiofool, obj[audiofool]])
         arr.sort((a, b) => { return b[1] - a[1] });
     }
-    let exportArr = arr.slice(1, 10);
-    console.log(exportArr)
-    fs.writeFile('export.txt',exportArr,(err) => {
+    console.log(arr)
+    let exportArr = arr.slice(0, 10);
+    fs.writeFile('export.txt','',(err) => { // exports and wipes out history
         if (err) throw err;
         console.log('Exported successfully.')
     })
+    for (var i = 0; i < (exportArr.length - 1); i++) {
+        fs.appendFileSync('export.txt', exportArr[i]+'\n');
+    }
+    endArr = exportArr.length - 1;
+    fs.appendFileSync('export.txt', exportArr[endArr]);
 }
 
 Promise.all([file1, file2]).then(val => {exportTen()}).catch(err => console.error(err))

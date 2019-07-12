@@ -1,10 +1,10 @@
-
-Focal 18,
-JL Audio 18,
-Wilson Audio 21,
-Polk Audio 21,
-Klipsch 18,
-REL 27,
-NAIM 36,
-Harmon Kardon 36,
-Transparent 48
+Transparent,48
+McIntosh,48
+Definitive Technology,45
+Outlaw,42
+Cambridge Audio,39
+NAIM,36
+Harmon Kardon,36
+Dynaudio,33
+REL,27
+ELAC,27
