@@ -66,37 +66,39 @@ let refactorVal = (num) => {
     for (var i = 0; i < num; i++) {
         arrRandom.push(Math.ceil(Math.random() * 100));
     };
-    let mergeIt = (arr) => {
-        if (arr.length <= 1) return arr;
-        let middlePoint = Math.floor(arr.length / 2);
-        let leftArr = mergeIt(arr.slice(0,middlePoint));
-        let rightArr = mergeIt(arr.slice(middlePoint));
-        return merge(leftArr, rightArr);
-    };
-    let merge = (leftArr, rightArr) => {
-        let arr = [];
-        let i = 0;
-        let j = 0;
-        while (i < leftArr.length && j < rightArr.length) {
-            if (leftArr[i] > rightArr[j]) {
-                arr.push(leftArr[i]);
-                i++;
-            } else {
-                arr.push(rightArr[j]);
-                j++;
-            };
-        };
-        while (i < leftArr.length) {
+    arr3 = mergeIt(arrRandom);
+};
+
+let mergeIt = (arr) => {
+    if (arr.length <= 1) return arr;
+    let middlePoint = Math.floor(arr.length / 2);
+    let leftArr = mergeIt(arr.slice(0, middlePoint));
+    let rightArr = mergeIt(arr.slice(middlePoint));
+    return merge(leftArr, rightArr);
+};
+
+let merge = (leftArr, rightArr) => {
+    let arr = [];
+    let i = 0;
+    let j = 0;
+    while (i < leftArr.length && j < rightArr.length) {
+        if (leftArr[i] > rightArr[j]) {
             arr.push(leftArr[i]);
             i++;
-        };
-        while (j < rightArr.length) {
+        } else {
             arr.push(rightArr[j]);
             j++;
-        }
-        return arr;
+        };
     };
-    arr3 = mergeIt(arrRandom);
+    while (i < leftArr.length) {
+        arr.push(leftArr[i]);
+        i++;
+    };
+    while (j < rightArr.length) {
+        arr.push(rightArr[j]);
+        j++;
+    }
+    return arr;
 };
 
 loopQuantity2 = 5;
@@ -106,4 +108,53 @@ refactorVal(loopQuantity2);
 console.log('----------------');
 console.log('refactorVal:');
 console.log(arr3);
+console.log('----------------');
+
+// Search through a sorted array for a specific value, then remove it.
+// Idea is to pivot sort through, then remove the index's value from the array.
+    // findValAndReplace pseudocode
+        // Look for an identified number in a sorted array
+        // Find the middle of the array
+        // Compare the index's value with the identified number
+        // If the index is higher, the artifical start of the array is the middle++
+        // Else the artificial end of the array is middle--
+        // Recursively repeat until the array is found and the array is 1 or less
+
+let findValAndReplace = (arr, val) => {
+    indexVal = 0;
+    let midPoint = Math.floor(arr.length/2);
+    if (arr.length <= 1) {
+        return;
+    } else if (arr[midPoint] === val) {
+        let afterMid = midPoint +1;
+        console.log(afterMid)
+        arr = arr.slice(midPoint, afterMid);
+        console.log('midpoint found to equal value')
+        console.log(arr)
+        return;
+    } else if (arr[midPoint] < val) {
+        let newMid = midPoint++;
+        arr = arr.slice(newMid);
+        console.log('greater than');
+        console.log(arr);
+        console.log('==++++==');
+        findValAndReplace(arr, val);
+    } else if (arr[midPoint] > val) {
+        let newMid = midPoint--;
+        arr = arr.slice(0,newMid);
+        console.log('less than');
+        console.log(arr);
+        console.log('==++++==');
+        findValAndReplace(arr, val);
+    };
+    return indexVal;
+};
+
+let arr4 = [1,2,4,55,60,75,82,83,84,90,91,93,97,100,104,105,150,152,155,200];
+let findMe = 8;
+
+console.log('----------------');
+console.log('findValAndReplace:');
+let answer = findValAndReplace(arr4, findMe);
+console.log(answer);
 console.log('----------------');
