@@ -121,16 +121,21 @@ console.log('----------------');
         // Recursively repeat until the array is found and the array is 1 or less
 
 let findValAndReplace = (arr, val) => {
-    indexVal = 0;
+    idx = arr.length;
     let midPoint = Math.floor(arr.length/2);
-    if (arr.length <= 1) {
-        return;
+    if (arr.length === 1) {
+        if (arr[0] !== val) {
+            console.log("didn't find it anywhere");
+            // this is where I update the value of nothing returned
+            return;
+        };
     } else if (arr[midPoint] === val) {
         let afterMid = midPoint +1;
         console.log(afterMid)
         arr = arr.slice(midPoint, afterMid);
         console.log('midpoint found to equal value')
         console.log(arr)
+        // this is where I update the value of something returned
         return;
     } else if (arr[midPoint] < val) {
         let newMid = midPoint++;
@@ -138,20 +143,20 @@ let findValAndReplace = (arr, val) => {
         console.log('greater than');
         console.log(arr);
         console.log('==++++==');
-        findValAndReplace(arr, val);
+        findValAndReplace(arr, val, idx);
     } else if (arr[midPoint] > val) {
         let newMid = midPoint--;
         arr = arr.slice(0,newMid);
         console.log('less than');
         console.log(arr);
-        console.log('==++++==');
-        findValAndReplace(arr, val);
+        console.log('==----==');
+        findValAndReplace(arr, val, idx);
     };
     return indexVal;
 };
 
 let arr4 = [1,2,4,55,60,75,82,83,84,90,91,93,97,100,104,105,150,152,155,200];
-let findMe = 8;
+let findMe = 200;
 
 console.log('----------------');
 console.log('findValAndReplace:');
