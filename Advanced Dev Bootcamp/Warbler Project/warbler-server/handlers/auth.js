@@ -2,16 +2,40 @@
 const db = require('../models'); // assumes index.js instead of /models/index.js
 const jwt = require('jsonwebtoken');
 
-exports.signin = function () {}
+// exports.signin = async function (req, res, next) {};
+exports.signin = async function () {}
 
 exports.signup = async function (req, res, next) {
     try {
-        // create a user
-        // create a token (signing a token)
+        // waiting for a creation of the user, passing in req.body from an ajax request
+        let user = await db.User.create(req.body);
+        // creates the 3 from user to not pass in user.x for each to the token
+        let { id, username, profileImageUrl } = user;
+        // create a token (signing a token) and key from env
+        let token = jwt.sign(
+            {
+                // what is passed in.
+                id,
+                username,
+                profileImageUrl
+            },
+            process.env.SECRET_KEY
+        );
+        return res.status(200).json({
+            id,
+            username,
+            profileImageUrl,
+            token
+        })
     } catch(err) {
-        // see what kind of error
-        // if it is a certain error
-        // respond with username/email already tken
-        // otherwise just send back a generic 400
+        // if a validation fails
+        if (err.code === 11000) {
+            // so it doesn't return the mongoose error
+            err.message = "Sorry, that username and/or email is taken.";
+        }
+        return next({
+            status: 400,
+            message: err.message
+        });
     }
 };

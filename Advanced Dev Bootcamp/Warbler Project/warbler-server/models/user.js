@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({ // which is an object
 });
 
 // before we save the user to the database, we want to hash the password
-userSchema.pre('save', async function() {
+userSchema.pre('save', async function(next) {
     try {
         if(!this.isModified ('password')){
             return next();
@@ -38,10 +38,10 @@ userSchema.pre('save', async function() {
 
 // instance method - that every document we create has
 // hash the password in the database to compare against the password provided hashed
-userSchema.method.comparePassword = async function(candidtatePassword, next){
+userSchema.methods.comparePassword = async function(candidatePassword, next){
     try {
         // to the individual document we are calling this on
-        let isMatch = await bcrypt.compare(candidtatePassword, this.password);
+        let isMatch = await bcrypt.compare(candidatePassword, this.password);
         return isMatch; // if true proceed, otherwise don't
     } catch(err) {
         return next(err);
@@ -50,4 +50,4 @@ userSchema.method.comparePassword = async function(candidtatePassword, next){
 
 const User = mongoose.model('user', userSchema);
 
-model.exports = User;
+module.exports = User;
