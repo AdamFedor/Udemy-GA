@@ -9,3 +9,4 @@ mongoose.connect('mongodb://localhost/warbler', { // what we'll connect to
 });
 
 module.exports.User = require('./user'); // bundling
+module.exports.Message = require('./message'); // accessed by the user above, but have to pass in the user to the message model

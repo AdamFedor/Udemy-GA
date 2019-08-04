@@ -19,7 +19,12 @@ const userSchema = new mongoose.Schema({ // which is an object
     },
     profileImageUrl: {
         type: String
-    }
+    },
+    // reference to all of the messages in an array
+    messages: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Message'
+    }]
 });
 
 // before we save the user to the database, we want to hash the password
