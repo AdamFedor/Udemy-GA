@@ -6,23 +6,18 @@ function onScoreUpdate(dropPosition, bounciness, size, bucketLabel) {
 
 function runAnalysis() {
   const testSetSize = 50;
-  const [testSet, trainingSet] = splitDataset(minMax(outputs, 3), testSetSize);
-  let numberCorrect = 0;
-  // for (let i = 0; i < testSet.length; i++) {
-  //   const bucket = knn(trainingSet, testSet[i][0]);
-  //   if (bucket === testSet[i][3]) {
-  //     numberCorrect++;
-  //   }
-  // } // replace with lodash below
-  _.range(1, 20).forEach(k => {
+  const k = 10;
+  _.range(0, 3).forEach(feature => {
+    // feature === 0, then 1, then 2 (dropPosition is 0, bounciness is 1, ball size is 2)
+    const data = _.map(outputs, row => [row[feature], _.last(row)]) // aka row[0], row[1], row[2] for row[feature]
+    const [testSet, trainingSet] = splitDataset(minMax(data, 1), testSetSize);
     const accuracy = _.chain(testSet)
-      .filter(testPoint => knn(trainingSet, _.initial(testPoint), k) === testPoint[3]) //testPoint is what is tested being passed in, same as above for loop
+      .filter(testPoint => knn(trainingSet, _.initial(testPoint), k) === _.last(testPoint)) //testPoint is what is tested being passed in, same as above for loop
       .size()
       .divide(testSetSize) // in chain the first argument doesn't have to be passed in, it's automatic
       .value()
-    console.log('For k of', k, 'Accuracy is:', accuracy)
+    console.log('For feature of', feature, 'Accuracy is:', accuracy)
   });
-  // console.log(testSet)
 }
 
 function knn(data, point, k) {
