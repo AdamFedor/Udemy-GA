@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* What tailwind does not allow well */
+button > svg {
+    /* All buttons with SVG within it */
+    margin-right: 5px;
+}
